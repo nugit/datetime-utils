@@ -1,8 +1,8 @@
 {
   "name": "datetime-utils",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "share lib for datetime",
-  "main": "./lib/datetimeUtils2.js",
+  "main": "./lib/datetimeUtils.js",
   "scripts": {
     "build": "babel source --presets babel-preset-es2015 --out-dir lib",
     "prepublish": "npm run build"
