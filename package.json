@@ -1,6 +1,6 @@
 {
   "name": "datetime-utils",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "share lib for datetime",
   "main": "./lib/datetimeUtils.js",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/nugit/datetime-utils#readme",
   "dependencies": {
-    "moment": "^2.18.1"
+    "moment": "^2.13.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
