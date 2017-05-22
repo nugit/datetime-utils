@@ -1,7 +1,16 @@
 /**
  * Created by linmin on 19/5/17.
  */
-import moment from 'moment';
+let moment = null;
+if (global.window && global.window.moment) {
+  moment = global.window.moment;
+} else {
+  try {
+    moment = require('moment');
+  } catch (e) {
+    throw new Error('Moment.js dependency not loaded');
+  }
+}
 
 const dateFormat = 'YYYY-MM-DD';
 function retrievePredefindedDateRange(key, base) {
