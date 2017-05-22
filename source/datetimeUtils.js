@@ -84,7 +84,8 @@ function retrieveThisRelativePeriod(unit, base) {
   } else if (unit === 'quarter') {
     return {
       start: start.subtract(start.month() % 3, 'months').date(1).format(dateFormat),
-      end: end.add(3 - end.month() % 3, 'months').date(0).format(dateFormat)
+      // end: end.add(3 - end.month() % 3, 'months').date(0).format(dateFormat)
+      end: end.subtract(1, 'days').format(dateFormat)
     };
   } else if (unit === 'year') {
     return {
@@ -100,7 +101,7 @@ function retrievePeriodParams(periodOrKey) {
   }
   const LAST_RANGE_REGEX = /^last(\d+)(day|week|month|quarter|year)s?$/;
   const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)$/;
-  const LAST_RANGE_REGEX_2 = /^last_(\d+)_(day|week|month|quarter|year)s?$/;
+  const LAST_RANGE_REGEX_2 = /^last_(\d+)_(day|week|month|quarter|year)s?(_including_current)?$/;
   const THIS_RANGE_REGEX = /^this_(day|week|month|quarter|year)$/;
   const TILL_YESTERDAY_REGEX = /^(\d{4}-\d{2}-\d{2})_to_yesterday$/;
 
@@ -114,7 +115,14 @@ function retrievePeriodParams(periodOrKey) {
   }
   match = periodOrKey.match(LAST_RANGE_REGEX_2);
   if (match) {
-    return {type: 'last', num: match[1], unit: match[2], newFormat: true}; //dynamic last_12_months
+    return {
+      type: 'last',
+      num: match[1],
+      unit: match[2],
+      newFormat: true,
+      including_current: match[3] === '_including_current',
+      includeingParam: match[2] === 'day' ? 'today' : `this ${match[2]}`
+    };
   }
   match = periodOrKey.match(THIS_RANGE_REGEX);
   if (match) {
@@ -136,7 +144,21 @@ function retrievePeriod(periodOrKey, baseDate) {
   }
   let params = retrievePeriodParams(periodOrKey);
   if (params && params.type === 'last') {
-    return retrieveLastRelativePeriod(params.num, params.unit, baseDate);
+    let num = params.num;
+    if (params.including_current) {
+      if (params.num === 1) {
+        return retrieveThisRelativePeriod(params.unit, baseDate);
+      } else {
+        let part1 = retrieveLastRelativePeriod(params.num - 1, params.unit, baseDate);
+        let part2 = retrieveThisRelativePeriod(params.unit, baseDate);
+        return {
+          start: part1.start,
+          end: part2.end
+        };
+      }
+    } else {
+      return retrieveLastRelativePeriod(params.num, params.unit, baseDate);
+    }
   } else if (params && params.type === 'this') {
     return retrieveThisRelativePeriod(params.unit, baseDate);
   } else if (params && params.type === 'till_tomorrow') {
