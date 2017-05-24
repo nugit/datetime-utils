@@ -107,7 +107,7 @@ function retrievePeriodParams(periodOrKey) {
 
   let match = periodOrKey.match(LAST_RANGE_REGEX);
   if (match) {
-    return {type: 'last', num: match[1], unit: match[2]}; //old format e.g.: last12months
+    return {type: 'last', num: Number(match[1]), unit: match[2]}; //old format e.g.: last12months
   }
   match = periodOrKey.match(LAST_RANGE_REGEX_1);
   if (match) {
@@ -117,7 +117,7 @@ function retrievePeriodParams(periodOrKey) {
   if (match) {
     return {
       type: 'last',
-      num: match[1],
+      num: Number(match[1]),
       unit: match[2],
       newFormat: true,
       including_current: match[3] === '_including_current',
