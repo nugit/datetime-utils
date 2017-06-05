@@ -186,7 +186,7 @@ function calculateAutoCompare(periodOrKey, baseDate) {
       start: moment(period.start).subtract(params.num, params.unit).format(dateFormat),
       end: moment(period.end).subtract(params.num, params.unit).format(dateFormat)
     };
-  } else if (params && params.type === 'till_tomorrow') {
+  } else if (params && params.type === 'year_to_date') {
     autoCompareInfo.label = `Previous Year`;
     autoCompareInfo.period = {
       start: moment(baseDate).subtract(1, 'year').month(0).date(1).format(dateFormat),
@@ -196,7 +196,7 @@ function calculateAutoCompare(periodOrKey, baseDate) {
     if (periodOrKey === 'today' || periodOrKey === 'yesterday') {
       autoCompareInfo.label = 'Previous Day';
     } else {
-      autoCompareInfo.label = `Previous Days`;
+      autoCompareInfo.label = `Previous Period`;
     }
     const span = moment.duration(moment(period.end).diff(period.start)).asDays() + 1;
     autoCompareInfo.period = {
@@ -204,10 +204,28 @@ function calculateAutoCompare(periodOrKey, baseDate) {
       end: moment(period.start).subtract(1, 'days').format(dateFormat)
     };
   }
-
   return autoCompareInfo;
 }
 
-const getDateRange = retrievePeriod;
+function retrieveComparePeriod(period, comparison = 'auto') {
+  if (comparison === 'auto') {
+    return calculateAutoCompare(period).period;
+  } else if (comparison === '12_months_ago') {
+    period = retrievePeriod(period);
+    return {
+      start: moment(period.start).subtract(1, 'year').format(dateFormat),
+      end: moment(period.end).subtract(1, 'year').format(dateFormat)
+    };
+  } else {
+    return comparison;
+  }
+}
 
-module.exports = {getDateRange, retrievePeriod, retrievePeriodParams, calculateAutoCompare};
+const getDateRange = retrievePeriod;
+module.exports = {
+  getDateRange,
+  retrievePeriod,
+  retrievePeriodParams,
+  retrieveComparePeriod,
+  calculateAutoCompare
+};
