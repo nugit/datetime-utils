@@ -170,6 +170,44 @@ function retrievePeriod(periodOrKey, baseDate) {
   return retrievePredefindedDateRange(periodOrKey);
 }
 
+function calculateAutoCompare(periodOrKey, baseDate) {
+  let autoCompareInfo = {period: {}};
+  let period = retrievePeriod(periodOrKey, baseDate);
+  let params = retrievePeriodParams(periodOrKey);
+  if (params && params.type === 'this') {
+    autoCompareInfo.label = `Previous ${params.unit}`;
+    autoCompareInfo.period = {
+      start: moment(period.start).subtract(1, params.unit).format(dateFormat),
+      end: moment(period.end).subtract(1, params.unit).format(dateFormat),
+    };
+  } else if (params && params.type === 'last') {
+    autoCompareInfo.label = `Previous ${params.num} ${params.unit}`;
+    autoCompareInfo.period = {
+      start: moment(period.start).subtract(params.num, params.unit).format(dateFormat),
+      end: moment(period.end).subtract(params.num, params.unit).format(dateFormat)
+    };
+  } else if (params && params.type === 'till_tomorrow') {
+    autoCompareInfo.label = `Previous Year`;
+    autoCompareInfo.period = {
+      start: moment(baseDate).subtract(1, 'year').month(0).date(1).format(dateFormat),
+      end: moment(baseDate).subtract(1, 'year').month(11).date(31).format(dateFormat)
+    };
+  } else {
+    if (periodOrKey === 'today' || periodOrKey === 'yesterday') {
+      autoCompareInfo.label = 'Previous Day';
+    } else {
+      autoCompareInfo.label = `Previous Days`;
+    }
+    const span = moment.duration(moment(period.end).diff(period.start)).asDays() + 1;
+    autoCompareInfo.period = {
+      start: moment(period.start).subtract(span, 'days').format(dateFormat),
+      end: moment(period.start).subtract(1, 'days').format(dateFormat)
+    };
+  }
+
+  return autoCompareInfo;
+}
+
 const getDateRange = retrievePeriod;
 
-module.exports = {getDateRange, retrievePeriod, retrievePeriodParams};
+module.exports = {getDateRange, retrievePeriod, retrievePeriodParams, calculateAutoCompare};
