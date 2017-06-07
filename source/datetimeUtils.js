@@ -28,12 +28,12 @@ function retrievePredefindedDateRange(key, base) {
   } else if (key === 'year_to_date') {
     return {
       start: start.month(0).date(1).format(dateFormat),
-      end: end.subtract(1, 'days').format(dateFormat)
+      end: end.format(dateFormat)
     };
   } else if (key === 'all_time') {
     return {
       start: start.subtract(3, 'year').format(dateFormat),
-      end: end.date(0).format(dateFormat)
+      end: end.format(dateFormat)
     };
   } else {
     throw new Error('Unrecognized date range: ' + key);
@@ -63,15 +63,20 @@ function retrieveLastRelativePeriod(num, unit, base) {
     };
   } else if (unit === 'year') {
     return {
-      start: start.subtract(num, 'year').month(0).date(1),
-      end: end.subtract(1, 'year').month(11).date(31)
+      start: start.subtract(num, 'year').month(0).date(1).format(dateFormat),
+      end: end.subtract(1, 'year').month(11).date(31).format(dateFormat)
     };
   }
 }
 
 function retrieveThisRelativePeriod(unit, base) {
   let start = moment(base), end = moment(base);
-  if (unit === 'week') {
+  if (unit === 'day') {
+    return {
+      start: start.format(dateFormat),
+      end: end.format(dateFormat),
+    };
+  } else if (unit === 'week') {
     return {
       start: start.day(1).format(dateFormat),
       end: end.day(7).format(dateFormat),
@@ -85,12 +90,12 @@ function retrieveThisRelativePeriod(unit, base) {
     return {
       start: start.subtract(start.month() % 3, 'months').date(1).format(dateFormat),
       // end: end.add(3 - end.month() % 3, 'months').date(0).format(dateFormat)
-      end: end.subtract(1, 'days').format(dateFormat)
+      end: end.add(3 - end.month() % 3, 'months').date(0).format(dateFormat)
     };
   } else if (unit === 'year') {
     return {
       start: start.month(0).date(1).format(dateFormat),
-      end: end.subtract(1, 'days').format(dateFormat)
+      end: end.month(11).date(31).format(dateFormat)
     };
   }
 }
@@ -178,15 +183,15 @@ function calculateAutoCompare(periodOrKey, baseDate) {
     autoCompareInfo.label = `Previous ${params.unit}`;
     autoCompareInfo.period = {
       start: moment(period.start).subtract(1, params.unit).format(dateFormat),
-      end: moment(period.end).subtract(1, params.unit).format(dateFormat),
+      end: moment(period.start).subtract(1, 'days').format(dateFormat),
     };
   } else if (params && params.type === 'last') {
     autoCompareInfo.label = `Previous ${params.num} ${params.unit}`;
     autoCompareInfo.period = {
       start: moment(period.start).subtract(params.num, params.unit).format(dateFormat),
-      end: moment(period.end).subtract(params.num, params.unit).format(dateFormat)
+      end: moment(period.start).subtract(1, 'days').format(dateFormat)
     };
-  } else if (params && params.type === 'year_to_date') {
+  } else if (periodOrKey === 'year_to_date') {
     autoCompareInfo.label = `Previous Year`;
     autoCompareInfo.period = {
       start: moment(baseDate).subtract(1, 'year').month(0).date(1).format(dateFormat),
