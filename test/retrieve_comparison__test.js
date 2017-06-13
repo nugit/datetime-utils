@@ -40,6 +40,18 @@ describe('retrieve period string', () => {
     expect(period.end).to.equal('2017-03-19');
   });
 
+  it('retrieve auto comparison for this month', () => {
+    let period = datetimeUtils.retrieveComparePeriod('this_month', 'auto');
+    expect(period.start).to.equal('2017-02-01');
+    expect(period.end).to.equal('2017-02-28');
+  });
+
+  it('retrieve auto comparison for this quarter', () => {
+    let period = datetimeUtils.retrieveComparePeriod('this_quarter', 'auto');
+    expect(period.start).to.equal('2016-10-01');
+    expect(period.end).to.equal('2016-12-31');
+  });
+
   after(function () {
     clock.restore();
   });
