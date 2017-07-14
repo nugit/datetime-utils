@@ -145,8 +145,8 @@ describe('retrieve period string', () => {
     let january2015 = 1420070400000;
     it('retrieve last_month', () => {
       let period = datetimeUtils.retrievePeriod('last_month', january2015);
-      expect(period.start).to.equal('2015-01-01');
-      expect(period.end).to.equal('2015-12-31');
+      expect(period.start).to.equal('2014-12-01');
+      expect(period.end).to.equal('2015-01-31');
     });
   })
 });
