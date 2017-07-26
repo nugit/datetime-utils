@@ -203,10 +203,27 @@ function calculateAutoCompare(periodOrKey, baseDate) {
     } else {
       autoCompareInfo.label = `Previous Period`;
     }
-    const span = moment.duration(moment(period.end).diff(period.start)).asDays() + 1;
+    let start = moment(period.start);
+    let end = moment(period.end);
+    let ms = moment(end).diff(start);
+    let span = moment.duration(ms).asDays() + 1;
+
+    let compareStart = moment(period.start).subtract(span, 'days');
+    let compareEnd = moment(period.start).subtract(1, 'days');
+
+    let endTomorrow = end.clone().add(1, 'days');
+    //handle whole month date range
+    if (start.date() === 1 && endTomorrow.date() === 1) {
+        let monthdiff = (endTomorrow.year() - start.year()) * 12 + endTomorrow.month() - start.month();
+        compareStart = moment(period.start).subtract(monthdiff, 'months');
+    }
+    //handle whole year date range
+    if (start.month() === 1 && start.date() === 1 && endTomorrow.month() === 1 && endTomorrow.date() === 1) {
+        compareStart = moment(period.start).subtract(endTomorrow.year() - start.year(), 'years');
+    }
     autoCompareInfo.period = {
-      start: moment(period.start).subtract(span, 'days').format(dateFormat),
-      end: moment(period.start).subtract(1, 'days').format(dateFormat)
+        start: compareStart.format(dateFormat),
+        end: compareEnd.format(dateFormat)
     };
   }
   return autoCompareInfo;

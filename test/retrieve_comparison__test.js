@@ -52,6 +52,18 @@ describe('retrieve period string', () => {
     expect(period.end).to.equal('2016-12-31');
   });
 
+  it('retrieve auto comparison for custom period (fit whole month)', () => {
+    let period = datetimeUtils.retrieveComparePeriod({start: '2017-06-01', end: '2017-06-30'}, 'auto');
+    expect(period.start).to.equal('2017-05-01');
+    expect(period.end).to.equal('2017-05-31');
+  });
+
+  it('retrieve auto comparison for custom period(fit whole year)', () => {
+    let period = datetimeUtils.retrieveComparePeriod({start: '2016-01-01', end: '2016-12-31'}, 'auto');
+    expect(period.start).to.equal('2015-01-01');
+    expect(period.end).to.equal('2015-12-31');
+  });
+
   after(function () {
     clock.restore();
   });
