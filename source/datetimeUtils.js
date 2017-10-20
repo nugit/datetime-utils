@@ -143,7 +143,10 @@ function retrievePeriodParams(periodOrKey) {
   return null;
 }
 
-function retrievePeriod(periodOrKey, baseDate) {
+function retrievePeriod(periodOrKey, baseDate, utcOffset) {
+  if(utcOffset) {
+    baseDate = moment.utc(baseDate).utcOffset(utcOffset)
+  }
   if (typeof periodOrKey !== 'string') {
     return periodOrKey;
   }
@@ -172,7 +175,7 @@ function retrievePeriod(periodOrKey, baseDate) {
       end: moment(baseDate).subtract(1, 'days').format('YYYY-MM-DD')
     };
   }
-  return retrievePredefindedDateRange(periodOrKey);
+  return retrievePredefindedDateRange(periodOrKey, baseDate);
 }
 
 function calculateAutoCompare(periodOrKey, baseDate) {

@@ -141,12 +141,36 @@ describe('retrieve period string', () => {
     });
   });
 
-  context('with baseDate', () => {
+  context('with utc baseDate to 1st of january 2015, 12:00am', () => {
     let january2015 = 1420070400000;
     it('retrieve last_month', () => {
       let period = datetimeUtils.retrievePeriod('last_month', january2015);
       expect(period.start).to.equal('2014-12-01');
       expect(period.end).to.equal('2014-12-31');
     });
+
+    it('retrieve yesterday', () => {
+      let period = datetimeUtils.retrievePeriod('yesterday', january2015);
+      expect(period.start).to.equal('2014-12-31');
+      expect(period.end).to.equal('2014-12-31');
+    });
+
+    context('with offset minus 1 hour', () => {
+      const offset = -1
+      context('when asking for today', () => {
+        it('retrieve yesterday', () => {
+          let period = datetimeUtils.retrievePeriod('today', january2015, offset);
+          expect(period.start).to.equal('2014-12-31');
+          expect(period.end).to.equal('2014-12-31');
+        });
+      });
+      context('when asking for yesterday', () => {
+        it('retrieve 2 days before', () => {
+          let period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
+          expect(period.start).to.equal('2014-12-30');
+          expect(period.end).to.equal('2014-12-30');
+        });
+      });
+    })
   })
 });
