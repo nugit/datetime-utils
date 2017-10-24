@@ -1,6 +1,6 @@
 {
   "name": "datetime-utils",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "description": "share lib for datetime",
   "main": "./lib/datetimeUtils.js",
   "repository": {
