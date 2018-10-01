@@ -149,6 +149,12 @@ describe('retrieve period string', () => {
       expect(period.end).to.equal('2014-12-31');
     });
 
+    it('retrieve this_month', () => {
+      const period = datetimeUtils.retrievePeriod('this_month', january2015);
+      expect(period.start).to.equal('2015-01-01');
+      expect(period.end).to.equal('2015-01-01');
+    });
+
     it('retrieve yesterday', () => {
       let period = datetimeUtils.retrievePeriod('yesterday', january2015);
       expect(period.start).to.equal('2014-12-31');

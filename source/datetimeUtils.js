@@ -84,7 +84,7 @@ function retrieveThisRelativePeriod(unit, base) {
   } else if (unit === 'month') {
     return {
       start: start.date(1).format(dateFormat),
-      end: end.subtract(1, 'days').format(dateFormat),
+      end: end.format(dateFormat),
     };
   } else if (unit === 'quarter') {
     return {
