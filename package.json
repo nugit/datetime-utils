@@ -1,6 +1,6 @@
 {
   "name": "nugit-datetime-utils",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "description": "share lib for datetime",
   "main": "./lib/datetimeUtils.js",
   "repository": {
