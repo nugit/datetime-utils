@@ -1,101 +1,103 @@
-let moment = null;
-if (global.window && global.window.moment) {
-  moment = global.window.moment;
-} else {
-  try {
-    moment = require('moment');
-  } catch (e) {
-    throw new Error('Moment.js dependency not loaded');
+const { addDays, endOfYear, format, differenceInDays, getDate, getMonth, getYear, lastDayOfYear, setDate, setDay, setDayOfYear, subDays, subMonths, subWeeks, subYears } = require('date-fns');
+
+const formatDate = date => format(date, 'YYYY-MM-DD');
+
+function retrievePredefindedDateRange(key, base = Date()) {
+  if (key === 'today') {
+    const date = formatDate(base);
+    return { start: date, end: date };
   }
+
+  if (key === 'yesterday') {
+    const yesterday = formatDate(subDays(base, 1));
+    return { start: yesterday, end: yesterday };
+  }
+
+  if (key === 'year_to_date') {
+    return {
+      start: formatDate(setDayOfYear(base, 1)),
+      end: formatDate(base),
+    };
+  }
+
+  if (key === 'all_time') {
+    return {
+      start: formatDate(subYears(base, 3)),
+      end: formatDate(base),
+    };
+  }
+
+  throw new Error('Unrecognized date range: ' + key);
 }
 
-const dateFormat = 'YYYY-MM-DD';
-function retrievePredefindedDateRange(key, base) {
-  const start = moment(base);
-  const end = moment(base);
-  if (key === 'today') {
-    return {
-      start: start.format(dateFormat),
-      end: end.format(dateFormat),
-    };
-  } else if (key === 'yesterday') {
-    return {
-      start: start.subtract(1, 'days').format(dateFormat),
-      end: end.subtract(1, 'days').format(dateFormat),
-    };
-  } else if (key === 'year_to_date') {
-    return {
-      start: start.month(0).date(1).format(dateFormat),
-      end: end.format(dateFormat),
-    };
-  } else if (key === 'all_time') {
-    return {
-      start: start.subtract(3, 'year').format(dateFormat),
-      end: end.format(dateFormat),
-    };
-  } else {
-    throw new Error('Unrecognized date range: ' + key);
-  }
-}
-function retrieveLastRelativePeriod(num, unit, base) {
-  const start = moment(base);
-  const end = moment(base);
+function retrieveLastRelativePeriod(num, unit, base = Date()) {
   if (unit === 'day') {
     return {
-      start: start.subtract(num, 'days').format(dateFormat),
-      end: end.subtract(1, 'days').format(dateFormat),
+      start: formatDate(subDays(base, num)),
+      end: formatDate(subDays(base, 1)),
     };
-  } else if (unit === 'week') {
+  }
+
+  if (unit === 'week') {
     return {
-      start: start.subtract(num, 'weeks').day(1).format(dateFormat),
-      end: end.subtract(1, 'weeks').day(7).format(dateFormat),
+      start: formatDate(setDay(subWeeks(base, num), 1)),
+      end: formatDate(setDay(subWeeks(base, 1), 7)),
     };
-  } else if (unit === 'month') {
+  }
+
+  if (unit === 'month') {
     return {
-      start: start.subtract(num, 'months').date(1).format(dateFormat),
-      end: end.date(0).format(dateFormat),
+      start: formatDate(setDate(subMonths(base, num), 1)),
+      end: formatDate(setDate(base, 0)),
     };
-  } else if (unit === 'quarter') {
+  }
+
+  if (unit === 'quarter') {
     return {
       start: start.subtract(3 * num, 'months').subtract(start.month() % 3, 'months').date(1).format(dateFormat),
       end: end.subtract(3 * num, 'months').add(3 - end.month() % 3, 'months').date(0).format(dateFormat),
     };
-  } else if (unit === 'year') {
+  }
+
+  if (unit === 'year') {
     return {
-      start: start.subtract(num, 'year').month(0).date(1).format(dateFormat),
-      end: end.subtract(1, 'year').month(11).date(31).format(dateFormat),
+      start: formatDate(setDayOfYear(subYears(start, num), 1)),
+      end: formatDate(setDate(setMonth(subYears(base, 1), 11), 31)),
     };
   }
 }
 
-function retrieveThisRelativePeriod(unit, base) {
-  const start = moment(base);
-  const end = moment(base);
+function retrieveThisRelativePeriod(unit, base = Date()) {
   if (unit === 'day') {
+    const date = formatDate(base);
+    return { start: date, end: date };
+  }
+
+  if (unit === 'week') {
     return {
-      start: start.format(dateFormat),
-      end: end.format(dateFormat),
+      start: formatDate(setDay(base, 1)),
+      end: formatDate(setDay(base, 7)),
     };
-  } else if (unit === 'week') {
+  }
+
+  if (unit === 'month') {
     return {
-      start: start.day(1).format(dateFormat),
-      end: end.day(7).format(dateFormat),
+      start: formatDate(setDate(base, 1)),
+      end: formatDate(base),
     };
-  } else if (unit === 'month') {
-    return {
-      start: start.date(1).format(dateFormat),
-      end: end.format(dateFormat),
-    };
-  } else if (unit === 'quarter') {
+  }
+
+  if (unit === 'quarter') {
     return {
       start: start.subtract(start.month() % 3, 'months').date(1).format(dateFormat),
-      // end: end.add(3 - end.month() % 3, 'months').date(0).format(dateFormat)
       end: end.add(3 - end.month() % 3, 'months').date(0).format(dateFormat),
     };
-  } else if (unit === 'year') {
+  }
+
+  if (unit === 'year') {
     return {
-      start: start.month(0).date(1).format(dateFormat),
-      end: end.month(11).date(31).format(dateFormat),
+      start: formatDate(setDayOfYear(base, 1)),
+      end: formatDate(lastDayOfYear(base)),
     };
   }
 }
@@ -110,13 +112,10 @@ function retrievePeriodParams(periodOrKey) {
   const TILL_YESTERDAY_REGEX = /^(\d{4}-\d{2}-\d{2})_to_yesterday$/;
 
   let match = periodOrKey.match(LAST_RANGE_REGEX);
-  if (match) {
-    return { type: 'last', num: Number(match[1]), unit: match[2] }; //old format e.g.: last12months
-  }
-  match = periodOrKey.match(LAST_RANGE_REGEX_1);
-  if (match) {
-    return { type: 'last', num: 1, unit: match[1] };
-  }
+  if (match) return { type: 'last', num: Number(match[1]), unit: match[2] }; //old format e.g.: last12months
+
+  if (match) return { type: 'last', num: 1, unit: match[1] };
+
   match = periodOrKey.match(LAST_RANGE_REGEX_2);
   if (match) {
     return {
@@ -128,17 +127,15 @@ function retrievePeriodParams(periodOrKey) {
       includeingParam: match[2] === 'day' ? 'today' : `this ${match[2]}`,
     };
   }
+
   match = periodOrKey.match(THIS_RANGE_REGEX);
-  if (match) {
-    return { type: 'this', unit: match[1] };
-  }
+  if (match) return { type: 'this', unit: match[1] };
+
   match = periodOrKey.match(TILL_YESTERDAY_REGEX);
-  if (match) {
-    return { type: 'till_tomorrow', start: match[1] };
-  }
-  if (periodOrKey === 'last') {
-    return { type: 'last', num: undefined, unit: undefined };
-  }
+  if (match) return { type: 'till_tomorrow', start: match[1] };
+
+  if (periodOrKey === 'last') return { type: 'last', num: undefined, unit: undefined };
+
   return null;
 }
 
@@ -170,63 +167,81 @@ function retrievePeriod(periodOrKey, baseDate, utcOffset) {
   } else if (params && params.type === 'till_tomorrow') {
     return {
       start: params.start,
-      end: moment(baseDate).subtract(1, 'days').format('YYYY-MM-DD'),
+      end: formatDate(subDays(baseDate, 1)),
     };
   }
   return retrievePredefindedDateRange(periodOrKey, baseDate);
 }
 
-function calculateAutoCompare(periodOrKey, baseDate) {
+const getSubtractionFn = (unit) => {
+  if ('year') return subYears;
+  if ('month') return subMonths;
+  if ('week') return subWeeks;
+  return subDays;
+};
+
+function calculateAutoCompare(periodOrKey, baseDate = Date()) {
   const autoCompareInfo = { period: {} };
   const period = retrievePeriod(periodOrKey, baseDate);
   const params = retrievePeriodParams(periodOrKey);
+
   if (params && params.type === 'this') {
-    autoCompareInfo.label = `Previous ${params.unit}`;
-    autoCompareInfo.period = {
-      start: moment(period.start).subtract(1, params.unit).format(dateFormat),
-      end: moment(period.start).subtract(1, 'days').format(dateFormat),
-    };
-  } else if (params && params.type === 'last') {
-    autoCompareInfo.label = `Previous ${params.num} ${params.unit}`;
-    autoCompareInfo.period = {
-      start: moment(period.start).subtract(params.num, params.unit).format(dateFormat),
-      end: moment(period.start).subtract(1, 'days').format(dateFormat),
-    };
-  } else if (periodOrKey === 'year_to_date') {
-    autoCompareInfo.label = `Previous Year`;
-    autoCompareInfo.period = {
-      start: moment(baseDate).subtract(1, 'year').month(0).date(1).format(dateFormat),
-      end: moment(baseDate).subtract(1, 'year').month(11).date(31).format(dateFormat),
-    };
-  } else {
-    if (periodOrKey === 'today' || periodOrKey === 'yesterday') {
-      autoCompareInfo.label = 'Previous Day';
-    } else {
-      autoCompareInfo.label = `Previous Period`;
-    }
-    const start = moment(period.start);
-    const end = moment(period.end);
-    const ms = moment(end).diff(start);
-    const span = moment.duration(ms).asDays() + 1;
-
-    let compareStart = moment(period.start).subtract(span, 'days');
-    const compareEnd = moment(period.start).subtract(1, 'days');
-
-    const endTomorrow = end.clone().add(1, 'days');
-    //handle whole month date range
-    if (start.date() === 1 && endTomorrow.date() === 1) {
-      const monthdiff = (endTomorrow.year() - start.year()) * 12 + endTomorrow.month() - start.month();
-      compareStart = moment(period.start).subtract(monthdiff, 'months');
-    }
-    //handle whole year date range
-    if (start.month() === 1 && start.date() === 1 && endTomorrow.month() === 1 && endTomorrow.date() === 1) {
-      compareStart = moment(period.start).subtract(endTomorrow.year() - start.year(), 'years');
-    }
-    autoCompareInfo.period = {
-      start: compareStart.format(dateFormat),
-      end: compareEnd.format(dateFormat),
+    const subtract = getSubtractionFn(params.unit);
+    return {
+      label: `Previous ${params.unit}`,
+      period: {
+        start: formatDate(subtract(period.start, 1)),
+        end: formatDate(subDays(period.start, 1)),
+      },
     };
   }
+
+  if (params && params.type === 'last') {
+    const subtract = getSubtractionFn(params.unit);
+    return {
+      label: `Previous ${params.num} ${params.unit}`,
+      period: {
+        start: formatDate(subtract(period.start, params.num)),
+        end: formatDate(subDays(period.start, 1)),
+      },
+    };
+  }
+
+  if (periodOrKey === 'year_to_date') {
+    return {
+      label: `Previous Year`,
+      period: {
+        start: formatDate(setDayOfYear(subYears(baseDate, 1), 1)),
+        end: formatDate(endOfYear(subYears(baseDate, 1))),
+      },
+    };
+  }
+
+  if (periodOrKey === 'today' || periodOrKey === 'yesterday') {
+    autoCompareInfo.label = 'Previous Day';
+  } else {
+    autoCompareInfo.label = `Previous Period`;
+  }
+
+  const { start, end } = period;
+  const span = differenceInDays(end, start) + 1;
+  let compareStart = subDays(start, span);
+  const compareEnd = subDays(start, 1);
+
+  const endTomorrow = addDays(end, 1);
+  //handle whole month date range
+  if (getDate(start) === 1 && getDate(endTomorrow) === 1) {
+    const monthdiff = (getYear(endTomorrow) - getYear(start)) * 12 + getMonth(endTomorrow) - getMonth(start);
+    compareStart = subMonths(period.start, monthdiff);
+  }
+  //handle whole year date range
+  if (getMonth(start) === 1 && getDate(start) === 1 && getMonth(endTomorrow) === 1 && getDate(endTomorrow) === 1) {
+    compareStart = subYears(start, getYears(endTomorrow) - getYears(start));
+  }
+  autoCompareInfo.period = {
+    start: formatDate(compareStart),
+    end: formatDate(compareEnd),
+  };
   return autoCompareInfo;
 }
 
@@ -236,8 +251,8 @@ function retrieveComparePeriod(period, comparison = 'auto') {
   if (comparison === '12_months_ago') {
     const yearPeriod = retrievePeriod(period);
     return {
-      start: moment(yearPeriod.start).subtract(1, 'year').format(dateFormat),
-      end: moment(yearPeriod.end).subtract(1, 'year').format(dateFormat),
+      start: formatDate(subYear(yearPeriod.start, 1)),
+      end: formatDate(subYear(yearPeriod.end, 1)),
     };
   }
 
