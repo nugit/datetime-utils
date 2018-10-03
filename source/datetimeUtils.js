@@ -1,4 +1,4 @@
-const { addDays, endOfYear, format, differenceInDays, getDate, getMonth, getYear, lastDayOfYear, setDate, setDay, setDayOfYear, subDays, subMonths, subWeeks, subYears } = require('date-fns');
+const { addDays, addMonths, endOfYear, format, differenceInDays, getDate, getMonth, getYear, lastDayOfYear, setDate, setDay, setDayOfYear, setMonth, subDays, subMonths, subWeeks, subYears } = require('date-fns');
 
 const formatDate = date => format(date, 'YYYY-MM-DD');
 
@@ -54,14 +54,14 @@ function retrieveLastRelativePeriod(num, unit, base = Date()) {
 
   if (unit === 'quarter') {
     return {
-      start: start.subtract(3 * num, 'months').subtract(start.month() % 3, 'months').date(1).format(dateFormat),
-      end: end.subtract(3 * num, 'months').add(3 - end.month() % 3, 'months').date(0).format(dateFormat),
+      start: formatDate(setDate(subMonths(base, (num * 3) + (getMonth(base) % 3)), 1)),
+      end: formatDate(setDate(addMonths(subMonths(base, 3 * num), 3 - getMonth(base) % 3), 0)),
     };
   }
 
   if (unit === 'year') {
     return {
-      start: formatDate(setDayOfYear(subYears(start, num), 1)),
+      start: formatDate(setDayOfYear(subYears(base, num), 1)),
       end: formatDate(setDate(setMonth(subYears(base, 1), 11), 31)),
     };
   }
@@ -89,8 +89,8 @@ function retrieveThisRelativePeriod(unit, base = Date()) {
 
   if (unit === 'quarter') {
     return {
-      start: start.subtract(start.month() % 3, 'months').date(1).format(dateFormat),
-      end: end.add(3 - end.month() % 3, 'months').date(0).format(dateFormat),
+      start: formatDate(setDate(subMonths(base, getMonth(base) % 3), 1)),
+      end: formatDate(setDate(addMonths(base, 3 - getMonth(base) % 3), 0)),
     };
   }
 
@@ -106,7 +106,7 @@ function retrievePeriodParams(periodOrKey) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
   const LAST_RANGE_REGEX = /^last(\d+)(day|week|month|quarter|year)s?$/;
-  const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)$/;
+	const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)$/;
   const LAST_RANGE_REGEX_2 = /^last_(\d+)_(day|week|month|quarter|year)s?(_including_current)?$/;
   const THIS_RANGE_REGEX = /^this_(day|week|month|quarter|year)$/;
   const TILL_YESTERDAY_REGEX = /^(\d{4}-\d{2}-\d{2})_to_yesterday$/;
@@ -114,6 +114,7 @@ function retrievePeriodParams(periodOrKey) {
   let match = periodOrKey.match(LAST_RANGE_REGEX);
   if (match) return { type: 'last', num: Number(match[1]), unit: match[2] }; //old format e.g.: last12months
 
+  match = periodOrKey.match(LAST_RANGE_REGEX_1);
   if (match) return { type: 'last', num: 1, unit: match[1] };
 
   match = periodOrKey.match(LAST_RANGE_REGEX_2);
@@ -147,7 +148,6 @@ function retrievePeriod(periodOrKey, baseDate, utcOffset) {
   }
   const params = retrievePeriodParams(periodOrKey);
   if (params && params.type === 'last') {
-    const num = params.num;
     if (params.including_current) {
       if (params.num === 1) {
         return retrieveThisRelativePeriod(params.unit, baseDate);
@@ -174,9 +174,9 @@ function retrievePeriod(periodOrKey, baseDate, utcOffset) {
 }
 
 const getSubtractionFn = (unit) => {
-  if ('year') return subYears;
-  if ('month') return subMonths;
-  if ('week') return subWeeks;
+  if (unit === 'year') return subYears;
+  if (unit === 'month') return subMonths;
+  if (unit === 'week') return subWeeks;
   return subDays;
 };
 
@@ -236,7 +236,7 @@ function calculateAutoCompare(periodOrKey, baseDate = Date()) {
   }
   //handle whole year date range
   if (getMonth(start) === 1 && getDate(start) === 1 && getMonth(endTomorrow) === 1 && getDate(endTomorrow) === 1) {
-    compareStart = subYears(start, getYears(endTomorrow) - getYears(start));
+    compareStart = subYears(start, getYear(endTomorrow) - getYear(start));
   }
   autoCompareInfo.period = {
     start: formatDate(compareStart),
@@ -251,8 +251,8 @@ function retrieveComparePeriod(period, comparison = 'auto') {
   if (comparison === '12_months_ago') {
     const yearPeriod = retrievePeriod(period);
     return {
-      start: formatDate(subYear(yearPeriod.start, 1)),
-      end: formatDate(subYear(yearPeriod.end, 1)),
+      start: formatDate(subYears(yearPeriod.start, 1)),
+      end: formatDate(subYears(yearPeriod.end, 1)),
     };
   }
 
