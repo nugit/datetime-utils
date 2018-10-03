@@ -30,7 +30,7 @@
     "build": "babel source --out-dir lib",
     "prepublish": "npm run build",
     "test": "./node_modules/.bin/mocha \"test/**/*__test.js\" --reporter spec --recursive",
-    "test_watch": "./node_modules/.bin/mocha \"**/*__test.js\" --reporter spec --recursive --watch",
+    "test-watch": "./node_modules/.bin/mocha \"**/*__test.js\" --reporter spec --recursive --watch",
     "commit": "commit-wizard"
   },
   "config": {
