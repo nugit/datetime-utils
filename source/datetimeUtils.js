@@ -184,6 +184,7 @@ function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
 const getSubtractionFn = (unit) => {
   if (unit === 'year') return subYears;
   if (unit === 'month') return subMonths;
+  if (unit === 'quarter') return (date, nb) => subMonths(date, nb * 3);
   if (unit === 'week') return subWeeks;
   return subDays;
 };
