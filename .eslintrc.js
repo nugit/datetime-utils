@@ -12,6 +12,6 @@ module.exports = {
       experimentalObjectRestSpread: true,
     },
   },
-  extends: 'eslint:recommended',
+  extends: 'airbnb',
 };
 

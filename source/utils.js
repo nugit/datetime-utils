@@ -23,4 +23,3 @@ export const applyOffset = (offset, dateStr) => {
   const tzDiff = offset * 60 + dateObj.getTimezoneOffset();
   return new Date(dateObj.getTime() + tzDiff * 60 * 1000).toString();
 };
-

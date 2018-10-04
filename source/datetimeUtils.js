@@ -14,7 +14,7 @@ import subDays from 'date-fns/sub_days';
 import subMonths from 'date-fns/sub_months';
 import subWeeks from 'date-fns/sub_weeks';
 import subYears from 'date-fns/sub_years';
-import { applyOffset, formatDate, getSubtractionFn } from './utils.js';
+import { applyOffset, formatDate, getSubtractionFn } from './utils';
 
 // :: String -> Option(String) -> Object
 function retrievePredefindedDateRange(key, base = Date()) {
@@ -42,29 +42,15 @@ function retrievePredefindedDateRange(key, base = Date()) {
     };
   }
 
-  throw new Error('Unrecognized date range: ' + key);
+  throw new Error(`Unrecognized date range: ${key}`);
 }
 
 // :: Int -> String -> Option(String) -> Object
 function retrieveLastRelativePeriod(num, unit, base = Date()) {
-  if (unit === 'day') {
+  if (unit === 'year') {
     return {
-      start: formatDate(subDays(base, num)),
-      end: formatDate(subDays(base, 1)),
-    };
-  }
-
-  if (unit === 'week') {
-    return {
-      start: formatDate(setDay(subWeeks(base, num), 1)),
-      end: formatDate(setDay(subWeeks(base, 1), 7)),
-    };
-  }
-
-  if (unit === 'month') {
-    return {
-      start: formatDate(setDate(subMonths(base, num), 1)),
-      end: formatDate(setDate(base, 0)),
+      start: formatDate(setDayOfYear(subYears(base, num), 1)),
+      end: formatDate(setDate(setMonth(subYears(base, 1), 11), 31)),
     };
   }
 
@@ -75,25 +61,40 @@ function retrieveLastRelativePeriod(num, unit, base = Date()) {
     };
   }
 
-  if (unit === 'year') {
+  if (unit === 'month') {
     return {
-      start: formatDate(setDayOfYear(subYears(base, num), 1)),
-      end: formatDate(setDate(setMonth(subYears(base, 1), 11), 31)),
+      start: formatDate(setDate(subMonths(base, num), 1)),
+      end: formatDate(setDate(base, 0)),
     };
-  }
-}
-
-// :: String -> Option(String) -> Object
-function retrieveThisRelativePeriod(unit, base = Date()) {
-  if (unit === 'day') {
-    const date = formatDate(base);
-    return { start: date, end: date };
   }
 
   if (unit === 'week') {
     return {
-      start: formatDate(setDay(base, 1)),
-      end: formatDate(setDay(base, 7)),
+      start: formatDate(setDay(subWeeks(base, num), 1)),
+      end: formatDate(setDay(subWeeks(base, 1), 7)),
+    };
+  }
+
+  // Default case: day
+  return {
+    start: formatDate(subDays(base, num)),
+    end: formatDate(subDays(base, 1)),
+  };
+}
+
+// :: String -> Option(String) -> Object
+function retrieveThisRelativePeriod(unit, base = Date()) {
+  if (unit === 'year') {
+    return {
+      start: formatDate(setDayOfYear(base, 1)),
+      end: formatDate(lastDayOfYear(base)),
+    };
+  }
+
+  if (unit === 'quarter') {
+    return {
+      start: formatDate(setDate(subMonths(base, getMonth(base) % 3), 1)),
+      end: formatDate(setDate(addMonths(base, 3 - (getMonth(base) % 3)), 0)),
     };
   }
 
@@ -104,19 +105,16 @@ function retrieveThisRelativePeriod(unit, base = Date()) {
     };
   }
 
-  if (unit === 'quarter') {
+  if (unit === 'week') {
     return {
-      start: formatDate(setDate(subMonths(base, getMonth(base) % 3), 1)),
-      end: formatDate(setDate(addMonths(base, 3 - getMonth(base) % 3), 0)),
+      start: formatDate(setDay(base, 1)),
+      end: formatDate(setDay(base, 7)),
     };
   }
 
-  if (unit === 'year') {
-    return {
-      start: formatDate(setDayOfYear(base, 1)),
-      end: formatDate(lastDayOfYear(base)),
-    };
-  }
+  // Default case: day
+  const date = formatDate(base);
+  return { start: date, end: date };
 }
 
 // :: (Object | String) -> Object
@@ -130,7 +128,7 @@ export function retrievePeriodParams(periodOrKey) {
   const TILL_YESTERDAY_REGEX = /^(\d{4}-\d{2}-\d{2})_to_yesterday$/;
 
   let match = periodOrKey.match(LAST_RANGE_REGEX);
-  if (match) return { type: 'last', num: Number(match[1]), unit: match[2] }; //old format e.g.: last12months
+  if (match) return { type: 'last', num: Number(match[1]), unit: match[2] }; // Old format e.g.: last12months
 
   match = periodOrKey.match(LAST_RANGE_REGEX_1);
   if (match) return { type: 'last', num: 1, unit: match[1] };
@@ -173,7 +171,7 @@ export function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
 
       const { start } = retrieveLastRelativePeriod(params.num - 1, params.unit, baseDate);
       const { end } = retrieveThisRelativePeriod(params.unit, baseDate);
-      return { start: start, end: end };
+      return { start, end };
     }
 
     return retrieveLastRelativePeriod(params.num, params.unit, baseDate);
@@ -223,7 +221,7 @@ export function calculateAutoCompare(periodOrKey, baseDate = Date()) {
 
   if (periodOrKey === 'year_to_date') {
     return {
-      label: `Previous Year`,
+      label: 'Previous Year',
       period: {
         start: formatDate(setDayOfYear(subYears(baseDate, 1), 1)),
         end: formatDate(endOfYear(subYears(baseDate, 1))),
@@ -234,7 +232,7 @@ export function calculateAutoCompare(periodOrKey, baseDate = Date()) {
   if (periodOrKey === 'today' || periodOrKey === 'yesterday') {
     autoCompareInfo.label = 'Previous Day';
   } else {
-    autoCompareInfo.label = `Previous Period`;
+    autoCompareInfo.label = 'Previous Period';
   }
 
   const { start, end } = period;
@@ -243,13 +241,19 @@ export function calculateAutoCompare(periodOrKey, baseDate = Date()) {
   const compareEnd = subDays(start, 1);
 
   const endTomorrow = addDays(end, 1);
-  //handle whole month date range
+  // Handle whole month date range
   if (getDate(start) === 1 && getDate(endTomorrow) === 1) {
-    const monthdiff = (getYear(endTomorrow) - getYear(start)) * 12 + getMonth(endTomorrow) - getMonth(start);
-    compareStart = subMonths(period.start, monthdiff);
+    const yearsDiff = getYear(endTomorrow) - getYear(start);
+    const monthDiff = yearsDiff * 12 + getMonth(endTomorrow) - getMonth(start);
+    compareStart = subMonths(period.start, monthDiff);
   }
-  //handle whole year date range
-  if (getMonth(start) === 1 && getDate(start) === 1 && getMonth(endTomorrow) === 1 && getDate(endTomorrow) === 1) {
+  // Handle whole year date range
+  if (
+    getMonth(start) === 1
+    && getDate(start) === 1
+    && getMonth(endTomorrow) === 1
+    && getDate(endTomorrow) === 1
+  ) {
     compareStart = subYears(start, getYear(endTomorrow) - getYear(start));
   }
   autoCompareInfo.period = {
@@ -275,4 +279,3 @@ export function retrieveComparePeriod(period, comparison = 'auto') {
 }
 
 export const getDateRange = retrievePeriod;
-
