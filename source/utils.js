@@ -4,8 +4,10 @@ import subMonths from 'date-fns/sub_months';
 import subWeeks from 'date-fns/sub_weeks';
 import subYears from 'date-fns/sub_years';
 
+// :: (Date | String | Int) -> String
 export const formatDate = date => format(date, 'YYYY-MM-DD');
 
+// :: String -> ((Date | String | Int) -> Int -> Date)
 export const getSubtractionFn = (unit) => {
   if (unit === 'year') return subYears;
   if (unit === 'month') return subMonths;
@@ -14,6 +16,7 @@ export const getSubtractionFn = (unit) => {
   return subDays;
 };
 
+// :: Int -> String -> String
 export const applyOffset = (offset, dateStr) => {
   if (!offset) return dateStr;
   const dateObj = new Date(dateStr);

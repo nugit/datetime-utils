@@ -16,6 +16,7 @@ import subWeeks from 'date-fns/sub_weeks';
 import subYears from 'date-fns/sub_years';
 import { applyOffset, formatDate, getSubtractionFn } from './utils.js';
 
+// :: String -> Option(String) -> Object
 function retrievePredefindedDateRange(key, base = Date()) {
   if (key === 'today') {
     const date = formatDate(base);
@@ -44,6 +45,7 @@ function retrievePredefindedDateRange(key, base = Date()) {
   throw new Error('Unrecognized date range: ' + key);
 }
 
+// :: Int -> String -> Option(String) -> Object
 function retrieveLastRelativePeriod(num, unit, base = Date()) {
   if (unit === 'day') {
     return {
@@ -81,6 +83,7 @@ function retrieveLastRelativePeriod(num, unit, base = Date()) {
   }
 }
 
+// :: String -> Option(String) -> Object
 function retrieveThisRelativePeriod(unit, base = Date()) {
   if (unit === 'day') {
     const date = formatDate(base);
@@ -116,6 +119,7 @@ function retrieveThisRelativePeriod(unit, base = Date()) {
   }
 }
 
+// :: (Object | String) -> Object
 export function retrievePeriodParams(periodOrKey) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
@@ -154,6 +158,7 @@ export function retrievePeriodParams(periodOrKey) {
   return null;
 }
 
+// :: (Object | String) -> Option(String) -> Int
 export function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
@@ -188,6 +193,7 @@ export function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
   return retrievePredefindedDateRange(periodOrKey, baseDate);
 }
 
+// :: (Object | String) -> Option(String) -> Object
 export function calculateAutoCompare(periodOrKey, baseDate = Date()) {
   const autoCompareInfo = { period: {} };
   const period = retrievePeriod(periodOrKey, baseDate);
@@ -253,6 +259,7 @@ export function calculateAutoCompare(periodOrKey, baseDate = Date()) {
   return autoCompareInfo;
 }
 
+// :: Object -> Option(String) -> Object
 export function retrieveComparePeriod(period, comparison = 'auto') {
   if (comparison === 'auto') return calculateAutoCompare(period).period;
 
