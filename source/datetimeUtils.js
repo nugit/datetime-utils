@@ -1,7 +1,6 @@
 import addDays from 'date-fns/add_days';
 import addMonths from 'date-fns/add_months';
 import endOfYear from 'date-fns/end_of_year';
-import format from 'date-fns/format';
 import differenceInDays from 'date-fns/difference_in_days';
 import getDate from 'date-fns/get_date';
 import getMonth from 'date-fns/get_month';
@@ -15,8 +14,7 @@ import subDays from 'date-fns/sub_days';
 import subMonths from 'date-fns/sub_months';
 import subWeeks from 'date-fns/sub_weeks';
 import subYears from 'date-fns/sub_years';
-
-const formatDate = date => format(date, 'YYYY-MM-DD');
+import { applyOffset, formatDate, getSubtractionFn } from './utils.js';
 
 function retrievePredefindedDateRange(key, base = Date()) {
   if (key === 'today') {
@@ -118,7 +116,7 @@ function retrieveThisRelativePeriod(unit, base = Date()) {
   }
 }
 
-function retrievePeriodParams(periodOrKey) {
+export function retrievePeriodParams(periodOrKey) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
   const LAST_RANGE_REGEX = /^last(\d+)(day|week|month|quarter|year)s?$/;
@@ -156,14 +154,7 @@ function retrievePeriodParams(periodOrKey) {
   return null;
 }
 
-const applyOffset = (offset, dateStr) => {
-  if (!offset) return dateStr;
-  const dateObj = new Date(dateStr);
-  const tzDiff = offset * 60 + dateObj.getTimezoneOffset();
-  return new Date(dateObj.getTime() + tzDiff * 60 * 1000).toString();
-};
-
-function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
+export function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
   const baseDate = applyOffset(utcOffset, base);
@@ -197,15 +188,7 @@ function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
   return retrievePredefindedDateRange(periodOrKey, baseDate);
 }
 
-const getSubtractionFn = (unit) => {
-  if (unit === 'year') return subYears;
-  if (unit === 'month') return subMonths;
-  if (unit === 'quarter') return (date, nb) => subMonths(date, nb * 3);
-  if (unit === 'week') return subWeeks;
-  return subDays;
-};
-
-function calculateAutoCompare(periodOrKey, baseDate = Date()) {
+export function calculateAutoCompare(periodOrKey, baseDate = Date()) {
   const autoCompareInfo = { period: {} };
   const period = retrievePeriod(periodOrKey, baseDate);
   const params = retrievePeriodParams(periodOrKey);
@@ -270,7 +253,7 @@ function calculateAutoCompare(periodOrKey, baseDate = Date()) {
   return autoCompareInfo;
 }
 
-function retrieveComparePeriod(period, comparison = 'auto') {
+export function retrieveComparePeriod(period, comparison = 'auto') {
   if (comparison === 'auto') return calculateAutoCompare(period).period;
 
   if (comparison === '12_months_ago') {
@@ -284,12 +267,5 @@ function retrieveComparePeriod(period, comparison = 'auto') {
   return comparison;
 }
 
-const getDateRange = retrievePeriod;
+export const getDateRange = retrievePeriod;
 
-module.exports = {
-  getDateRange,
-  retrievePeriod,
-  retrievePeriodParams,
-  retrieveComparePeriod,
-  calculateAutoCompare
-};
