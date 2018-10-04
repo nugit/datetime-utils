@@ -5,9 +5,9 @@ import babel from 'rollup-plugin-babel';
 export default {
   input: 'source/datetimeUtils.js',
   output: {
-    file: './lib/datetimeUtils.js',
-    format: 'umd',
     name: 'nugit-datetime-utils',
+    file: './lib/datetimeUtils.js',
+    format: 'cjs',
   },
   plugins: [
     resolve(),
