@@ -1,6 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonJS from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
+import { uglify } from 'rollup-plugin-uglify';
 
 export default {
   input: 'source/datetimeUtils.js',
@@ -13,6 +14,7 @@ export default {
     resolve(),
     commonJS({ include: 'node_modules/**' }),
     babel({ exclude: 'node_modules/**' }),
+    uglify({ sourcemap: false }),
   ],
 };
 
