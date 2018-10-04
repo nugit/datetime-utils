@@ -55,7 +55,7 @@ function retrieveLastRelativePeriod(num, unit, base = Date()) {
   if (unit === 'quarter') {
     return {
       start: formatDate(setDate(subMonths(base, (num * 3) + (getMonth(base) % 3)), 1)),
-      end: formatDate(setDate(addMonths(subMonths(base, 3 * num), 3 - getMonth(base) % 3), 0)),
+      end: formatDate(setDate(addMonths(subMonths(base, 3 * num), 3 - (getMonth(base) % 3)), 0)),
     };
   }
 
@@ -140,36 +140,44 @@ function retrievePeriodParams(periodOrKey) {
   return null;
 }
 
-function retrievePeriod(periodOrKey, baseDate, utcOffset) {
+const applyOffset = (offset, dateStr) => {
+  if (!offset) return dateStr;
+  const dateObj = new Date(dateStr);
+  const tzDiff = offset * 60 + dateObj.getTimezoneOffset();
+  return new Date(dateObj.getTime() + tzDiff * 60 * 1000).toString();
+};
+
+function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
-  if (utcOffset) {
-    baseDate = moment.utc(baseDate).utcOffset(utcOffset)
-  }
+  const baseDate = applyOffset(utcOffset, base);
+
   const params = retrievePeriodParams(periodOrKey);
   if (params && params.type === 'last') {
     if (params.including_current) {
       if (params.num === 1) {
         return retrieveThisRelativePeriod(params.unit, baseDate);
-      } else {
-        const part1 = retrieveLastRelativePeriod(params.num - 1, params.unit, baseDate);
-        const part2 = retrieveThisRelativePeriod(params.unit, baseDate);
-        return {
-          start: part1.start,
-          end: part2.end,
-        };
       }
-    } else {
-      return retrieveLastRelativePeriod(params.num, params.unit, baseDate);
+
+      const { start } = retrieveLastRelativePeriod(params.num - 1, params.unit, baseDate);
+      const { end } = retrieveThisRelativePeriod(params.unit, baseDate);
+      return { start: start, end: end };
     }
-  } else if (params && params.type === 'this') {
+
+    return retrieveLastRelativePeriod(params.num, params.unit, baseDate);
+  }
+
+  if (params && params.type === 'this') {
     return retrieveThisRelativePeriod(params.unit, baseDate);
-  } else if (params && params.type === 'till_tomorrow') {
+  }
+
+  if (params && params.type === 'till_tomorrow') {
     return {
       start: params.start,
       end: formatDate(subDays(baseDate, 1)),
     };
   }
+
   return retrievePredefindedDateRange(periodOrKey, baseDate);
 }
 
