@@ -36,7 +36,7 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "prepublish": "yarn build",
-    "test": "mocha \"test/**/*__test.js\" --compilers js:@babel/register --reporter spec --recursive",
+    "test": "mocha \"test/**/*__test.js\" --require @babel/register --reporter spec --recursive",
     "test-watch": "yarn test --watch",
     "lint": "eslint --cache -c .eslintrc.js source/**/*.js",
     "commit": "commit-wizard"
