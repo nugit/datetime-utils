@@ -122,7 +122,7 @@ function retrievePeriodParams(periodOrKey) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
   const LAST_RANGE_REGEX = /^last(\d+)(day|week|month|quarter|year)s?$/;
-	const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)$/;
+  const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)$/;
   const LAST_RANGE_REGEX_2 = /^last_(\d+)_(day|week|month|quarter|year)s?(_including_current)?$/;
   const THIS_RANGE_REGEX = /^this_(day|week|month|quarter|year)$/;
   const TILL_YESTERDAY_REGEX = /^(\d{4}-\d{2}-\d{2})_to_yesterday$/;
