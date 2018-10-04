@@ -20,17 +20,24 @@
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
     "eslint": "^5.6.1",
     "mocha": "^5.2.0",
     "pre-git": "^3.17.1",
+    "rollup": "^0.66.3",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.1.8",
+    "rollup-plugin-node-resolve": "^3.4.0",
     "sinon": "^2.4.1"
   },
   "scripts": {
-    "build": "babel source --out-dir lib",
-    "prepublish": "npm run build",
-    "test": "./node_modules/.bin/mocha \"test/**/*__test.js\" --reporter spec --recursive",
-    "test-watch": "./node_modules/.bin/mocha \"**/*__test.js\" --reporter spec --recursive --watch",
+    "build": "rollup -c rollup.config.js",
+    "prepublish": "yarn build",
+    "test": "mocha \"test/**/*__test.js\" --compilers js:@babel/register --reporter spec --recursive",
+    "test-watch": "yarn test --watch",
+    "lint": "eslint --cache -c .eslintrc.js source/**/*.js",
     "commit": "commit-wizard"
   },
   "config": {

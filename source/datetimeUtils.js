@@ -1,4 +1,20 @@
-const { addDays, addMonths, endOfYear, format, differenceInDays, getDate, getMonth, getYear, lastDayOfYear, setDate, setDay, setDayOfYear, setMonth, subDays, subMonths, subWeeks, subYears } = require('date-fns');
+import addDays from 'date-fns/add_days';
+import addMonths from 'date-fns/add_months';
+import endOfYear from 'date-fns/end_of_year';
+import format from 'date-fns/format';
+import differenceInDays from 'date-fns/difference_in_days';
+import getDate from 'date-fns/get_date';
+import getMonth from 'date-fns/get_month';
+import getYear from 'date-fns/get_year';
+import lastDayOfYear from 'date-fns/last_day_of_year';
+import setDate from 'date-fns/set_date';
+import setDay from 'date-fns/set_day';
+import setDayOfYear from 'date-fns/set_day_of_year';
+import setMonth from 'date-fns/set_month';
+import subDays from 'date-fns/sub_days';
+import subMonths from 'date-fns/sub_months';
+import subWeeks from 'date-fns/sub_weeks';
+import subYears from 'date-fns/sub_years';
 
 const formatDate = date => format(date, 'YYYY-MM-DD');
 
