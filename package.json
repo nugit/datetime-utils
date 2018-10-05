@@ -54,6 +54,7 @@
       ]
     }
   },
+  "files": ["lib"],
   "release": {
     "analyzeCommits": "simple-commit-message"
   }
