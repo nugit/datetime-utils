@@ -6,3 +6,6 @@ A share lib for multiple nugit projects. for example 'vis service' and 'mailer s
 $ npm install --save nugit-datetime-utils
 const dt = require('nugit-datetime-utils');
 const period = dt.getDateRange('last7days');
+```
+
+_Brought to you by the power of ☭_
