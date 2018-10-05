@@ -1,8 +1,10 @@
 {
   "name": "nugit-datetime-utils",
-  "version": "2.6.0",
-  "description": "share lib for datetime",
-  "main": "./lib/datetimeUtils.js",
+  "version": "3.0.0",
+  "description": "Shared time utils",
+  "main": "lib/nugit-datetime-utils.cjs.js",
+  "module": "lib/nugit-datetime-utils.esm.js",
+  "browser": "lib/nugit-datetime-utils.umd.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nugit/datetime-utils.git"
@@ -14,21 +16,35 @@
   },
   "homepage": "https://github.com/nugit/datetime-utils#readme",
   "dependencies": {
-    "moment": "^2.22.2"
+    "date-fns": "^1.29.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
     "mocha": "^5.2.0",
     "pre-git": "^3.17.1",
+    "rollup": "^0.66.4",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.1.8",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-uglify": "^6.0.0",
     "sinon": "^2.4.1"
   },
   "scripts": {
-    "build": "babel source --presets babel-preset-es2015 --out-dir lib",
-    "prepublish": "npm run build",
-    "test": "./node_modules/.bin/mocha \"test/**/*__test.js\" --reporter spec --recursive",
-    "test_watch": "./node_modules/.bin/mocha \"**/*__test.js\" --reporter spec --recursive --watch",
+    "build": "rollup -c rollup.config.js",
+    "prepublish": "yarn build",
+    "test": "mocha \"test/**/*__test.js\" --require @babel/register --reporter spec --recursive",
+    "test-watch": "yarn test --watch",
+    "lint": "eslint --cache -c .eslintrc.js src/**/*.js",
     "commit": "commit-wizard"
   },
   "config": {
