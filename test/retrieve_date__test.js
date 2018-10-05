@@ -1,12 +1,12 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const datetimeUtils = require('../source/datetimeUtils');
+const datetimeUtils = require('../src/main');
 
 describe('retrieve period string', () => {
   context('without baseDate', () => {
     let clock;
-    before(function () {
+    before(() => {
       clock = sinon.useFakeTimers(new Date('2017-03-20').getTime());
     });
 
@@ -78,64 +78,64 @@ describe('retrieve period string', () => {
     it('retrieve last_3_months', () => {
       const period = datetimeUtils.retrievePeriod('last_3_months');
       expect(period).to.deep.equal({
-        "start": "2016-12-01",
-        "end": "2017-02-28"
+        start: '2016-12-01',
+        end: '2017-02-28',
       });
       const period2 = datetimeUtils.retrievePeriod('last3months');
       expect(period2).to.deep.equal({
-        "start": "2016-12-01",
-        "end": "2017-02-28"
+        start: '2016-12-01',
+        end: '2017-02-28',
       });
     });
     it('retrieve last_2_quarters', () => {
       const period = datetimeUtils.retrievePeriod('last_2_quarters');
       expect(period).to.deep.equal({
-        "start": "2016-07-01",
-        "end": "2016-09-30"
+        start: '2016-07-01',
+        end: '2016-09-30',
       });
     });
 
     it('retrieve last_2_years', () => {
       const period = datetimeUtils.retrievePeriod('last_2_years');
       expect(period).to.deep.equal({
-        "start": "2015-01-01",
-        "end": "2016-12-31"
+        start: '2015-01-01',
+        end: '2016-12-31',
       });
     });
 
     it('retrieve last_3_days_including_current', () => {
       const period = datetimeUtils.retrievePeriod('last_3_days_including_current');
       expect(period).to.deep.equal({
-        "start": "2017-03-18",
-        "end": "2017-03-20"
+        start: '2017-03-18',
+        end: '2017-03-20',
       });
     });
 
     it('retrieve last_2_weeks_including_current', () => {
       const period = datetimeUtils.retrievePeriod('last_2_weeks_including_current');
       expect(period).to.deep.equal({
-        "start": "2017-03-13",
-        "end": "2017-03-26"
+        start: '2017-03-13',
+        end: '2017-03-26',
       });
     });
 
     it('retrieve last_1_quarter_including_current', () => {
       const period = datetimeUtils.retrievePeriod('last_1_quarter_including_current');
       expect(period).to.deep.equal({
-        "start": "2017-01-01",
-        "end": "2017-03-31"
+        start: '2017-01-01',
+        end: '2017-03-31',
       });
     });
 
     it('retrieve last_1_year_including_current', () => {
       const period = datetimeUtils.retrievePeriod('last_1_year_including_current');
       expect(period).to.deep.equal({
-        "start": "2017-01-01",
-        "end": "2017-12-31"
+        start: '2017-01-01',
+        end: '2017-12-31',
       });
     });
 
-    after(function () {
+    after(() => {
       clock.restore();
     });
   });
@@ -161,7 +161,7 @@ describe('retrieve period string', () => {
     });
 
     context('with offset minus 1 hour', () => {
-      const offset = -1
+      const offset = -1;
       context('when asking for today', () => {
         it('retrieve yesterday', () => {
           const period = datetimeUtils.retrievePeriod('today', january2015, offset);
@@ -176,6 +176,6 @@ describe('retrieve period string', () => {
           expect(period.end).to.equal('2014-12-30');
         });
       });
-    })
-  })
+    });
+  });
 });
