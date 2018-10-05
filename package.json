@@ -44,7 +44,7 @@
     "prepublish": "yarn build",
     "test": "mocha \"test/**/*__test.js\" --require @babel/register --reporter spec --recursive",
     "test-watch": "yarn test --watch",
-    "lint": "eslint --cache -c .eslintrc.js source/**/*.js",
+    "lint": "eslint --cache -c .eslintrc.js src/**/*.js",
     "commit": "commit-wizard"
   },
   "config": {
