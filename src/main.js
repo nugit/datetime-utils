@@ -118,7 +118,7 @@ function retrieveThisRelativePeriod(unit, base = Date()) {
 }
 
 // :: (Object | String) -> Object
-export function retrievePeriodParams(periodOrKey) {
+function retrievePeriodParams(periodOrKey) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
   const LAST_RANGE_REGEX = /^last(\d+)(day|week|month|quarter|year)s?$/;
@@ -157,7 +157,7 @@ export function retrievePeriodParams(periodOrKey) {
 }
 
 // :: (Object | String) -> Option(String) -> Int
-export function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
+function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
   const baseDate = applyOffset(utcOffset, base);
@@ -192,7 +192,7 @@ export function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
 }
 
 // :: (Object | String) -> Option(String) -> Object
-export function calculateAutoCompare(periodOrKey, baseDate = Date()) {
+function calculateAutoCompare(periodOrKey, baseDate = Date()) {
   const autoCompareInfo = { period: {} };
   const period = retrievePeriod(periodOrKey, baseDate);
   const params = retrievePeriodParams(periodOrKey);
@@ -264,7 +264,7 @@ export function calculateAutoCompare(periodOrKey, baseDate = Date()) {
 }
 
 // :: Object -> Option(String) -> Object
-export function retrieveComparePeriod(period, comparison = 'auto') {
+function retrieveComparePeriod(period, comparison = 'auto') {
   if (comparison === 'auto') return calculateAutoCompare(period).period;
 
   if (comparison === '12_months_ago') {
@@ -278,4 +278,9 @@ export function retrieveComparePeriod(period, comparison = 'auto') {
   return comparison;
 }
 
-export const getDateRange = retrievePeriod;
+export default {
+  retrievePeriod,
+  retrievePeriodParams,
+  calculateAutoCompare,
+  retrieveComparePeriod,
+};
