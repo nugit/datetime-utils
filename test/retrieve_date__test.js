@@ -154,6 +154,12 @@ describe('retrieve period string', () => {
       expect(period.end).to.equal('2015-01-01');
     });
 
+    it('retrieve this_month', () => {
+      const period = datetimeUtils.retrievePeriod('this_year', january2015);
+      expect(period.start).to.equal('2015-01-01');
+      expect(period.end).to.equal('2015-12-31');
+    });
+
     it('retrieve yesterday', () => {
       const period = datetimeUtils.retrievePeriod('yesterday', january2015);
       expect(period.start).to.equal('2014-12-31');
@@ -161,19 +167,55 @@ describe('retrieve period string', () => {
     });
 
     context('with offset minus 1 hour', () => {
-      const offset = -1;
-      context('when asking for today', () => {
-        it('retrieve yesterday', () => {
-          const period = datetimeUtils.retrievePeriod('today', january2015, offset);
-          expect(period.start).to.equal('2014-12-31');
-          expect(period.end).to.equal('2014-12-31');
+      context('when offset in hours', () => {
+        const offset = -1;
+        context('when asking for today', () => {
+          it('retrieve yesterday', () => {
+            const period = datetimeUtils.retrievePeriod('today', january2015, offset);
+            expect(period.start).to.equal('2014-12-31');
+            expect(period.end).to.equal('2014-12-31');
+          });
+        });
+        context('when asking for yesterday', () => {
+          it('retrieve 2 days before', () => {
+            const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
+            expect(period.start).to.equal('2014-12-30');
+            expect(period.end).to.equal('2014-12-30');
+          });
         });
       });
-      context('when asking for yesterday', () => {
-        it('retrieve 2 days before', () => {
-          const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
-          expect(period.start).to.equal('2014-12-30');
-          expect(period.end).to.equal('2014-12-30');
+      context('when offset in seconds', () => {
+        const offset = -3600;
+        context('when asking for today', () => {
+          it('retrieve yesterday', () => {
+            const period = datetimeUtils.retrievePeriod('today', january2015, offset);
+            expect(period.start).to.equal('2014-12-31');
+            expect(period.end).to.equal('2014-12-31');
+          });
+        });
+        context('when asking for yesterday', () => {
+          it('retrieve 2 days before', () => {
+            const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
+            expect(period.start).to.equal('2014-12-30');
+            expect(period.end).to.equal('2014-12-30');
+          });
+        });
+      });
+      context('when offset is a string', () => {
+        const offset = '-01:00';
+        context('when asking for today', () => {
+          it('retrieve yesterday', () => {
+            const period = datetimeUtils.retrievePeriod('today', january2015, offset);
+            expect(period.start).to.equal('2014-12-31');
+            expect(period.end).to.equal('2014-12-31');
+          });
+        });
+        context('when asking for yesterday', () => {
+          it('retrieve 2 days before', () => {
+            const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
+            expect(period.start).to.equal('2014-12-30');
+            expect(period.end).to.equal('2014-12-30');
+          });
         });
       });
     });
