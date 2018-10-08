@@ -24,8 +24,7 @@ export const parseTimezone = (tz) => {
   const hours = parseInt(chunk1.slice(1), 10);
   const minutes = parseInt(chunk2, 10);
   const result = hours + (minutes / 60);
-  if (isPositive) return result;
-  return -result;
+  return isPositive ? result : -result;
 };
 
 // The offset can be either in hours or in seconds. Or it can be a string.
