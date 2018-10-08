@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const datetimeUtils = require('../src/main');
+const datetimeUtils = require('../src/main').default;
 
 describe('retrieve period string', () => {
   let clock;
