@@ -47,51 +47,51 @@ describe('utils', () => {
     });
   });
 
-  describe('parseTimezone', () => {
+  describe('parseTimezoneStrToHours', () => {
     context('when passed a positive timezone', () => {
       it('should parse it corectly', () => {
         const tz = '+08:00';
-        expect(utils.parseTimezone(tz)).to.equal(8);
+        expect(utils.parseTimezoneStrToHours(tz)).to.equal(8);
       });
     });
     context('when passed a negative timezone', () => {
       it('should parse it corectly', () => {
         const tz = '-12:00';
-        expect(utils.parseTimezone(tz)).to.equal(-12);
+        expect(utils.parseTimezoneStrToHours(tz)).to.equal(-12);
       });
     });
     context('when passed a complex timezone', () => {
       it('should parse it corectly', () => {
         const tz = '-10:30';
-        expect(utils.parseTimezone(tz)).to.equal(-10.5);
+        expect(utils.parseTimezoneStrToHours(tz)).to.equal(-10.5);
       });
     });
   });
 
-  describe('normalizeOffset', () => {
+  describe('normalizeOffsetToMs', () => {
     context('when passed a string', () => {
       it('should parse it corectly and returns a miliseconds equivalent', () => {
         const tz = '+08:00';
-        expect(utils.normalizeOffset(tz)).to.equal(8 * 3600 * 1000);
+        expect(utils.normalizeOffsetToMs(tz)).to.equal(8 * 3600 * 1000);
       });
     });
     context('when passed hours', () => {
       it('should convert them to miliseconds', () => {
         const tz = 12;
-        expect(utils.normalizeOffset(tz)).to.equal(12 * 3600 * 1000);
+        expect(utils.normalizeOffsetToMs(tz)).to.equal(12 * 3600 * 1000);
       });
     });
     context('when passed seconds', () => {
       it('should convert them to miliseconds', () => {
         const tz = 3600;
-        expect(utils.normalizeOffset(tz)).to.equal(3600000);
+        expect(utils.normalizeOffsetToMs(tz)).to.equal(3600000);
       });
     });
   });
 
-  describe('getTzDiff', () => {
+  describe('getMsDiffFromUFC', () => {
     it('should correctly return a miliseconds total difference', () => {
-      const diff = utils.getTzDiff('+05:30', new Date('Mon Oct 08 2018 15:38:06 GMT+0800'));
+      const diff = utils.getMsDiffFromUTC('+05:30', new Date('Mon Oct 08 2018 15:38:06 GMT+0800'));
       const expectedDiff = -((8 - 5.5) * 3600 * 1000);
       expect(diff).to.equal(expectedDiff);
     });
