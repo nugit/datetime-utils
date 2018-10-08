@@ -3,6 +3,7 @@ import addMonths from 'date-fns/add_months';
 import endOfYear from 'date-fns/end_of_year';
 import differenceInDays from 'date-fns/difference_in_days';
 import getDate from 'date-fns/get_date';
+import getDayOfYear from 'date-fns/get_day_of_year';
 import getMonth from 'date-fns/get_month';
 import getYear from 'date-fns/get_year';
 import lastDayOfYear from 'date-fns/last_day_of_year';
@@ -248,12 +249,7 @@ function calculateAutoCompare(periodOrKey, baseDate = Date()) {
     compareStart = subMonths(period.start, monthDiff);
   }
   // Handle whole year date range
-  if (
-    getMonth(start) === 1
-    && getDate(start) === 1
-    && getMonth(endTomorrow) === 1
-    && getDate(endTomorrow) === 1
-  ) {
+  if (getDayOfYear(start) === 1 && getDayOfYear(endTomorrow) === 1) {
     compareStart = subYears(start, getYear(endTomorrow) - getYear(start));
   }
   autoCompareInfo.period = {

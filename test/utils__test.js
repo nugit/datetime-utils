@@ -38,6 +38,13 @@ describe('utils', () => {
         expect(utils.formatDate(rawOutput)).to.equal('2018-01-25');
       });
     });
+    context('unit is none of the above', () => {
+      it('should return a subDays function', () => {
+        const fn = utils.getSubtractionFn('whatever');
+        const rawOutput = fn('2018-02-01', 1);
+        expect(utils.formatDate(rawOutput)).to.equal('2018-01-31');
+      });
+    });
   });
 
   describe('parseTimezone', () => {

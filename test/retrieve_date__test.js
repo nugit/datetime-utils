@@ -3,62 +3,62 @@ const sinon = require('sinon');
 
 const datetimeUtils = require('../src/main').default;
 
-describe('retrieve period string', () => {
+describe('should retrieve period string', () => {
   context('without baseDate', () => {
     let clock;
     before(() => {
       clock = sinon.useFakeTimers(new Date('2017-03-20').getTime());
     });
 
-    it('retrieve today', () => {
+    it('should retrieve today', () => {
       const period = datetimeUtils.retrievePeriod('today');
       expect(period.start).to.equal('2017-03-20');
       expect(period.end).to.equal('2017-03-20');
     });
 
-    it('retrieve yesterday', () => {
+    it('should retrieve yesterday', () => {
       const period = datetimeUtils.retrievePeriod('yesterday');
       expect(period.start).to.equal('2017-03-19');
       expect(period.end).to.equal('2017-03-19');
     });
 
-    it('retrieve year_to_date', () => {
+    it('should retrieve year_to_date', () => {
       const period = datetimeUtils.retrievePeriod('year_to_date');
       expect(period.start).to.equal('2017-01-01');
       expect(period.end).to.equal('2017-03-20');
     });
 
-    it('retrieve all_time', () => {
+    it('should retrieve all_time', () => {
       const period = datetimeUtils.retrievePeriod('all_time');
       expect(period.start).to.equal('2014-03-20');
       expect(period.end).to.equal('2017-03-20');
     });
 
-    it('retrieve last_week', () => {
+    it('should retrieve last_week', () => {
       const period = datetimeUtils.retrievePeriod('last_week');
       expect(period.start).to.equal('2017-03-13');
       expect(period.end).to.equal('2017-03-19');
     });
 
-    it('retrieve last_month', () => {
+    it('should retrieve last_month', () => {
       const period = datetimeUtils.retrievePeriod('last_month');
       expect(period.start).to.equal('2017-02-01');
       expect(period.end).to.equal('2017-02-28');
     });
 
-    it('retrieve last_quarter', () => {
+    it('should retrieve last_quarter', () => {
       const period = datetimeUtils.retrievePeriod('last_quarter');
       expect(period.start).to.equal('2016-10-01');
       expect(period.end).to.equal('2016-12-31');
     });
 
-    it('retrieve last_year', () => {
+    it('should retrieve last_year', () => {
       const period = datetimeUtils.retrievePeriod('last_year');
       expect(period.start).to.equal('2016-01-01');
       expect(period.end).to.equal('2016-12-31');
     });
 
-    it('retrieve last_3_days', () => {
+    it('should retrieve last_3_days', () => {
       const period = datetimeUtils.retrievePeriod('last_3_days');
       expect(period.start).to.equal('2017-03-17');
       expect(period.end).to.equal('2017-03-19');
@@ -67,7 +67,7 @@ describe('retrieve period string', () => {
       expect(period2.end).to.equal('2017-03-19');
     });
 
-    it('retrieve last_3_weeks', () => {
+    it('should retrieve last_3_weeks', () => {
       const period = datetimeUtils.retrievePeriod('last_3_weeks');
       expect(period.start).to.equal('2017-02-27');
       expect(period.end).to.equal('2017-03-19');
@@ -75,7 +75,7 @@ describe('retrieve period string', () => {
       expect(period2.start).to.equal('2017-02-27');
       expect(period2.end).to.equal('2017-03-19');
     });
-    it('retrieve last_3_months', () => {
+    it('should retrieve last_3_months', () => {
       const period = datetimeUtils.retrievePeriod('last_3_months');
       expect(period).to.deep.equal({
         start: '2016-12-01',
@@ -87,7 +87,7 @@ describe('retrieve period string', () => {
         end: '2017-02-28',
       });
     });
-    it('retrieve last_2_quarters', () => {
+    it('should retrieve last_2_quarters', () => {
       const period = datetimeUtils.retrievePeriod('last_2_quarters');
       expect(period).to.deep.equal({
         start: '2016-07-01',
@@ -95,7 +95,7 @@ describe('retrieve period string', () => {
       });
     });
 
-    it('retrieve last_2_years', () => {
+    it('should retrieve last_2_years', () => {
       const period = datetimeUtils.retrievePeriod('last_2_years');
       expect(period).to.deep.equal({
         start: '2015-01-01',
@@ -103,7 +103,7 @@ describe('retrieve period string', () => {
       });
     });
 
-    it('retrieve last_3_days_including_current', () => {
+    it('should retrieve last_3_days_including_current', () => {
       const period = datetimeUtils.retrievePeriod('last_3_days_including_current');
       expect(period).to.deep.equal({
         start: '2017-03-18',
@@ -111,7 +111,7 @@ describe('retrieve period string', () => {
       });
     });
 
-    it('retrieve last_2_weeks_including_current', () => {
+    it('should retrieve last_2_weeks_including_current', () => {
       const period = datetimeUtils.retrievePeriod('last_2_weeks_including_current');
       expect(period).to.deep.equal({
         start: '2017-03-13',
@@ -119,7 +119,7 @@ describe('retrieve period string', () => {
       });
     });
 
-    it('retrieve last_1_quarter_including_current', () => {
+    it('should retrieve last_1_quarter_including_current', () => {
       const period = datetimeUtils.retrievePeriod('last_1_quarter_including_current');
       expect(period).to.deep.equal({
         start: '2017-01-01',
@@ -127,7 +127,7 @@ describe('retrieve period string', () => {
       });
     });
 
-    it('retrieve last_1_year_including_current', () => {
+    it('should retrieve last_1_year_including_current', () => {
       const period = datetimeUtils.retrievePeriod('last_1_year_including_current');
       expect(period).to.deep.equal({
         start: '2017-01-01',
@@ -142,42 +142,55 @@ describe('retrieve period string', () => {
 
   context('with utc baseDate to 1st of january 2015, 12:00am', () => {
     const january2015 = 1420070400000;
-    it('retrieve last_month', () => {
+    it('should retrieve last_month', () => {
       const period = datetimeUtils.retrievePeriod('last_month', january2015);
       expect(period.start).to.equal('2014-12-01');
       expect(period.end).to.equal('2014-12-31');
     });
 
-    it('retrieve this_month', () => {
+    it('should retrieve this_month', () => {
       const period = datetimeUtils.retrievePeriod('this_month', january2015);
       expect(period.start).to.equal('2015-01-01');
       expect(period.end).to.equal('2015-01-01');
     });
 
-    it('retrieve this_month', () => {
+    it('should retrieve this_month', () => {
       const period = datetimeUtils.retrievePeriod('this_year', january2015);
       expect(period.start).to.equal('2015-01-01');
       expect(period.end).to.equal('2015-12-31');
     });
 
-    it('retrieve yesterday', () => {
+    it('should retrieve yesterday', () => {
       const period = datetimeUtils.retrievePeriod('yesterday', january2015);
       expect(period.start).to.equal('2014-12-31');
       expect(period.end).to.equal('2014-12-31');
+    });
+
+    it('should retrieve yesterday', () => {
+      const fn = () => datetimeUtils.retrievePeriod('whatever', january2015);
+      expect(fn).to.throw('Unrecognized date range: whatever');
+    });
+
+    it('should retrieve yesterday', () => {
+      const period = datetimeUtils.retrievePeriod('2014-01-01_to_yesterday', january2015);
+      expect(period).to.eql({
+        start: '2014-01-01',
+        end: '2014-12-31',
+      });
     });
 
     context('with offset minus 1 hour', () => {
       context('when offset in hours', () => {
         const offset = -1;
         context('when asking for today', () => {
-          it('retrieve yesterday', () => {
+          it('should retrieve yesterday', () => {
             const period = datetimeUtils.retrievePeriod('today', january2015, offset);
             expect(period.start).to.equal('2014-12-31');
             expect(period.end).to.equal('2014-12-31');
           });
         });
         context('when asking for yesterday', () => {
-          it('retrieve 2 days before', () => {
+          it('should retrieve 2 days before', () => {
             const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
             expect(period.start).to.equal('2014-12-30');
             expect(period.end).to.equal('2014-12-30');
@@ -187,14 +200,14 @@ describe('retrieve period string', () => {
       context('when offset in seconds', () => {
         const offset = -3600;
         context('when asking for today', () => {
-          it('retrieve yesterday', () => {
+          it('should retrieve yesterday', () => {
             const period = datetimeUtils.retrievePeriod('today', january2015, offset);
             expect(period.start).to.equal('2014-12-31');
             expect(period.end).to.equal('2014-12-31');
           });
         });
         context('when asking for yesterday', () => {
-          it('retrieve 2 days before', () => {
+          it('should retrieve 2 days before', () => {
             const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
             expect(period.start).to.equal('2014-12-30');
             expect(period.end).to.equal('2014-12-30');
@@ -204,14 +217,14 @@ describe('retrieve period string', () => {
       context('when offset is a string', () => {
         const offset = '-01:00';
         context('when asking for today', () => {
-          it('retrieve yesterday', () => {
+          it('should retrieve yesterday', () => {
             const period = datetimeUtils.retrievePeriod('today', january2015, offset);
             expect(period.start).to.equal('2014-12-31');
             expect(period.end).to.equal('2014-12-31');
           });
         });
         context('when asking for yesterday', () => {
-          it('retrieve 2 days before', () => {
+          it('should retrieve 2 days before', () => {
             const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
             expect(period.start).to.equal('2014-12-30');
             expect(period.end).to.equal('2014-12-30');
