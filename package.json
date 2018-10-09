@@ -31,6 +31,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
     "pre-git": "^3.17.1",
     "rollup": "^0.66.4",
     "rollup-plugin-babel": "^4.0.3",
@@ -44,6 +45,7 @@
     "prepublish": "yarn build",
     "test": "mocha \"test/**/*__test.js\" --require @babel/register --reporter spec --recursive",
     "test-watch": "yarn test --watch",
+    "coverage": "COVERAGE=true nyc yarn test && nyc report",
     "lint": "eslint --cache -c .eslintrc.js src/**/*.js",
     "commit": "commit-wizard"
   },
@@ -54,7 +56,9 @@
       ]
     }
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "release": {
     "analyzeCommits": "simple-commit-message"
   }

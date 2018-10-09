@@ -36,6 +36,7 @@ export default [
       'date-fns/end_of_year',
       'date-fns/difference_in_days',
       'date-fns/get_date',
+      'date-fns/get_day_of_year',
       'date-fns/get_month',
       'date-fns/get_year',
       'date-fns/last_day_of_year',
