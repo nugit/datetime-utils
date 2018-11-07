@@ -5,7 +5,7 @@ const datetimeUtils = require('../src/main').default;
 
 describe('retrieve period string', () => {
   let clock;
-  before(() => {
+  beforeAll(() => {
     clock = sinon.useFakeTimers(new Date('2017-03-20').getTime());
   });
 
@@ -87,7 +87,7 @@ describe('retrieve period string', () => {
     expect(period).to.eql(comparisonObj);
   });
 
-  after(() => {
+  afterAll(() => {
     clock.restore();
   });
 });

@@ -10,35 +10,35 @@ describe('utils', () => {
   });
 
   describe('getSubstractionFn', () => {
-    context('unit is year', () => {
+    describe('unit is year', () => {
       it('should return a subYears function', () => {
         const fn = utils.getSubtractionFn('year');
         const rawOutput = fn('2018-02-01', 1);
         expect(utils.formatDate(rawOutput)).to.equal('2017-02-01');
       });
     });
-    context('unit is quarter', () => {
+    describe('unit is quarter', () => {
       it('should return a subQuarters function', () => {
         const fn = utils.getSubtractionFn('quarter');
         const rawOutput = fn('2018-02-01', 1);
         expect(utils.formatDate(rawOutput)).to.equal('2017-11-01');
       });
     });
-    context('unit is month', () => {
+    describe('unit is month', () => {
       it('should return a subMonths function', () => {
         const fn = utils.getSubtractionFn('month');
         const rawOutput = fn('2018-02-01', 1);
         expect(utils.formatDate(rawOutput)).to.equal('2018-01-01');
       });
     });
-    context('unit is week', () => {
+    describe('unit is week', () => {
       it('should return a subWeeks function', () => {
         const fn = utils.getSubtractionFn('week');
         const rawOutput = fn('2018-02-01', 1);
         expect(utils.formatDate(rawOutput)).to.equal('2018-01-25');
       });
     });
-    context('unit is none of the above', () => {
+    describe('unit is none of the above', () => {
       it('should return a subDays function', () => {
         const fn = utils.getSubtractionFn('whatever');
         const rawOutput = fn('2018-02-01', 1);
@@ -48,19 +48,19 @@ describe('utils', () => {
   });
 
   describe('parseTimezoneStrToHours', () => {
-    context('when passed a positive timezone', () => {
+    describe('when passed a positive timezone', () => {
       it('should parse it corectly', () => {
         const tz = '+08:00';
         expect(utils.parseTimezoneStrToHours(tz)).to.equal(8);
       });
     });
-    context('when passed a negative timezone', () => {
+    describe('when passed a negative timezone', () => {
       it('should parse it corectly', () => {
         const tz = '-12:00';
         expect(utils.parseTimezoneStrToHours(tz)).to.equal(-12);
       });
     });
-    context('when passed a complex timezone', () => {
+    describe('when passed a complex timezone', () => {
       it('should parse it corectly', () => {
         const tz = '-10:30';
         expect(utils.parseTimezoneStrToHours(tz)).to.equal(-10.5);
@@ -69,19 +69,19 @@ describe('utils', () => {
   });
 
   describe('normalizeOffsetToMs', () => {
-    context('when passed a string', () => {
+    describe('when passed a string', () => {
       it('should parse it corectly and returns a miliseconds equivalent', () => {
         const tz = '+08:00';
         expect(utils.normalizeOffsetToMs(tz)).to.equal(8 * 3600 * 1000);
       });
     });
-    context('when passed hours', () => {
+    describe('when passed hours', () => {
       it('should convert them to miliseconds', () => {
         const tz = 12;
         expect(utils.normalizeOffsetToMs(tz)).to.equal(12 * 3600 * 1000);
       });
     });
-    context('when passed seconds', () => {
+    describe('when passed seconds', () => {
       it('should convert them to miliseconds', () => {
         const tz = 3600;
         expect(utils.normalizeOffsetToMs(tz)).to.equal(3600000);
