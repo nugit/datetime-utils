@@ -4,7 +4,7 @@
   "description": "Shared time utils",
   "main": "lib/nugit-datetime-utils.cjs.js",
   "module": "lib/nugit-datetime-utils.esm.js",
-  "browser": "lib/nugit-datetime-utils.umd.js",
+  "browser": "lib/nugit-datetime-utils.esm.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nugit/datetime-utils.git"
