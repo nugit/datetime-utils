@@ -48,7 +48,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "coverage": "jest --coverage",
-    "lint": "eslint --cache -c .eslintrc.js src/**/*.js",
+    "lint": "eslint --cache .",
     "commit": "commit-wizard"
   },
   "config": {
