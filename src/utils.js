@@ -2,7 +2,16 @@ import format from 'date-fns/format';
 import subDays from 'date-fns/sub_days';
 import subMonths from 'date-fns/sub_months';
 import subWeeks from 'date-fns/sub_weeks';
+import subQuarters from 'date-fns/sub_quarters';
 import subYears from 'date-fns/sub_years';
+import startOfMonth from 'date-fns/start_of_month';
+import startOfISOWeek from 'date-fns/start_of_iso_week';
+import startOfQuarter from 'date-fns/start_of_quarter';
+import startOfYear from 'date-fns/start_of_year';
+import endOfMonth from 'date-fns/end_of_month';
+import endOfISOWeek from 'date-fns/end_of_iso_week';
+import endOfQuarter from 'date-fns/end_of_quarter';
+import endOfYear from 'date-fns/end_of_year';
 
 // :: (Date | String | Int) -> String
 export const formatDate = date => format(date, 'YYYY-MM-DD');
@@ -10,10 +19,28 @@ export const formatDate = date => format(date, 'YYYY-MM-DD');
 // :: String -> ((Date | String | Int) -> Int -> Date)
 export const getSubtractionFn = (unit) => {
   if (unit === 'year') return subYears;
-  if (unit === 'quarter') return (date, nb) => subMonths(date, nb * 3);
+  if (unit === 'quarter') return subQuarters;
   if (unit === 'month') return subMonths;
   if (unit === 'week') return subWeeks;
   return subDays;
+};
+
+// :: String -> ((Date | String | Int) -> Int -> Date)
+export const getStartOfFn = (unit) => {
+  if (unit === 'year') return startOfYear;
+  if (unit === 'quarter') return startOfQuarter;
+  if (unit === 'month') return startOfMonth;
+  if (unit === 'week') return startOfISOWeek;
+  return _ => _;
+};
+
+// :: String -> ((Date | String | Int) -> Int -> Date)
+export const getEndOfFn = (unit) => {
+  if (unit === 'year') return endOfYear;
+  if (unit === 'quarter') return endOfQuarter;
+  if (unit === 'month') return endOfMonth;
+  if (unit === 'week') return endOfISOWeek;
+  return _ => _;
 };
 
 // :: String -> Float

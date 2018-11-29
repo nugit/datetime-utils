@@ -1,138 +1,68 @@
 import addDays from 'date-fns/add_days';
-import addMonths from 'date-fns/add_months';
-import endOfYear from 'date-fns/end_of_year';
 import differenceInDays from 'date-fns/difference_in_days';
 import getDate from 'date-fns/get_date';
 import getDayOfYear from 'date-fns/get_day_of_year';
 import getMonth from 'date-fns/get_month';
 import getYear from 'date-fns/get_year';
-import lastDayOfYear from 'date-fns/last_day_of_year';
-import setDate from 'date-fns/set_date';
-import setDay from 'date-fns/set_day';
-import setDayOfYear from 'date-fns/set_day_of_year';
-import setMonth from 'date-fns/set_month';
 import subDays from 'date-fns/sub_days';
 import subMonths from 'date-fns/sub_months';
-import subWeeks from 'date-fns/sub_weeks';
 import subYears from 'date-fns/sub_years';
-import { applyOffset, formatDate, getSubtractionFn } from './utils';
-
-// :: String -> Option(String) -> Object
-function retrievePredefindedDateRange(key, base = Date()) {
-  if (key === 'today') {
-    const date = formatDate(base);
-    return { start: date, end: date };
-  }
-
-  if (key === 'yesterday') {
-    const yesterday = formatDate(subDays(base, 1));
-    return { start: yesterday, end: yesterday };
-  }
-
-  if (key === 'year_to_date') {
-    return {
-      start: formatDate(setDayOfYear(base, 1)),
-      end: formatDate(base),
-    };
-  }
-
-  if (key === 'all_time') {
-    return {
-      start: formatDate(subYears(base, 3)),
-      end: formatDate(base),
-    };
-  }
-
-  throw new Error(`Unrecognized date range: ${key}`);
-}
+import {
+  applyOffset, formatDate, getSubtractionFn, getStartOfFn, getEndOfFn,
+} from './utils';
+import { convertLegacyParams } from './legacy';
 
 // :: Int -> String -> Option(String) -> Object
 function retrieveLastRelativePeriod(num, unit, base = Date()) {
-  if (unit === 'year') {
-    return {
-      start: formatDate(setDayOfYear(subYears(base, num), 1)),
-      end: formatDate(setDate(setMonth(subYears(base, 1), 11), 31)),
-    };
-  }
+  const startOf = getStartOfFn(unit);
+  const endOf = getEndOfFn(unit);
+  const sub = getSubtractionFn(unit);
 
-  if (unit === 'quarter') {
-    return {
-      start: formatDate(setDate(subMonths(base, (num * 3) + (getMonth(base) % 3)), 1)),
-      end: formatDate(setDate(addMonths(subMonths(base, 3 * num), 3 - (getMonth(base) % 3)), 0)),
-    };
-  }
-
-  if (unit === 'month') {
-    return {
-      start: formatDate(setDate(subMonths(base, num), 1)),
-      end: formatDate(setDate(base, 0)),
-    };
-  }
-
-  if (unit === 'week') {
-    return {
-      start: formatDate(setDay(subWeeks(base, num), 1)),
-      end: formatDate(setDay(subWeeks(base, 1), 7)),
-    };
-  }
-
-  // Default case: day
   return {
-    start: formatDate(subDays(base, num)),
-    end: formatDate(subDays(base, 1)),
+    start: formatDate(startOf(sub(base, num))),
+    end: formatDate(endOf(sub(base, 1))),
   };
 }
 
 // :: String -> Option(String) -> Object
-function retrieveThisRelativePeriod(unit, base = Date()) {
-  if (unit === 'year') {
-    return {
-      start: formatDate(setDayOfYear(base, 1)),
-      end: formatDate(lastDayOfYear(base)),
-    };
-  }
+function retrieveThisRelativePeriod(unit, base = Date(), num = 1) {
+  const dayBefore = subDays(base, 1);
 
-  if (unit === 'quarter') {
-    return {
-      start: formatDate(setDate(subMonths(base, getMonth(base) % 3), 1)),
-      end: formatDate(setDate(addMonths(base, 3 - (getMonth(base) % 3)), 0)),
-    };
-  }
+  const startOf = getStartOfFn(unit);
+  const sub = getSubtractionFn(unit);
 
-  if (unit === 'month') {
-    return {
-      start: formatDate(setDate(base, 1)),
-      end: formatDate(base),
-    };
-  }
+  return {
+    start: formatDate(startOf(sub(dayBefore, num - 1))),
+    end: formatDate(dayBefore),
+  };
+}
 
-  if (unit === 'week') {
-    return {
-      start: formatDate(setDay(base, 1)),
-      end: formatDate(setDay(base, 7)),
-    };
+// :: String -> Option(String) -> Object
+function retrievePredefinedDateRange(key, base = Date()) {
+  switch (key) {
+    case 'yesterday':
+      return retrieveThisRelativePeriod('day', base);
+    case 'all_time':
+      return {
+        start: formatDate(subYears(base, 3)),
+        end: formatDate(subDays(base, 1)),
+      };
+    default:
+      throw new Error(`Unrecognized date range: ${key}`);
   }
-
-  // Default case: day
-  const date = formatDate(base);
-  return { start: date, end: date };
 }
 
 // :: (Object | String) -> Object
 function retrievePeriodParams(periodOrKey) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
-  const LAST_RANGE_REGEX = /^last(\d+)(day|week|month|quarter|year)s?$/;
   const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)$/;
   const LAST_RANGE_REGEX_2 = /^last_(\d+)_(day|week|month|quarter|year)s?(_including_current)?$/;
   const THIS_RANGE_REGEX = /^this_(day|week|month|quarter|year)$/;
   const TILL_YESTERDAY_REGEX = /^(\d{4}-\d{2}-\d{2})_to_yesterday$/;
 
-  let match = periodOrKey.match(LAST_RANGE_REGEX);
-  if (match) return { type: 'last', num: Number(match[1]), unit: match[2] }; // Old format e.g.: last12months
-
-  match = periodOrKey.match(LAST_RANGE_REGEX_1);
-  if (match) return { type: 'last', num: 1, unit: match[1] };
+  let match = periodOrKey.match(LAST_RANGE_REGEX_1);
+  if (match) return { type: 'last', unit: match[1], num: 1 };
 
   match = periodOrKey.match(LAST_RANGE_REGEX_2);
   if (match) {
@@ -150,10 +80,13 @@ function retrievePeriodParams(periodOrKey) {
   if (match) return { type: 'this', unit: match[1] };
 
   match = periodOrKey.match(TILL_YESTERDAY_REGEX);
+  // TODO: change till_tomorrow to till_yesterday
   if (match) return { type: 'till_tomorrow', start: match[1] };
 
+  // TODO: find out what is it for
   if (periodOrKey === 'last') return { type: 'last', num: undefined, unit: undefined };
 
+  // TODO: Why no throw error?
   return null;
 }
 
@@ -165,17 +98,13 @@ function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
 
   const params = retrievePeriodParams(periodOrKey);
   if (params && params.type === 'last') {
-    if (params.including_current) {
-      if (params.num === 1) {
-        return retrieveThisRelativePeriod(params.unit, baseDate);
-      }
+    const { unit, num } = params;
 
-      const { start } = retrieveLastRelativePeriod(params.num - 1, params.unit, baseDate);
-      const { end } = retrieveThisRelativePeriod(params.unit, baseDate);
-      return { start, end };
+    if (params.including_current) {
+      return retrieveThisRelativePeriod(unit, baseDate, num);
     }
 
-    return retrieveLastRelativePeriod(params.num, params.unit, baseDate);
+    return retrieveLastRelativePeriod(num, unit, baseDate);
   }
 
   if (params && params.type === 'this') {
@@ -189,7 +118,7 @@ function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
     };
   }
 
-  return retrievePredefindedDateRange(periodOrKey, baseDate);
+  return retrievePredefinedDateRange(periodOrKey, baseDate);
 }
 
 // :: (Object | String) -> Option(String) -> Object
@@ -220,17 +149,7 @@ function calculateAutoCompare(periodOrKey, baseDate = Date()) {
     };
   }
 
-  if (periodOrKey === 'year_to_date') {
-    return {
-      label: 'Previous Year',
-      period: {
-        start: formatDate(setDayOfYear(subYears(baseDate, 1), 1)),
-        end: formatDate(endOfYear(subYears(baseDate, 1))),
-      },
-    };
-  }
-
-  if (periodOrKey === 'today' || periodOrKey === 'yesterday') {
+  if (periodOrKey === 'yesterday') {
     autoCompareInfo.label = 'Previous Day';
   } else {
     autoCompareInfo.label = 'Previous Period';
@@ -275,8 +194,8 @@ function retrieveComparePeriod(period, comparison = 'auto') {
 }
 
 export default {
-  retrievePeriod,
-  retrievePeriodParams,
-  calculateAutoCompare,
-  retrieveComparePeriod,
+  retrievePeriod: convertLegacyParams(retrievePeriod),
+  retrievePeriodParams: convertLegacyParams(retrievePeriodParams),
+  calculateAutoCompare: convertLegacyParams(calculateAutoCompare),
+  retrieveComparePeriod: convertLegacyParams(retrieveComparePeriod),
 };
