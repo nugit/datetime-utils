@@ -7,9 +7,7 @@ import getYear from 'date-fns/get_year';
 import subDays from 'date-fns/sub_days';
 import subMonths from 'date-fns/sub_months';
 import subYears from 'date-fns/sub_years';
-import {
-  applyOffset, formatDate, getSubtractionFn, getStartOfFn, getEndOfFn,
-} from './utils';
+import { applyOffset, formatDate, getSubtractionFn, getStartOfFn, getEndOfFn } from './utils';
 import { convertLegacyParams } from './legacy';
 
 // :: Int -> String -> Option(String) -> Object
