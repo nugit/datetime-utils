@@ -82,13 +82,19 @@ describe('#retrieveComparePeriod', () => {
       expect(period.end).to.equal('2015-12-31');
     });
 
-    it('should 12_month_ago compare period for this month be the same month of the previous year', () => {
+    it('should 12_month_ago compare period for this month be the same number of days one year before', () => {
       const period = datetimeUtils.retrieveComparePeriod('this_month', '12_months_ago');
       expect(period.start).to.equal('2016-03-01');
-      expect(period.end).to.equal('2016-03-19'); // to be confirmed
+      expect(period.end).to.equal('2016-03-19');
     });
 
-    it('should return a custom comparison object', () => { // What is the expected behavior?!
+    it('should 12_month_ago compare period for this quarter be the same number of days one year before', () => {
+      const period = datetimeUtils.retrieveComparePeriod('this_quarter', '12_months_ago');
+      expect(period.start).to.equal('2016-01-01');
+      expect(period.end).to.equal('2016-03-19');
+    });
+
+    it('should return a custom comparison object', () => {
       const comparisonObj = { start: '2017-01-01', end: '2017-01-02' };
       const period = datetimeUtils.retrieveComparePeriod('this_month', comparisonObj);
       expect(period).to.eql(comparisonObj);

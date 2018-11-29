@@ -77,11 +77,11 @@ describe('#retrievePeriod', () => {
         expect(period.end).to.equal('2017-03-19');
       });
 
-      // it('should all_time period be [19/03/2014 - 19/03/2017]', () => {
-      //   const period = datetimeUtils.retrievePeriod('all_time');
-      //   expect(period.start).to.equal('2014-03-20');
-      //   expect(period.end).to.equal('2017-03-20');
-      // });
+      it('should all_time period be from 01/01/2015 to yesterday', () => {
+        const period = datetimeUtils.retrievePeriod('all_time');
+        expect(period.start).to.equal('2015-01-01');
+        expect(period.end).to.equal('2017-03-19');
+      });
 
       it('should last_3_days period be [17/03/2017 - 19/03/2017]', () => {
         const period = datetimeUtils.retrievePeriod('last_3_days');

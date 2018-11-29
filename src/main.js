@@ -35,16 +35,23 @@ function retrieveThisRelativePeriod(unit, base = Date(), num = 1) {
   };
 }
 
+function retrieveTillYesterday(start, base = Date()) {
+  const dayBefore = subDays(base, 1);
+
+  return {
+    start: formatDate(start),
+    end: formatDate(dayBefore),
+  };
+}
+
 // :: String -> Option(String) -> Object
 function retrievePredefinedDateRange(key, base = Date()) {
   switch (key) {
     case 'yesterday':
       return retrieveThisRelativePeriod('day', base);
     case 'all_time':
-      return {
-        start: formatDate(subYears(base, 3)),
-        end: formatDate(subDays(base, 1)),
-      };
+      // arbritary start in 2015
+      return retrieveTillYesterday(Date('2015-01-01'), base);
     default:
       throw new Error(`Unrecognized date range: ${key}`);
   }
@@ -110,10 +117,7 @@ function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
   }
 
   if (params && params.type === 'till_tomorrow') {
-    return {
-      start: params.start,
-      end: formatDate(subDays(baseDate, 1)),
-    };
+    return retrieveTillYesterday(params.start, base);
   }
 
   return retrievePredefinedDateRange(periodOrKey, baseDate);
@@ -181,6 +185,7 @@ function retrieveComparePeriod(period, comparison = 'auto') {
   if (comparison === 'auto') return calculateAutoCompare(period).period;
 
   if (comparison === '12_months_ago') {
+    // For 12 month comparison, we compare with same period length
     const yearPeriod = retrievePeriod(period);
     return {
       start: formatDate(subYears(yearPeriod.start, 1)),
