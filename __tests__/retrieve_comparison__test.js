@@ -10,16 +10,40 @@ describe('#retrieveComparePeriod', () => {
       clock = sinon.useFakeTimers(new Date('2017-03-20').getTime());
     });
 
-    it('should auto compare period for today be yesterday', () => {
+    it('should auto compare period for today be the day before yesterday (today is deprecated and replaced by yesterday)', () => {
       const period = datetimeUtils.retrieveComparePeriod('today', 'auto');
-      expect(period.start).to.equal('2017-03-19');
-      expect(period.end).to.equal('2017-03-19');
+      expect(period.start).to.equal('2017-03-18');
+      expect(period.end).to.equal('2017-03-18');
     });
 
     it('should auto compare period for yesterday be the day before', () => {
       const period = datetimeUtils.retrieveComparePeriod('yesterday', 'auto');
       expect(period.start).to.equal('2017-03-18');
       expect(period.end).to.equal('2017-03-18');
+    });
+
+    it('should auto compare period for last week be two weeks before', () => {
+      const period = datetimeUtils.retrieveComparePeriod('last_week', 'auto');
+      expect(period.start).to.equal('2017-03-06');
+      expect(period.end).to.equal('2017-03-12');
+    });
+
+    it('should auto compare period for this week be two weeks before as today is Monday', () => {
+      const period = datetimeUtils.retrieveComparePeriod('this_week', 'auto');
+      expect(period.start).to.equal('2017-03-06');
+      expect(period.end).to.equal('2017-03-12');
+    });
+
+    it('should auto compare period for last week be two weeks before, implicitly using auto mode', () => {
+      const period = datetimeUtils.retrieveComparePeriod('last_week');
+      expect(period.start).to.equal('2017-03-06');
+      expect(period.end).to.equal('2017-03-12');
+    });
+
+    it('should auto compare period for this month be last month', () => {
+      const period = datetimeUtils.retrieveComparePeriod('this_month', 'auto');
+      expect(period.start).to.equal('2017-02-01');
+      expect(period.end).to.equal('2017-02-28');
     });
 
     it('should auto compare period for year_to_date be last year', () => {
@@ -32,30 +56,6 @@ describe('#retrieveComparePeriod', () => {
       const period = datetimeUtils.retrieveComparePeriod({ start: '2017-03-15', end: '2017-03-19' }, 'auto');
       expect(period.start).to.equal('2017-03-10');
       expect(period.end).to.equal('2017-03-14');
-    });
-
-    it('should auto compare period for this week be last week', () => {
-      const period = datetimeUtils.retrieveComparePeriod('this_week', 'auto');
-      expect(period.start).to.equal('2017-03-13');
-      expect(period.end).to.equal('2017-03-19');
-    });
-
-    it('should auto compare period for this week be last week, implicitly using auto mode', () => {
-      const period = datetimeUtils.retrieveComparePeriod('this_week');
-      expect(period.start).to.equal('2017-03-13');
-      expect(period.end).to.equal('2017-03-19');
-    });
-
-    it('should auto compare period for last week be two weeks before', () => {
-      const period = datetimeUtils.retrieveComparePeriod('last_week', 'auto');
-      expect(period.start).to.equal('2017-03-06');
-      expect(period.end).to.equal('2017-03-12');
-    });
-
-    it('should auto compare period for this month be last month', () => {
-      const period = datetimeUtils.retrieveComparePeriod('this_month', 'auto');
-      expect(period.start).to.equal('2017-02-01');
-      expect(period.end).to.equal('2017-02-28');
     });
 
     it('should auto compare period for this quarter be last quarter', () => {
@@ -85,7 +85,7 @@ describe('#retrieveComparePeriod', () => {
     it('should 12_month_ago compare period for this month be the same month of the previous year', () => {
       const period = datetimeUtils.retrieveComparePeriod('this_month', '12_months_ago');
       expect(period.start).to.equal('2016-03-01');
-      expect(period.end).to.equal('2016-03-20'); // to be confirmed
+      expect(period.end).to.equal('2016-03-19'); // to be confirmed
     });
 
     it('should return a custom comparison object', () => { // What is the expected behavior?!

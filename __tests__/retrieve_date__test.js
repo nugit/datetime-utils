@@ -23,25 +23,25 @@ describe('#retrievePeriod', () => {
         expect(period.end).to.equal('2017-03-19');
       });
 
-      it('should last_week period be [13/03/2014 - 19/03/2017]', () => {
+      it('should last_week period be [13/03/2017 - 19/03/2017]', () => {
         const period = datetimeUtils.retrievePeriod('last_week');
         expect(period.start).to.equal('2017-03-13');
         expect(period.end).to.equal('2017-03-19');
       });
 
-      it('should this_week period be [13/03/2014 - 19/03/2017] as today is Monday', () => {
+      it('should this_week period be [13/03/2017 - 19/03/2017] as today is Monday', () => {
         const period = datetimeUtils.retrievePeriod('this_week');
         expect(period.start).to.equal('2017-03-13');
         expect(period.end).to.equal('2017-03-19');
       });
 
-      it('should this_month period be [01/03/2014 - 19/03/2017]', () => {
+      it('should this_month period be [01/03/2017 - 19/03/2017]', () => {
         const period = datetimeUtils.retrievePeriod('this_month');
         expect(period.start).to.equal('2017-03-01');
         expect(period.end).to.equal('2017-03-19');
       });
 
-      it('should last_month period be [01/02/2014 - 28/02/2017]', () => {
+      it('should last_month period be [01/02/2017 - 28/02/2017]', () => {
         const period = datetimeUtils.retrievePeriod('last_month');
         expect(period.start).to.equal('2017-02-01');
         expect(period.end).to.equal('2017-02-28');
@@ -112,11 +112,12 @@ describe('#retrievePeriod', () => {
           end: '2017-02-28',
         });
       });
-      it('should last_2_quarters period be [01/07/2016 - 30/09/2017]', () => {
+
+      it('should last_2_quarters period be [01/07/2016 - 31/12/2016]', () => {
         const period = datetimeUtils.retrievePeriod('last_2_quarters');
         expect(period).to.deep.equal({
           start: '2016-07-01',
-          end: '2016-09-30',
+          end: '2016-12-31',
         });
       });
 
@@ -128,37 +129,39 @@ describe('#retrievePeriod', () => {
         });
       });
 
-      // it('should last_3_days_including_current period be [18/03/2018 - 20/03/2017]', () => {
-      //   const period = datetimeUtils.retrievePeriod('last_3_days_including_current');
-      //   expect(period).to.deep.equal({
-      //     start: '2017-03-18',
-      //     end: '2017-03-20',
-      //   });
-      // });
+      it('should last_3_days_including_current period be [17/03/2017 - 19/03/2017] (deprecated in favor of last_3_days)', () => {
+        const period = datetimeUtils.retrievePeriod('last_3_days_including_current');
+        expect(period.start).to.equal('2017-03-17');
+        expect(period.end).to.equal('2017-03-19');
+      });
 
-      // it('should last_2_weeks_including_current period be [13/03/2017 - 26/03/2017]', () => {
-      //   const period = datetimeUtils.retrievePeriod('last_2_weeks_including_current');
-      //   expect(period).to.deep.equal({
-      //     start: '2017-03-13',
-      //     end: '2017-03-26',
-      //   });
-      // });
+      it('should last_2_weeks_including_current period be [06/03/2017 - 19/03/2017]', () => {
+        const period = datetimeUtils.retrievePeriod('last_2_weeks_including_current');
+        expect(period.start).to.equal('2017-03-06');
+        expect(period.end).to.equal('2017-03-19');
+      });
 
-      // it('should last_1_quarter_including_current period be [01/01/2017 - 31/03/2017]', () => {
-      //   const period = datetimeUtils.retrievePeriod('last_1_quarter_including_current');
-      //   expect(period).to.deep.equal({
-      //     start: '2017-01-01',
-      //     end: '2017-03-31',
-      //   });
-      // });
+      it('should last_1_quarter_including_current period be [01/01/2017 - 19/03/2017]', () => {
+        const period = datetimeUtils.retrievePeriod('last_1_quarter_including_current');
+        expect(period.start).to.equal('2017-01-01');
+        expect(period.end).to.equal('2017-03-19');
+      });
 
-      // it('should last_1_year_including_current period be [01/01/2017 - 31/12/2017]', () => {
-      //   const period = datetimeUtils.retrievePeriod('last_1_year_including_current');
-      //   expect(period).to.deep.equal({
-      //     start: '2017-01-01',
-      //     end: '2017-12-31',
-      //   });
-      // });
+      it('should last_1_year_including_current period be [01/01/2017 - 19/03/2017]', () => {
+        const period = datetimeUtils.retrievePeriod('last_1_year_including_current');
+        expect(period).to.deep.equal({
+          start: '2017-01-01',
+          end: '2017-03-19',
+        });
+      });
+
+      it('should 2014-01-01_to_yesterday period be [01/01/2014 - 19/03/2017]', () => {
+        const period = datetimeUtils.retrievePeriod('2014-01-01_to_yesterday');
+        expect(period).to.eql({
+          start: '2014-01-01',
+          end: '2017-03-19',
+        });
+      });
 
       afterAll(() => {
         clock.restore();
@@ -230,8 +233,8 @@ describe('#retrievePeriod', () => {
 
       it('should year_to_date period be[01/01/2014 - 31/12/2014] (deprecated and interpreted as this_year)', () => {
         const period = datetimeUtils.retrievePeriod('year_to_date', january2015);
-        expect(period.start).to.equal('2015-01-01');
-        expect(period.end).to.equal('2015-12-31');
+        expect(period.start).to.equal('2014-01-01');
+        expect(period.end).to.equal('2014-12-31');
       });
 
       it('should unknown period throw an Error', () => {
@@ -239,58 +242,69 @@ describe('#retrievePeriod', () => {
         expect(fn).to.throw('Unrecognized date range: whatever');
       });
 
-      // it('should 2014-01-01_to_yesterday period be [01/01/2014 - 31/12/2014]', () => {
-      //   const period = datetimeUtils.retrievePeriod('2014-01-01_to_yesterday', january2015);
-      //   expect(period).to.eql({
-      //     start: '2014-01-01',
-      //     end: '2014-12-31',
-      //   });
-      // });
+      it('should last_2_weeks_including_current period be [22/12/2014 - 31/12/2014]', () => {
+        const period = datetimeUtils.retrievePeriod('last_2_weeks_including_current', january2015);
+        expect(period).to.deep.equal({
+          start: '2014-12-22',
+          end: '2014-12-31',
+        });
+      });
 
-      // describe('with offset minus 1 hour', () => {
-      //   describe('when offset in hours', () => {
-      //     const offset = -1;
+      it('should last_1_quarter_including_current period be [01/10/2017 - 31/12/2017]', () => {
+        const period = datetimeUtils.retrievePeriod('last_1_quarter_including_current', january2015);
+        expect(period).to.deep.equal({
+          start: '2014-10-01',
+          end: '2014-12-31',
+        });
+      });
 
-      //     it('should today period be [31/12/2014 - 31/12/2014]', () => {
-      //       const period = datetimeUtils.retrievePeriod('today', january2015, offset);
-      //       expect(period.start).to.equal('2014-12-31');
-      //       expect(period.end).to.equal('2014-12-31');
-      //     });
-      //     it('should yesterday period be [30/12/2014 - 30/12/2014]', () => {
-      //       const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
-      //       expect(period.start).to.equal('2014-12-30');
-      //       expect(period.end).to.equal('2014-12-30');
-      //     });
-      //   });
-      //   describe('when offset in seconds', () => {
-      //     const offset = -3600;
+      it('should last_1_year_including_current period be [01/01/2014 - 31/12/2014]', () => {
+        const period = datetimeUtils.retrievePeriod('last_1_year_including_current', january2015);
+        expect(period.start).to.equal('2014-01-01');
+        expect(period.end).to.equal('2014-12-31');
+      });
 
-      //     it('should today period be [31/12/2014 - 31/12/2014]', () => {
-      //       const period = datetimeUtils.retrievePeriod('today', january2015, offset);
-      //       expect(period.start).to.equal('2014-12-31');
-      //       expect(period.end).to.equal('2014-12-31');
-      //     });
-      //     it('should yesterday period be [30/12/2014 - 30/12/2014]', () => {
-      //       const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
-      //       expect(period.start).to.equal('2014-12-30');
-      //       expect(period.end).to.equal('2014-12-30');
-      //     });
-      //   });
-      //   describe('when offset is a string', () => {
-      //     const offset = '-01:00';
+      it('should 2014-01-01_to_yesterday period be [01/01/2014 - 31/12/2014]', () => {
+        const period = datetimeUtils.retrievePeriod('2014-01-01_to_yesterday', january2015);
+        expect(period).to.eql({
+          start: '2014-01-01',
+          end: '2014-12-31',
+        });
+      });
 
-      //     it('should today period be [31/12/2014 - 31/12/2014]', () => {
-      //       const period = datetimeUtils.retrievePeriod('today', january2015, offset);
-      //       expect(period.start).to.equal('2014-12-31');
-      //       expect(period.end).to.equal('2014-12-31');
-      //     });
-      //     it('should yesterday period be [30/12/2014 - 30/12/2014]', () => {
-      //       const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
-      //       expect(period.start).to.equal('2014-12-30');
-      //       expect(period.end).to.equal('2014-12-30');
-      //     });
-      //   });
-      // });
+      describe('with offset minus 1 hour', () => {
+        [
+          { offset: -1, context: 'when offset -1 hours' },
+          { offset: -3600, context: 'when offset -3600 seconds' },
+          { offset: '-01:00', context: 'when offset -1 hour as string' },
+        ].forEach(({ offset, context }) => {
+          describe(context, () => {
+            it('should yesterday period be 30/12/2014', () => {
+              const period = datetimeUtils.retrievePeriod('yesterday', january2015, offset);
+              expect(period.start).to.equal('2014-12-30');
+              expect(period.end).to.equal('2014-12-30');
+            });
+
+            it('should last_week period be [22/12/2014 - 28/12/2014]', () => {
+              const period = datetimeUtils.retrievePeriod('last_week', january2015, offset);
+              expect(period.start).to.equal('2014-12-22');
+              expect(period.end).to.equal('2014-12-28');
+            });
+
+            it('should last_year period be [01/01/2013 - 31/12/2013]', () => {
+              const period = datetimeUtils.retrievePeriod('last_year', january2015, offset);
+              expect(period.start).to.equal('2013-01-01');
+              expect(period.end).to.equal('2013-12-31');
+            });
+
+            it('should this_year period be [01/01/2013 - 30/12/2014]', () => {
+              const period = datetimeUtils.retrievePeriod('this_year', january2015, offset);
+              expect(period.start).to.equal('2014-01-01');
+              expect(period.end).to.equal('2014-12-30');
+            });
+          });
+        });
+      });
     });
   });
 });
