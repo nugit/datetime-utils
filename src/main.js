@@ -8,7 +8,7 @@ import subDays from 'date-fns/sub_days';
 import subMonths from 'date-fns/sub_months';
 import subYears from 'date-fns/sub_years';
 import { applyOffset, formatDate, getSubtractionFn, getStartOfFn, getEndOfFn } from './utils';
-import { convertLegacyParams } from './legacy';
+import { convertLegacyParams, migrateLegacyPeriodString } from './legacy';
 
 // :: Int -> String -> Option(String) -> Object
 function retrieveLastRelativePeriod(num, unit, base = Date()) {
@@ -61,13 +61,22 @@ function retrievePredefinedDateRange(key, base = Date()) {
 function retrievePeriodParams(periodOrKey) {
   if (typeof periodOrKey !== 'string') return periodOrKey;
 
-  const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)$/;
+  const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)(_including_current)?$/;
   const LAST_RANGE_REGEX_2 = /^last_(\d+)_(day|week|month|quarter|year)s?(_including_current)?$/;
   const THIS_RANGE_REGEX = /^this_(day|week|month|quarter|year)$/;
   const TILL_YESTERDAY_REGEX = /^(\d{4}-\d{2}-\d{2})_to_yesterday$/;
+  const CUSTOM_REGEX = /^(\d{4}-\d{2}-\d{2})_to_(\d{4}-\d{2}-\d{2})$/;
 
   let match = periodOrKey.match(LAST_RANGE_REGEX_1);
-  if (match) return { type: 'last', unit: match[1], num: 1 };
+  if (match) {
+    return {
+      type: 'last',
+      num: 1,
+      unit: match[1],
+      including_current: match[2] === '_including_current',
+      includeingParam: match[1] === 'day' ? 'today' : 'this',
+    };
+  }
 
   match = periodOrKey.match(LAST_RANGE_REGEX_2);
   if (match) {
@@ -75,7 +84,6 @@ function retrievePeriodParams(periodOrKey) {
       type: 'last',
       num: Number(match[1]),
       unit: match[2],
-      newFormat: true,
       including_current: match[3] === '_including_current',
       includeingParam: match[2] === 'day' ? 'today' : `this ${match[2]}`,
     };
@@ -85,13 +93,11 @@ function retrievePeriodParams(periodOrKey) {
   if (match) return { type: 'this', unit: match[1] };
 
   match = periodOrKey.match(TILL_YESTERDAY_REGEX);
-  // TODO: change till_tomorrow to till_yesterday
-  if (match) return { type: 'till_tomorrow', start: match[1] };
+  if (match) return { type: 'till_yesterday', start: match[1] };
 
-  // TODO: find out what is it for
-  if (periodOrKey === 'last') return { type: 'last', num: undefined, unit: undefined };
+  match = periodOrKey.match(CUSTOM_REGEX);
+  if (match) return { start: match[1], end: match[2] };
 
-  // TODO: Why no throw error?
   return null;
 }
 
@@ -116,8 +122,12 @@ function retrievePeriod(periodOrKey, base = Date(), utcOffset) {
     return retrieveThisRelativePeriod(params.unit, baseDate);
   }
 
-  if (params && params.type === 'till_tomorrow') {
+  if (params && params.type === 'till_yesterday') {
     return retrieveTillYesterday(params.start, base);
+  }
+
+  if (params && params.type === 'custom') {
+    return { start: params.start, end: params.end };
   }
 
   return retrievePredefinedDateRange(periodOrKey, baseDate);
@@ -197,6 +207,7 @@ function retrieveComparePeriod(period, comparison = 'auto') {
 }
 
 export default {
+  migrateLegacyPeriodString,
   retrievePeriod: convertLegacyParams(retrievePeriod),
   retrievePeriodParams: convertLegacyParams(retrievePeriodParams),
   calculateAutoCompare: convertLegacyParams(calculateAutoCompare),
