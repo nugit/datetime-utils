@@ -1,35 +1,70 @@
-function migrateLegacyPeriodString(periodString) {
-  if (typeof periodString !== 'string') return periodString;
+import { getPeriodParams, getRange, getCustomPeriod } from './main';
+
+function migrateLegacyPeriod(period) {
+  if (typeof period !== 'string') {
+    // a range is provided, this is legacy way to handle custom periods
+    return getCustomPeriod(period.start, period.end);
+  }
 
   const LAST_RANGE_REGEX_LEGACY = /^last(\d+)(day|week|month|quarter|year)s?$/;
-  const matchLegacyFormat = periodString.match(LAST_RANGE_REGEX_LEGACY);
+  const matchLegacyFormat = period.match(LAST_RANGE_REGEX_LEGACY);
   if (matchLegacyFormat) {
     return `last_${matchLegacyFormat[1]}_${matchLegacyFormat[2]}`;
   }
 
   // last_x_days_including current is deprecated
   const LAST_RANGE_REGEX = /^(last_(\d+)_days?)_including_current$/;
-  const matchIncludingCurrentDay = periodString.match(LAST_RANGE_REGEX);
+  const matchIncludingCurrentDay = period.match(LAST_RANGE_REGEX);
   if (matchIncludingCurrentDay) {
     return matchIncludingCurrentDay[1];
   }
 
-  switch (periodString) {
+  switch (period) {
     case 'today':
       return 'yesterday';
     case 'year_to_date':
       return 'this_year';
     default:
-      return periodString;
+      return period;
+  }
+}
+
+function migrateLegacyCompareMode(compareMode = 'auto') {
+  switch (compareMode) {
+    case 'auto':
+    case '12_months_ago':
+      return compareMode;
+    default:
+      // in that case compareMode is actually a range
+      return migrateLegacyPeriod(compareMode);
   }
 }
 
 // Proxy given function to migrate legacy period parameter
 function convertLegacyParams(fn) {
-  return (period, ...args) => fn(migrateLegacyPeriodString(period), ...args);
+  return (period, ...args) => fn(migrateLegacyPeriod(period), ...args);
+}
+
+function toLegacyPeriod(period) {
+  const { type } = getPeriodParams(period);
+
+  return type === 'custom' ? getRange(period) : period;
+}
+
+function toLegacyCompareMode(compareMode) {
+  switch (compareMode) {
+    case 'auto':
+    case '12_months_ago':
+      return compareMode;
+    default:
+      return toLegacyPeriod(compareMode);
+  }
 }
 
 export {
-  migrateLegacyPeriodString,
+  toLegacyPeriod,
+  toLegacyCompareMode,
+  migrateLegacyPeriod,
+  migrateLegacyCompareMode,
   convertLegacyParams,
 };

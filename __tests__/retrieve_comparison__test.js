@@ -1,7 +1,6 @@
-const { expect } = require('chai');
-const sinon = require('sinon');
-
-const datetimeUtils = require('../src/main').default;
+import { expect } from 'chai';
+import sinon from 'sinon';
+import datetimeUtils from '../src/index';
 
 describe('#retrieveComparePeriod', () => {
   describe('when current date is 20/03/2017', () => {

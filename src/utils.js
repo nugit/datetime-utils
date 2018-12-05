@@ -12,6 +12,11 @@ import endOfMonth from 'date-fns/end_of_month';
 import endOfISOWeek from 'date-fns/end_of_iso_week';
 import endOfQuarter from 'date-fns/end_of_quarter';
 import endOfYear from 'date-fns/end_of_year';
+import differenceInDays from 'date-fns/difference_in_days';
+import differenceInWeeks from 'date-fns/difference_in_weeks';
+import differenceInMonths from 'date-fns/difference_in_months';
+import differenceInQuarters from 'date-fns/difference_in_quarters';
+import differenceInYears from 'date-fns/difference_in_years';
 
 // :: (Date | String | Int) -> String
 export const formatDate = date => format(date, 'YYYY-MM-DD');
@@ -23,6 +28,15 @@ export const getSubtractionFn = (unit) => {
   if (unit === 'month') return subMonths;
   if (unit === 'week') return subWeeks;
   return subDays;
+};
+
+// :: String -> ((Date | String | Int) -> Int -> Date)
+export const getDiffFn = (unit) => {
+  if (unit === 'year') return differenceInYears;
+  if (unit === 'quarter') return differenceInQuarters;
+  if (unit === 'month') return differenceInMonths;
+  if (unit === 'week') return differenceInWeeks;
+  return differenceInDays;
 };
 
 // :: String -> ((Date | String | Int) -> Int -> Date)
@@ -69,10 +83,10 @@ export const getMsDiffFromUTC = (offset, date) => (
 
 // The offset can be either in hours or in seconds. Or it can be a string.
 // Returns a new Date string with the offset applied to it.
-// :: (Int | String) -> String -> String
-export const applyOffset = (offset, dateStr) => {
-  if (!offset) return dateStr;
-  const dateObj = new Date(dateStr);
+// :: (Int | String) -> (Int | String | Date) -> Date
+export const applyOffset = (offset, date) => {
+  if (!offset) return date;
+  const dateObj = date instanceof Date ? date : new Date(date);
   const diffFromUTC = getMsDiffFromUTC(offset, dateObj);
-  return new Date(dateObj.getTime() + diffFromUTC).toString();
+  return new Date(dateObj.getTime() + diffFromUTC);
 };

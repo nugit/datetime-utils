@@ -1,6 +1,5 @@
-const { expect } = require('chai');
-
-const utils = require('../src/utils');
+import { expect } from 'chai';
+import * as utils from '../src/utils';
 
 describe('utils', () => {
   describe('formatDate', () => {
@@ -102,7 +101,7 @@ describe('utils', () => {
       const newDate = utils.applyOffset('-08:00', 'Mon Oct 08 2018 15:38:06');
       // We slice to get rid of the timezone information, which is dependant
       // on the computer this test runs on
-      expect(newDate.slice(0, 24)).to.equal('Sun Oct 07 2018 23:38:06');
+      expect(newDate.toString().slice(0, 24)).to.equal('Sun Oct 07 2018 23:38:06');
     });
   });
 });

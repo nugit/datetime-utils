@@ -7,10 +7,10 @@ import pkg from './package.json';
 export default [
   // Brwoser-friendly UMD build
   {
-    input: 'src/main.js',
+    input: 'src/index.js',
     output: {
       name: 'nugit-datetime-utils',
-      file: pkg.browser,
+      file: 'lib/nugit-datetime-utils.umd.js',
       format: 'umd',
     },
     plugins: [
@@ -28,7 +28,7 @@ export default [
   // an array for the `output` option, where we can specify
   // `file` and `format` for each target)
   {
-    input: 'src/main.js',
+    input: 'src/index.js',
     external: id => /date-fns/.test(id),
     output: [
       {
