@@ -1,4 +1,5 @@
 import { getRange, getPeriodParams, getCompareRange, getAutoCompareRangeAndLabel, getCustomPeriod } from './main';
+import { formatDate } from './utils';
 
 function migrateLegacyPeriod(period) {
   if (typeof period !== 'string') {
@@ -69,12 +70,13 @@ const retrieveComparePeriod = (period, compareMode) => getCompareRange(
 );
 const calculateAutoCompare = (period, base) => {
   const { label, range } = getAutoCompareRangeAndLabel(
-    getRange(migrateLegacyPeriod(period)),
+    migrateLegacyPeriod(period),
     base,
   );
 
   return { label, period: range };
 };
+
 export {
   toLegacyPeriod,
   toLegacyCompareMode,
