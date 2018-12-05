@@ -1,4 +1,4 @@
-import { getPeriodParams, getRange, getCustomPeriod } from './main';
+import { getRange, getPeriodParams, getCompareRange, getAutoCompareRangeAndLabel, getCustomPeriod } from './main';
 
 function migrateLegacyPeriod(period) {
   if (typeof period !== 'string') {
@@ -61,10 +61,27 @@ function toLegacyCompareMode(compareMode) {
   }
 }
 
+const retrievePeriod = convertLegacyParams(getRange);
+const retrievePeriodParams = convertLegacyParams(getPeriodParams);
+const retrieveComparePeriod = (period, compareMode) => getCompareRange(
+  migrateLegacyPeriod(period),
+  migrateLegacyCompareMode(compareMode),
+);
+const calculateAutoCompare = (period, base) => {
+  const { label, range } = getAutoCompareRangeAndLabel(
+    migrateLegacyPeriod(period),
+    base,
+  );
+
+  return { label, period: range };
+};
 export {
   toLegacyPeriod,
   toLegacyCompareMode,
   migrateLegacyPeriod,
   migrateLegacyCompareMode,
-  convertLegacyParams,
+  retrievePeriod,
+  retrievePeriodParams,
+  retrieveComparePeriod,
+  calculateAutoCompare,
 };

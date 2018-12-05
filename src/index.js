@@ -1,27 +1,24 @@
 import { getRange, getPeriodParams, getCompareRange, getAutoCompareRangeAndLabel, getTillYesterdayPeriod, getCustomPeriod, getLastPeriod, getThisPeriod } from './main';
-import { migrateLegacyPeriod, migrateLegacyCompareMode, convertLegacyParams, toLegacyPeriod, toLegacyCompareMode } from './legacy';
+import { migrateLegacyPeriod, migrateLegacyCompareMode, toLegacyPeriod, toLegacyCompareMode, retrievePeriod, retrievePeriodParams, retrieveComparePeriod, calculateAutoCompare } from './legacy';
 import { formatDate } from './utils';
 
 export default {
-  formatDate,
-  getTillYesterdayPeriod,
-  getCustomPeriod,
-  getLastPeriod,
-  getThisPeriod,
-  migrateLegacyPeriod,
-  migrateLegacyCompareMode,
-  toLegacyPeriod,
-  toLegacyCompareMode,
   getRange,
   getPeriodParams,
   getCompareRange,
   getAutoCompareRangeAndLabel,
+  getTillYesterdayPeriod,
+  getCustomPeriod,
+  getLastPeriod,
+  getThisPeriod,
+  formatDate,
   // legacy
-  retrievePeriod: convertLegacyParams(getRange),
-  retrievePeriodParams: convertLegacyParams(getPeriodParams),
-  retrieveComparePeriod: (period, compareMode) => getCompareRange(
-    migrateLegacyPeriod(period),
-    migrateLegacyCompareMode(compareMode),
-  ),
-  calculateAutoCompare: convertLegacyParams(getAutoCompareRangeAndLabel),
+  migrateLegacyPeriod,
+  migrateLegacyCompareMode,
+  toLegacyPeriod,
+  toLegacyCompareMode,
+  retrievePeriod,
+  retrievePeriodParams,
+  retrieveComparePeriod,
+  calculateAutoCompare,
 };
