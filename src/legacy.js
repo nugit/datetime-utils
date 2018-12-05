@@ -69,7 +69,7 @@ const retrieveComparePeriod = (period, compareMode) => getCompareRange(
 );
 const calculateAutoCompare = (period, base) => {
   const { label, range } = getAutoCompareRangeAndLabel(
-    migrateLegacyPeriod(period),
+    getRange(migrateLegacyPeriod(period)),
     base,
   );
 
