@@ -1,5 +1,4 @@
 import { getRange, getPeriodParams, getCompareRange, getAutoCompareRangeAndLabel, getCustomPeriod } from './main';
-import { formatDate } from './utils';
 
 function migrateLegacyPeriod(period) {
   if (typeof period !== 'string') {
