@@ -30,7 +30,7 @@ export const getSubtractionFn = (unit) => {
   return subDays;
 };
 
-// :: String -> ((Date | String | Int) -> Int -> Date)
+// :: String -> ((Date | String | Int) -> (Date | String | Int) -> Int)
 export const getDiffFn = (unit) => {
   if (unit === 'year') return differenceInYears;
   if (unit === 'quarter') return differenceInQuarters;
@@ -39,7 +39,7 @@ export const getDiffFn = (unit) => {
   return differenceInDays;
 };
 
-// :: String -> ((Date | String | Int) -> Int -> Date)
+// :: String -> ((Date | String | Int) -> Date)
 export const getStartOfFn = (unit) => {
   if (unit === 'year') return startOfYear;
   if (unit === 'quarter') return startOfQuarter;
@@ -49,7 +49,7 @@ export const getStartOfFn = (unit) => {
   return _ => _;
 };
 
-// :: String -> ((Date | String | Int) -> Int -> Date)
+// :: String -> ((Date | String | Int) -> Date)
 export const getEndOfFn = (unit) => {
   if (unit === 'year') return endOfYear;
   if (unit === 'quarter') return endOfQuarter;

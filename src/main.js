@@ -9,13 +9,13 @@ import isMonday from 'date-fns/is_monday';
 import isSunday from 'date-fns/is_sunday';
 import { applyOffset, formatDate, getSubtractionFn, getStartOfFn, getEndOfFn, getDiffFn } from './utils';
 
-// :: Date|Int|String -> Date|Int|String -> Object
+// :: (Date | Int | String) -> (Date | Int | String)  -> Object
 const formatRange = (start, end) => ({
   start: formatDate(start),
   end: formatDate(end),
 });
 
-// :: Int -> String -> Option(Date|Int|String) -> Object
+// :: Int -> String -> Option(Date | Int | String) = new Date() -> Object
 const getLastRelativePeriodRange = (num, unit, base = new Date()) => {
   const startOf = getStartOfFn(unit);
   const endOf = getEndOfFn(unit);
@@ -24,7 +24,7 @@ const getLastRelativePeriodRange = (num, unit, base = new Date()) => {
   return formatRange(startOf(sub(base, num)), endOf(sub(base, 1)));
 };
 
-// :: String -> Option(String) -> Object
+// :: String -> Option(Date | Int | String) = new Date() -> Object
 const getThisRelativePeriodRange = (unit, base = new Date(), num = 1) => {
   const dayBefore = subDays(base, 1);
 
@@ -34,13 +34,14 @@ const getThisRelativePeriodRange = (unit, base = new Date(), num = 1) => {
   return formatRange(startOf(sub(dayBefore, num - 1)), formatDate(dayBefore));
 };
 
+// :: (Date | Int | String) -> Option(Date | Int | String) = new Date() -> Object
 const getTillYesterdayRange = (start, base = new Date()) => {
   const dayBefore = subDays(base, 1);
 
   return formatRange(start, dayBefore);
 };
 
-// :: (String) -> Object
+// :: String -> Object
 const getPeriodParams = (period) => {
   const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)(_including_current)?$/;
   const LAST_RANGE_REGEX_2 = /^last_(\d+)_(day|week|month|quarter|year)s?(_including_current)?$/;
@@ -89,7 +90,7 @@ const getPeriodParams = (period) => {
   }
 };
 
-// :: (String) -> Option(String) -> Int
+// :: (String) -> Option(Date | Int | String) -> Option(Int) = 0 -> Object
 const getRange = (period, base = new Date(), utcOffset = 0) => {
   const baseDate = applyOffset(utcOffset, base);
 
@@ -124,6 +125,7 @@ const getRange = (period, base = new Date(), utcOffset = 0) => {
   }
 };
 
+// :: (Date | Int | String) -> (Date | Int | String) -> String
 const getBestCompareUnit = (start, end) => {
   if (getDayOfYear(start) === 1 && getDayOfYear(end) === getDaysInYear(end)) {
     return 'year';
@@ -146,7 +148,7 @@ const getBestCompareUnit = (start, end) => {
   return 'day';
 };
 
-// :: (String) -> Option(String) -> Object
+// :: (String) -> Option(Date | Int | String) = new Date() -> Object
 const getAutoCompareRangeAndLabel = (period, baseDate = new Date()) => {
   const { start, end } = getRange(period, baseDate);
   const params = getPeriodParams(period);
@@ -196,7 +198,7 @@ const getAutoCompareRangeAndLabel = (period, baseDate = new Date()) => {
   }
 };
 
-// :: Object -> Option(String) -> Object
+// :: String -> Option(String) = 'auto' -> Object
 const getCompareRange = (period, compareMode = 'auto') => {
   switch (compareMode) {
     case 'auto':
@@ -211,10 +213,13 @@ const getCompareRange = (period, compareMode = 'auto') => {
   }
 };
 
+// :: (Date | Int | String) -> String
 const getTillYesterdayPeriod = date => `${formatDate(date)}_to_yesterday`;
 
+// :: (Date | Int | String) -> (Date | Int | String) -> String
 const getCustomPeriod = (start, end) => `${formatDate(start)}_to_${formatDate(end)}`;
 
+// :: Int -> String -> Boolean -> String
 const getLastPeriod = (num, unit, includingCurrent) => {
   const suffix = `${unit}${includingCurrent ? '_including_current' : ''}`;
 
@@ -225,6 +230,7 @@ const getLastPeriod = (num, unit, includingCurrent) => {
   return `last_${num}_${suffix}`;
 };
 
+// :: String -> String
 const getThisPeriod = unit => `this_${unit}`;
 
 export {
