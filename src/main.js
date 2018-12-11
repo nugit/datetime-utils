@@ -9,40 +9,38 @@ import isMonday from 'date-fns/is_monday';
 import isSunday from 'date-fns/is_sunday';
 import { applyOffset, formatDate, getSubtractionFn, getStartOfFn, getEndOfFn, getDiffFn } from './utils';
 
-function formatRange(start, end) {
-  return {
-    start: formatDate(start),
-    end: formatDate(end),
-  };
-}
+const formatRange = (start, end) => ({
+  start: formatDate(start),
+  end: formatDate(end),
+});
 
 // :: Int -> String -> Option(String) -> Object
-function getLastRelativePeriodRange(num, unit, base = new Date()) {
+const getLastRelativePeriodRange = (num, unit, base = new Date()) => {
   const startOf = getStartOfFn(unit);
   const endOf = getEndOfFn(unit);
   const sub = getSubtractionFn(unit);
 
   return formatRange(startOf(sub(base, num)), endOf(sub(base, 1)));
-}
+};
 
 // :: String -> Option(String) -> Object
-function getThisRelativePeriodRange(unit, base = new Date(), num = 1) {
+const getThisRelativePeriodRange = (unit, base = new Date(), num = 1) => {
   const dayBefore = subDays(base, 1);
 
   const startOf = getStartOfFn(unit);
   const sub = getSubtractionFn(unit);
 
   return formatRange(startOf(sub(dayBefore, num - 1)), formatDate(dayBefore));
-}
+};
 
-function getTillYesterdayRange(start, base = new Date()) {
+const getTillYesterdayRange = (start, base = new Date()) => {
   const dayBefore = subDays(base, 1);
 
   return formatRange(start, dayBefore);
-}
+};
 
 // :: (String) -> Object
-function getPeriodParams(period) {
+const getPeriodParams = (period) => {
   const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)(_including_current)?$/;
   const LAST_RANGE_REGEX_2 = /^last_(\d+)_(day|week|month|quarter|year)s?(_including_current)?$/;
   const THIS_RANGE_REGEX = /^this_(day|week|month|quarter|year)$/;
@@ -88,10 +86,10 @@ function getPeriodParams(period) {
     default:
       throw new Error(`Unrecognized date range: ${period}`);
   }
-}
+};
 
 // :: (String) -> Option(String) -> Int
-function getRange(period, base = new Date(), utcOffset = 0) {
+const getRange = (period, base = new Date(), utcOffset = 0) => {
   const baseDate = applyOffset(utcOffset, base);
 
   const params = getPeriodParams(period);
@@ -123,9 +121,9 @@ function getRange(period, base = new Date(), utcOffset = 0) {
     default:
       throw new Error(`Unrecognized date range: ${period}`);
   }
-}
+};
 
-function getBestCompareUnit(start, end) {
+const getBestCompareUnit = (start, end) => {
   if (getDayOfYear(start) === 1 && getDayOfYear(end) === getDaysInYear(end)) {
     return 'year';
   }
@@ -145,10 +143,10 @@ function getBestCompareUnit(start, end) {
   }
 
   return 'day';
-}
+};
 
 // :: (String) -> Option(String) -> Object
-function getAutoCompareRangeAndLabel(period, baseDate = new Date()) {
+const getAutoCompareRangeAndLabel = (period, baseDate = new Date()) => {
   const { start, end } = getRange(period, baseDate);
   const params = getPeriodParams(period);
 
@@ -195,10 +193,10 @@ function getAutoCompareRangeAndLabel(period, baseDate = new Date()) {
       };
     }
   }
-}
+};
 
 // :: Object -> Option(String) -> Object
-function getCompareRange(period, compareMode = 'auto') {
+const getCompareRange = (period, compareMode = 'auto') => {
   switch (compareMode) {
     case 'auto':
       return getAutoCompareRangeAndLabel(period).range;
@@ -210,17 +208,13 @@ function getCompareRange(period, compareMode = 'auto') {
     default:
       return getRange(compareMode);
   }
-}
+};
 
-function getTillYesterdayPeriod(date) {
-  return `${formatDate(date)}_to_yesterday`;
-}
+const getTillYesterdayPeriod = date => `${formatDate(date)}_to_yesterday`;
 
-function getCustomPeriod(start, end) {
-  return `${formatDate(start)}_to_${formatDate(end)}`;
-}
+const getCustomPeriod = (start, end) => `${formatDate(start)}_to_${formatDate(end)}`;
 
-function getLastPeriod(num, unit, includingCurrent) {
+const getLastPeriod = (num, unit, includingCurrent) => {
   const suffix = `${unit}${includingCurrent ? '_including_current' : ''}`;
 
   if (num === 1) {
@@ -228,11 +222,9 @@ function getLastPeriod(num, unit, includingCurrent) {
   }
 
   return `last_${num}_${suffix}`;
-}
+};
 
-function getThisPeriod(unit) {
-  return `this_${unit}`;
-}
+const getThisPeriod = unit => `this_${unit}`;
 
 export {
   getRange,

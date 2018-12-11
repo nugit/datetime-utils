@@ -1,6 +1,6 @@
 import { getRange, getPeriodParams, getCompareRange, getAutoCompareRangeAndLabel, getCustomPeriod } from './main';
 
-function migrateLegacyPeriod(period) {
+const migrateLegacyPeriod = (period) => {
   if (typeof period !== 'string') {
     // a range is provided, this is legacy way to handle custom periods
     return getCustomPeriod(period.start, period.end);
@@ -27,9 +27,9 @@ function migrateLegacyPeriod(period) {
     default:
       return period;
   }
-}
+};
 
-function migrateLegacyCompareMode(compareMode = 'auto') {
+const migrateLegacyCompareMode = (compareMode = 'auto') => {
   switch (compareMode) {
     case 'auto':
     case '12_months_ago':
@@ -38,20 +38,18 @@ function migrateLegacyCompareMode(compareMode = 'auto') {
       // in that case compareMode is actually a range
       return migrateLegacyPeriod(compareMode);
   }
-}
+};
 
 // Proxy given function to migrate legacy period parameter
-function convertLegacyParams(fn) {
-  return (period, ...args) => fn(migrateLegacyPeriod(period), ...args);
-}
+const convertLegacyParams = fn => (period, ...args) => fn(migrateLegacyPeriod(period), ...args);
 
-function toLegacyPeriod(period) {
+const toLegacyPeriod = (period) => {
   const { type } = getPeriodParams(period);
 
   return type === 'custom' ? getRange(period) : period;
-}
+};
 
-function toLegacyCompareMode(compareMode) {
+const toLegacyCompareMode = (compareMode) => {
   switch (compareMode) {
     case 'auto':
     case '12_months_ago':
@@ -59,7 +57,7 @@ function toLegacyCompareMode(compareMode) {
     default:
       return toLegacyPeriod(compareMode);
   }
-}
+};
 
 const retrievePeriod = convertLegacyParams(getRange);
 const retrievePeriodParams = convertLegacyParams(getPeriodParams);

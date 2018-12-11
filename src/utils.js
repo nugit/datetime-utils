@@ -76,9 +76,9 @@ export const normalizeOffsetToMs = (offset) => {
 };
 
 // :: (Int | String) -> Object -> Int
-export const getMsDiffFromUTC = (offset, date) => (
+export const getMsDiffFromUTC = offset => (
   // The getTimezoneOffset retuns minutes
-  normalizeOffsetToMs(offset) + (date.getTimezoneOffset() * 60 * 1000)
+  normalizeOffsetToMs(offset) + (new Date().getTimezoneOffset() * 60 * 1000)
 );
 
 // The offset can be either in hours or in seconds. Or it can be a string.
@@ -87,6 +87,6 @@ export const getMsDiffFromUTC = (offset, date) => (
 export const applyOffset = (offset, date) => {
   if (!offset) return date;
   const dateObj = date instanceof Date ? date : new Date(date);
-  const diffFromUTC = getMsDiffFromUTC(offset, dateObj);
+  const diffFromUTC = getMsDiffFromUTC(offset);
   return new Date(dateObj.getTime() + diffFromUTC);
 };
