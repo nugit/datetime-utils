@@ -9,12 +9,13 @@ import isMonday from 'date-fns/is_monday';
 import isSunday from 'date-fns/is_sunday';
 import { applyOffset, formatDate, getSubtractionFn, getStartOfFn, getEndOfFn, getDiffFn } from './utils';
 
+// :: Date|Int|String -> Date|Int|String -> Object
 const formatRange = (start, end) => ({
   start: formatDate(start),
   end: formatDate(end),
 });
 
-// :: Int -> String -> Option(String) -> Object
+// :: Int -> String -> Option(Date|Int|String) -> Object
 const getLastRelativePeriodRange = (num, unit, base = new Date()) => {
   const startOf = getStartOfFn(unit);
   const endOf = getEndOfFn(unit);

@@ -29,7 +29,7 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/index.js',
-    external: id => /date-fns/.test(id),
+    external: id => /^date-fns/.test(id),
     output: [
       {
         name: 'nugit-datetime-utils',

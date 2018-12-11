@@ -45,6 +45,7 @@ export const getStartOfFn = (unit) => {
   if (unit === 'quarter') return startOfQuarter;
   if (unit === 'month') return startOfMonth;
   if (unit === 'week') return startOfISOWeek;
+  // return identity function when unit is day
   return _ => _;
 };
 
@@ -54,6 +55,7 @@ export const getEndOfFn = (unit) => {
   if (unit === 'quarter') return endOfQuarter;
   if (unit === 'month') return endOfMonth;
   if (unit === 'week') return endOfISOWeek;
+  // return identity function when unit is day
   return _ => _;
 };
 
