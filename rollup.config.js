@@ -7,10 +7,10 @@ import pkg from './package.json';
 export default [
   // Brwoser-friendly UMD build
   {
-    input: 'src/main.js',
+    input: 'src/index.js',
     output: {
       name: 'nugit-datetime-utils',
-      file: pkg.browser,
+      file: 'lib/nugit-datetime-utils.umd.js',
       format: 'umd',
     },
     plugins: [
@@ -28,28 +28,8 @@ export default [
   // an array for the `output` option, where we can specify
   // `file` and `format` for each target)
   {
-    input: 'src/main.js',
-    external: [
-      'date-fns',
-      'date-fns/add_days',
-      'date-fns/add_months',
-      'date-fns/end_of_year',
-      'date-fns/difference_in_days',
-      'date-fns/get_date',
-      'date-fns/get_day_of_year',
-      'date-fns/get_month',
-      'date-fns/get_year',
-      'date-fns/last_day_of_year',
-      'date-fns/set_date',
-      'date-fns/set_day',
-      'date-fns/set_day_of_year',
-      'date-fns/set_month',
-      'date-fns/sub_days',
-      'date-fns/sub_months',
-      'date-fns/sub_weeks',
-      'date-fns/sub_years',
-      'date-fns/format',
-    ],
+    input: 'src/index.js',
+    external: id => /^date-fns/.test(id),
     output: [
       {
         name: 'nugit-datetime-utils',

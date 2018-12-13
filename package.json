@@ -1,6 +1,6 @@
 {
   "name": "nugit-datetime-utils",
-  "version": "3.1.0",
+  "version": "3.4.0-rc.1",
   "description": "Shared time utils",
   "main": "lib/nugit-datetime-utils.cjs.js",
   "module": "lib/nugit-datetime-utils.esm.js",
@@ -40,7 +40,8 @@
     "rollup-plugin-commonjs": "^9.1.8",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-uglify": "^6.0.0",
-    "sinon": "^7.1.1"
+    "sinon": "^7.1.1",
+    "timezone-mock": "^1.0.2"
   },
   "scripts": {
     "build": "rollup -c rollup.config.js",
@@ -48,7 +49,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "coverage": "jest --coverage",
-    "lint": "eslint --cache -c .eslintrc.js src/**/*.js",
+    "lint": "eslint --cache .",
     "commit": "commit-wizard"
   },
   "config": {

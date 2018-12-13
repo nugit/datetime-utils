@@ -1,0 +1,47 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "extends": "airbnb",
+  "rules": {
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectExpression": {
+          "minProperties": 6,
+          "multiline": true,
+          "consistent": true
+        },
+        "ObjectPattern": {
+          "minProperties": 6,
+          "multiline": true,
+          "consistent": true
+        },
+        "ImportDeclaration": "never",
+        "ExportDeclaration": {
+          "minProperties": 6,
+          "multiline": true,
+          "consistent": true
+        }
+      }
+    ],
+    "quote-props": [
+      "error",
+      "consistent-as-needed",
+      {
+        "keywords": false,
+        "unnecessary": true,
+        "numbers": false
+      }
+    ]
+  }
+}
