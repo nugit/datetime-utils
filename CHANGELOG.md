@@ -1,4 +1,4 @@
-# [unreleased]
+# 4.0.0 -- 13/12/2018
 
 > This version try to differentiate `period` and `range` concepts. The first one in a string representing the period and range is an object representing the actual date range the given period is equivalent given a base date. So `range` is the interpretation of the `period`.
 
