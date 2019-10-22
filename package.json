@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/nugit/datetime-utils#readme",
   "dependencies": {
-    "date-fns": "^1.29.0"
+    "date-fns": "^2.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
