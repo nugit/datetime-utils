@@ -1,25 +1,7 @@
-import differenceInDays from 'date-fns/difference_in_days';
-import differenceInMonths from 'date-fns/difference_in_months';
-import differenceInQuarters from 'date-fns/difference_in_quarters';
-import differenceInWeeks from 'date-fns/difference_in_weeks';
-import differenceInYears from 'date-fns/difference_in_years';
-import endOfISOWeek from 'date-fns/end_of_iso_week';
-import endOfMonth from 'date-fns/end_of_month';
-import endOfQuarter from 'date-fns/end_of_quarter';
-import endOfYear from 'date-fns/end_of_year';
-import format from 'date-fns/format';
-import startOfISOWeek from 'date-fns/start_of_iso_week';
-import startOfMonth from 'date-fns/start_of_month';
-import startOfQuarter from 'date-fns/start_of_quarter';
-import startOfYear from 'date-fns/start_of_year';
-import subDays from 'date-fns/sub_days';
-import subMonths from 'date-fns/sub_months';
-import subQuarters from 'date-fns/sub_quarters';
-import subWeeks from 'date-fns/sub_weeks';
-import subYears from 'date-fns/sub_years';
+import { differenceInDays, differenceInMonths, differenceInQuarters, differenceInWeeks, differenceInYears, endOfISOWeek, endOfMonth, endOfQuarter, endOfYear, format, startOfISOWeek, startOfMonth, startOfQuarter, startOfYear, subDays, subMonths, subQuarters, subWeeks, subYears } from './helpers';
 
 // :: (Date | String | Int) -> String
-export const formatDate = date => format(date, 'YYYY-MM-DD');
+export const formatDate = date => format(date, 'yyyy-MM-dd');
 
 // :: String -> ((Date | String | Int) -> Int -> Date)
 export const getSubtractionFn = (unit) => {

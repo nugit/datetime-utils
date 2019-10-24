@@ -1,12 +1,4 @@
-import getDate from 'date-fns/get_date';
-import getDaysInMonth from 'date-fns/get_days_in_month';
-import getDaysInYear from 'date-fns/get_days_in_year';
-import getDayOfYear from 'date-fns/get_day_of_year';
-import isMonday from 'date-fns/is_monday';
-import isSameDay from 'date-fns/is_same_day';
-import isSunday from 'date-fns/is_sunday';
-import subDays from 'date-fns/sub_days';
-import subYears from 'date-fns/sub_years';
+import { getDate, getDayOfYear, getDaysInMonth, getDaysInYear, isMonday, isSameDay, isSunday, subDays, subYears } from './helpers';
 import { applyOffset, formatDate, getDiffFn, getEndOfFn, getStartOfFn, getSubtractionFn } from './utils';
 
 // :: (Date | Int | String) -> (Date | Int | String)  -> Object
