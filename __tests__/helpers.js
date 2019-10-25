@@ -199,6 +199,32 @@ describe('helpers', () => {
     });
   });
 
+  describe('formatDistanceToNow', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers(new Date(2018, 0, 10).getTime());
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    describe('with options', () => {
+      it('should return the distance in words', () => {
+        expect(
+          helpers.formatDistanceToNow('2018-02-15', { addSuffix: true }),
+        ).to.equal('in about 1 month');
+      });
+    });
+
+    describe('without options', () => {
+      it('should return the distance in words', () => {
+        expect(helpers.formatDistanceToNow('2018-02-15')).to.equal('about 1 month');
+      });
+    });
+  });
+
   describe('getDate', () => {
     test('should return the day of month', () => {
       expect(helpers.getDate('2018-01-20')).to.equal(20);

@@ -15,6 +15,7 @@ export {
   endOfWeek,
   endOfYear,
   format,
+  formatDistanceToNow,
   getDate,
   getDayOfYear,
   getDaysInMonth,

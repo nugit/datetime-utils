@@ -14,6 +14,7 @@ import _endOfQuarter from 'date-fns/endOfQuarter';
 import _endOfWeek from 'date-fns/endOfWeek';
 import _endOfYear from 'date-fns/endOfYear';
 import _format from 'date-fns/format';
+import _formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import _getDate from 'date-fns/getDate';
 import _getDayOfYear from 'date-fns/getDayOfYear';
 import _getDaysInMonth from 'date-fns/getDaysInMonth';
@@ -118,6 +119,11 @@ export const endOfYear = date => _endOfYear(parseISO(date));
 // :: (Date | Int | String) -> String -> Option(Object) -> String
 export const format = (date, formatIn, options) => (
   _format(parseISO(date), formatIn, options)
+);
+
+// :: (Date | Int | String) -> Option(Object) -> String
+export const formatDistanceToNow = (date, options) => (
+  _formatDistanceToNow(parseISO(date), options)
 );
 
 // :: (Date | Int | String) -> Number
