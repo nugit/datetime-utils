@@ -1,11 +1,18 @@
 # nugit-datetime-utils
-A share lib for multiple nugit projects. for example 'vis service' and 'mailer service'.
 
- ## Using with Node.js
+[![npm version](https://badge.fury.io/js/nugit-datetime-utils.svg)](http://badge.fury.io/js/nugit-datetime-utils)
+
+A shared library for multiple Nugit projects.
+
+## Installation
+```sh
+npm install nugit-datetime-utils --save
 ```
-$ npm install --save nugit-datetime-utils
-const dt = require('nugit-datetime-utils');
-const period = dt.getDateRange('last7days');
+
+## Usage
+```js
+const { getRange } = require('nugit-datetime-utils');
+const periodRange = getRange('last_7_days');
 ```
 
 _Brought to you by the power of ☭_

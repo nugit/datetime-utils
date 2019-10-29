@@ -1,7 +1,7 @@
 {
   "name": "nugit-datetime-utils",
   "version": "4.0.0",
-  "description": "Shared time utils",
+  "description": "Shared datetime utils library",
   "main": "lib/nugit-datetime-utils.cjs.js",
   "module": "lib/nugit-datetime-utils.esm.js",
   "browser": "lib/nugit-datetime-utils.esm.js",
