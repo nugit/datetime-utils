@@ -1,3 +1,20 @@
+# 5.0.0 -- unreleased
+
+> This version updates `date-fns` to its latest major version 2.6.0. This fixes a bug that does not parse daylight savings dates properly for Eastern Hemisphere regions (e.g. Australia and New Zealand). The update will not allow `date` to be passed as a string type anymore. Thus, helper methods have been created to still support it.
+
+## Update
+
+- Dependencies to their latest versions
+- CircleCI node version to 12.10
+
+## Change
+
+- Named exports instead using of default exports
+
+## Add
+
+- Helper methods to still support `date` as a string type
+
 # 4.0.0 -- 13/12/2018
 
 > This version try to differentiate `period` and `range` concepts. The first one in a string representing the period and range is an object representing the actual date range the given period is equivalent given a base date. So `range` is the interpretation of the `period`.
@@ -12,7 +29,7 @@
 - `retrievePeriodParams` in favor of `getPeriodParams` (`period` parameter should be a string)
 - `calculateAutoCompare` in favor of `getAutoCompareRangeAndLabel` (`period` parameter should be a string and object key `period` has been renamed to `range`)
 - `retrieveComparePeriod` in favor of `getCompareRange` (both `period` & `compareMode` parameters should be string)
-  
+
 ## Change
 
 - period `today` is deprecated, and will have same behavior as `yesterday`
