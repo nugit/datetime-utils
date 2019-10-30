@@ -1,3 +1,4 @@
+import bundlesize from 'rollup-plugin-bundle-size';
 import resolve from 'rollup-plugin-node-resolve';
 import commonJS from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
@@ -5,7 +6,7 @@ import { uglify } from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
 export default [
-  // Brwoser-friendly UMD build
+  // Browser-friendly UMD build
   {
     input: 'src/index.js',
     output: {
@@ -18,6 +19,7 @@ export default [
       commonJS({ include: 'node_modules/**' }),
       babel({ exclude: 'node_modules/**' }),
       uglify({ sourcemap: false }),
+      bundlesize(),
     ],
   },
 
@@ -42,6 +44,9 @@ export default [
         format: 'es',
       },
     ],
-    plugins: [babel({ exclude: 'node_modules/**' })],
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      bundlesize(),
+    ],
   },
 ];

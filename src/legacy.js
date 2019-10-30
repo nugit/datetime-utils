@@ -1,4 +1,4 @@
-import { getRange, getPeriodParams, getCompareRange, getAutoCompareRangeAndLabel, getCustomPeriod } from './main';
+import { getAutoCompareRangeAndLabel, getCompareRange, getCustomPeriod, getPeriodParams, getRange } from './main';
 
 // (Object | String) -> String
 const migrateLegacyPeriod = (period) => {
