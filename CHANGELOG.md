@@ -6,6 +6,7 @@
 
 - Dependencies to their latest versions
 - CircleCI node version to 12.10
+- CircleCI configs to support auto publishing based on tags
 
 ## Change
 
