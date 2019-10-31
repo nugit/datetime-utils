@@ -1,4 +1,4 @@
-# 5.0.0 -- unreleased
+# 5.0.0 -- 31/10/2019
 
 > This version updates `date-fns` to its latest major version 2.6.0. This fixes a bug that does not parse daylight savings dates properly for Eastern Hemisphere regions (e.g. Australia and New Zealand). The update will not allow `date` to be passed as a string type anymore. Thus, helper methods have been created to still support it.
 
