@@ -1,3 +1,33 @@
+# 5.0.1 -- 16/10/2019
+
+## Update
+
+- Dependencies:
+  - https://github.com/nugit/datetime-utils/pull/20
+  - https://github.com/nugit/datetime-utils/pull/22
+  - https://github.com/nugit/datetime-utils/pull/21
+  - https://github.com/nugit/datetime-utils/pull/28
+  - https://github.com/nugit/datetime-utils/pull/26
+  - https://github.com/nugit/datetime-utils/pull/25
+  - https://github.com/nugit/datetime-utils/pull/27
+  - https://github.com/nugit/datetime-utils/pull/24
+  - https://github.com/nugit/datetime-utils/pull/23
+  - https://github.com/nugit/datetime-utils/pull/29
+  - https://github.com/nugit/datetime-utils/pull/33
+  - https://github.com/nugit/datetime-utils/pull/31
+  - https://github.com/nugit/datetime-utils/pull/30
+  - https://github.com/nugit/datetime-utils/pull/34
+  - https://github.com/nugit/datetime-utils/pull/35
+  - https://github.com/nugit/datetime-utils/pull/37
+  - https://github.com/nugit/datetime-utils/pull/36
+  - https://github.com/nugit/datetime-utils/pull/41
+  - https://github.com/nugit/datetime-utils/pull/40
+  - https://github.com/nugit/datetime-utils/pull/42
+
+## Misc
+
+- Setup Dependabot https://github.com/nugit/datetime-utils/pull/43
+
 # 5.0.0 -- 31/10/2019
 
 > This version updates `date-fns` to its latest major version 2.6.0. This fixes a bug that does not parse daylight savings dates properly for Eastern Hemisphere regions (e.g. Australia and New Zealand). The update will not allow `date` to be passed as a string type anymore. Thus, helper methods have been created to still support it.
