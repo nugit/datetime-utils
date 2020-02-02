@@ -6146,9 +6146,9 @@ through@^2.3.6:
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
 
 timezone-mock@^1.0.8:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/timezone-mock/-/timezone-mock-1.0.12.tgz#26ff3767e8a2029e429033693c3b4280b3a082c0"
-  integrity sha512-zSC87YTKvUJaBhGC3sqlniQjZrIbuL69MMrH9jCyMbSFubfuRGSc+m5XQd//12+6rBZu5cHh61N/YmpbbiStFw==
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/timezone-mock/-/timezone-mock-1.0.13.tgz#d117219e32058c24c866122c9d170180bd40f135"
+  integrity sha512-GPWeUl5GsoUrwydxoKTLJ6WLRmvLBgqetBdpqH/kJnMT6KgQOn6WOQAMe6kkD5ZEfhbiqwpRVBFxK7mzMMuAnw==
 
 tmp@^0.0.33:
   version "0.0.33"
