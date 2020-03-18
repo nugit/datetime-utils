@@ -1,3 +1,10 @@
+# 5.0.2 -- 18/03/2020
+
+## Chore
+
+- Upgrade dependencies
+  - https://github.com/nugit/datetime-utils/pull/299
+
 # 5.0.1 -- 16/10/2019
 
 ## Update
