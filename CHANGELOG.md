@@ -1,8 +1,39 @@
-# 5.0.1 -- 18/03/2020
+# 5.0.2 -- 18/03/2020
 
 ## Chore
 
-- Upgrade dev-dependencies
+- Upgrade dependencies
+  - https://github.com/nugit/datetime-utils/pull/299
+
+# 5.0.1 -- 16/10/2019
+
+## Update
+
+- Dependencies:
+  - https://github.com/nugit/datetime-utils/pull/20
+  - https://github.com/nugit/datetime-utils/pull/22
+  - https://github.com/nugit/datetime-utils/pull/21
+  - https://github.com/nugit/datetime-utils/pull/28
+  - https://github.com/nugit/datetime-utils/pull/26
+  - https://github.com/nugit/datetime-utils/pull/25
+  - https://github.com/nugit/datetime-utils/pull/27
+  - https://github.com/nugit/datetime-utils/pull/24
+  - https://github.com/nugit/datetime-utils/pull/23
+  - https://github.com/nugit/datetime-utils/pull/29
+  - https://github.com/nugit/datetime-utils/pull/33
+  - https://github.com/nugit/datetime-utils/pull/31
+  - https://github.com/nugit/datetime-utils/pull/30
+  - https://github.com/nugit/datetime-utils/pull/34
+  - https://github.com/nugit/datetime-utils/pull/35
+  - https://github.com/nugit/datetime-utils/pull/37
+  - https://github.com/nugit/datetime-utils/pull/36
+  - https://github.com/nugit/datetime-utils/pull/41
+  - https://github.com/nugit/datetime-utils/pull/40
+  - https://github.com/nugit/datetime-utils/pull/42
+
+## Misc
+
+- Setup Dependabot https://github.com/nugit/datetime-utils/pull/43
 
 # 5.0.0 -- 31/10/2019
 
