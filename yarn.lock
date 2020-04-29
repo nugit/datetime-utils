@@ -3971,7 +3971,7 @@ jest-resolve-dependencies@^25.5.0:
     jest-regex-util "^25.2.6"
     jest-snapshot "^25.5.0"
 
-jest-resolve@^25.5.0:
+jest-resolve@^25.5.0, jest-resolve@^25.5.1:
   version "25.5.1"
   resolved "https://registry.yarnpkg.com/jest-resolve/-/jest-resolve-25.5.1.tgz#0e6fbcfa7c26d2a5fe8f456088dc332a79266829"
   integrity sha512-Hc09hYch5aWdtejsUZhA+vSzcotf7fajSlPA6EZPE1RmPBAD39XtJhvHWFStid58iit4IPDLI/Da4cwdDmAHiQ==
@@ -4051,9 +4051,9 @@ jest-serializer@^25.5.0:
     graceful-fs "^4.2.4"
 
 jest-snapshot@^25.5.0:
-  version "25.5.0"
-  resolved "https://registry.yarnpkg.com/jest-snapshot/-/jest-snapshot-25.5.0.tgz#0344dc1b8a949aeffefa45075508bb6277ee07d1"
-  integrity sha512-DveG7ZRn6HEmpDxpZXXR/U5x/aKG5N88tdaB+CH0d5jpb9tuvLMZn8rGZeBiLPS0RCO5VIlu8HL/WtY6wMk0QA==
+  version "25.5.1"
+  resolved "https://registry.yarnpkg.com/jest-snapshot/-/jest-snapshot-25.5.1.tgz#1a2a576491f9961eb8d00c2e5fd479bc28e5ff7f"
+  integrity sha512-C02JE1TUe64p2v1auUJ2ze5vcuv32tkv9PyhEb318e8XOKF7MOyXdJ7kdjbvrp3ChPLU2usI7Rjxs97Dj5P0uQ==
   dependencies:
     "@babel/types" "^7.0.0"
     "@jest/types" "^25.5.0"
@@ -4065,7 +4065,7 @@ jest-snapshot@^25.5.0:
     jest-get-type "^25.2.6"
     jest-matcher-utils "^25.5.0"
     jest-message-util "^25.5.0"
-    jest-resolve "^25.5.0"
+    jest-resolve "^25.5.1"
     make-dir "^3.0.0"
     natural-compare "^1.4.0"
     pretty-format "^25.5.0"
@@ -4426,9 +4426,9 @@ make-dir@^2.0.0, make-dir@^2.1.0:
     semver "^5.6.0"
 
 make-dir@^3.0.0:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-3.0.2.tgz#04a1acbf22221e1d6ef43559f43e05a90dbb4392"
-  integrity sha512-rYKABKutXa6vXTXhoV18cBE7PaewPXHe/Bdq4v+ZLMhxbWApkFFplT0LcbMW+6BbjnQXzZ/sAvSE/JdguApG5w==
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-3.1.0.tgz#415e967046b3a7f1d185277d84aa58203726a13f"
+  integrity sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==
   dependencies:
     semver "^6.0.0"
 
