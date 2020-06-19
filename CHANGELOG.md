@@ -1,9 +1,15 @@
+# 5.0.3 -- 19/06/2020
+
+## Chore
+
+- Upgrade dependencies https://github.com/nugit/datetime-utils/pull/683
+- Update dependabot config https://github.com/nugit/datetime-utils/pull/688
+
 # 5.0.2 -- 18/03/2020
 
 ## Chore
 
-- Upgrade dependencies
-  - https://github.com/nugit/datetime-utils/pull/299
+- Upgrade dependencies https://github.com/nugit/datetime-utils/pull/299
 
 # 5.0.1 -- 16/10/2019
 
