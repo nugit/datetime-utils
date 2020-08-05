@@ -6224,9 +6224,9 @@ through@^2.3.6:
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
 
 timezone-mock@^1.0.8:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/timezone-mock/-/timezone-mock-1.1.0.tgz#ac402345b42721538131368876cc17cfbb849da3"
-  integrity sha512-YBUMlri3qt6yh07Q+zEr7boXLaumRnUA96Y/NJxaapW7BcR9GRp39nyg5XrRm1+h2q0L5LIOzHt78uHeBntdaA==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/timezone-mock/-/timezone-mock-1.1.1.tgz#7964813e0d81b6c203d5a74f7dd5e6726770f467"
+  integrity sha512-WsYcWLzCzer2QMJzFQUproCV09e8ZEFfKfGkXfkbJt/sP1pGEYhvt8iOMMhR+dDcyTHmh1CVV2ghfxwlz9K4dg==
 
 tmp@^0.0.33:
   version "0.0.33"
