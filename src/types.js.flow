@@ -1,0 +1,58 @@
+// @flow
+
+export type Period = string;
+
+export type Range = {|
+  end: string,
+  start: string,
+|};
+
+export type Unit = 'day' | 'week' | 'month' | 'quarter' | 'year';
+
+export type PeriodLastParams = {|
+  including_current: boolean,
+  includingParam: string,
+  num: number,
+  type: 'last',
+  unit: Unit,
+|};
+
+export type PeriodThisParams = {|
+  type: 'this',
+  unit: Unit,
+|};
+
+export type PeriodTillYesterdayParams = {|
+  start: string,
+  type: 'till_yesterday',
+|};
+
+export type PeriodCustomParams = {|
+  end: string,
+  start: string,
+  type: 'custom',
+|};
+
+export type PeriodYesterdayParams = {|
+  type: 'yesterday',
+|};
+
+export type PeriodAllTimeParams = {|
+  type: 'all_time',
+|};
+
+export type PeriodParams = PeriodLastParams | PeriodThisParams | PeriodTillYesterdayParams
+| PeriodCustomParams | PeriodYesterdayParams | PeriodAllTimeParams;
+
+export type RangeAndLabel = {|
+  label: string,
+  range: Range,
+|};
+
+export type CompareMode = 'auto' | '12_months_ago' | Period;
+
+export type LegacyCompareMode = CompareMode | Range;
+
+export type DateLike = Date | string | number;
+
+export type LegacyPeriod = Period | Range;
