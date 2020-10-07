@@ -39,7 +39,7 @@ describe('helpers', () => {
       });
 
       describe('date is a integer type', () => {
-        it('should return date as it is', () => {
+        it('should return date as date type', () => {
           const date = 1514764800000; // 2018-01-01
           expect(helpers.parseISO(date)).toEqual(new Date(date));
         });
