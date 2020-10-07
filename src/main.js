@@ -9,7 +9,9 @@ const formatRange = (start: DateLike, end: DateLike): Range => ({
   end: formatDate(end),
 });
 
-const getLastRelativePeriodRange = (num: number, unit: Unit, base: Date = new Date()): Range => {
+const getLastRelativePeriodRange = (
+  num: number, unit: Unit, base?: DateLike = new Date(),
+): Range => {
   const startOf = getStartOfFn(unit);
   const endOf = getEndOfFn(unit);
   const sub = getSubtractionFn(unit);
@@ -18,7 +20,7 @@ const getLastRelativePeriodRange = (num: number, unit: Unit, base: Date = new Da
 };
 
 const getThisRelativePeriodRange = (
-  unit: Unit, base: Date = new Date(), num: number = 1,
+  unit: Unit, base?: DateLike = new Date(), num?: number = 1,
 ): Range => {
   const dayBefore = subDays(base, 1);
 
@@ -28,7 +30,7 @@ const getThisRelativePeriodRange = (
   return formatRange(startOf(sub(dayBefore, num - 1)), formatDate(dayBefore));
 };
 
-const getTillYesterdayRange = (start: DateLike, base: Date = new Date()): Range => {
+const getTillYesterdayRange = (start: DateLike, base?: DateLike = new Date()): Range => {
   const dayBefore = subDays(base, 1);
 
   return formatRange(start, dayBefore);
@@ -96,7 +98,7 @@ const getPeriodParams = (period: Period): PeriodParams => {
 };
 
 const getRange = (
-  period: Period, base: DateLike = new Date(), utcOffset: string | number = 0,
+  period: Period, base?: DateLike = new Date(), utcOffset?: string | number = 0,
 ): Range => {
   const baseDate = applyOffset(utcOffset, base);
 
@@ -154,7 +156,7 @@ const getBestCompareUnit = (start: DateLike, end: DateLike): Unit => {
 };
 
 const getAutoCompareRangeAndLabel = (
-  period: Period, baseDate: Date = new Date(),
+  period: Period, baseDate?: DateLike = new Date(),
 ): RangeAndLabel => {
   const { start, end } = getRange(period, baseDate);
   const params = getPeriodParams(period);
@@ -204,7 +206,7 @@ const getAutoCompareRangeAndLabel = (
   }
 };
 
-const getCompareRange = (period: Period, compareMode: CompareMode = 'auto'): Range => {
+const getCompareRange = (period: Period, compareMode?: CompareMode = 'auto'): Range => {
   switch (compareMode) {
     case 'auto':
       return getAutoCompareRangeAndLabel(period).range;

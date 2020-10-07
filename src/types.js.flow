@@ -42,7 +42,7 @@ export type PeriodAllTimeParams = {|
 |};
 
 export type PeriodParams = PeriodLastParams | PeriodThisParams | PeriodTillYesterdayParams
-| PeriodCustomParams | PeriodYesterdayParams | PeriodAllTimeParams;
+  | PeriodCustomParams | PeriodYesterdayParams | PeriodAllTimeParams;
 
 export type RangeAndLabel = {|
   label: string,

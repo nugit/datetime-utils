@@ -3,7 +3,7 @@
 import { getAutoCompareRangeAndLabel, getCompareRange, getCustomPeriod, getPeriodParams, getRange } from './main';
 import type { CompareMode, DateLike, LegacyCompareMode, LegacyPeriod, Period, PeriodParams, Range } from './types.js.flow';
 
-const migrateLegacyPeriod = (period: Period | Range): Period => {
+const migrateLegacyPeriod = (period: LegacyPeriod): Period => {
   if (typeof period !== 'string') {
     // a range is provided, this is legacy way to handle custom periods
     return getCustomPeriod(period.start, period.end);
@@ -82,7 +82,7 @@ type CalculateAutoCompareReturn = {|
 |};
 
 const calculateAutoCompare = (
-  period: LegacyPeriod, base?: Date = new Date(),
+  period: LegacyPeriod, base?: DateLike = new Date(),
 ): CalculateAutoCompareReturn => {
   const { label, range } = getAutoCompareRangeAndLabel(
     migrateLegacyPeriod(period),
