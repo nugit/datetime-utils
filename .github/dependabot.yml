@@ -10,3 +10,5 @@ updates:
     reviewers:
       - "@nugit/front-devs"
     target-branch: "develop"
+    commit-message:
+      prefix: "fix:"

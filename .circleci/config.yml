@@ -59,7 +59,9 @@ jobs:
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
-      - run: npm publish
+      - run:
+          name: deploy
+          command: yarn deploy
 
 workflows:
   version: 2
@@ -88,6 +90,7 @@ workflows:
             - build
           filters:
             branches:
-              ignore: /.*/
-            tags:
-              only: /v[0-9]+\.[0-9]+\.[0-9]+.*/
+              only:
+                - develop
+                - master
+                - alpha
