@@ -22,6 +22,14 @@ jobs:
       - checkout
       - install
       - run: yarn lint
+  flow:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:12.10
+    steps:
+      - checkout
+      - install
+      - run: yarn flow
   test:
     working_directory: ~/repo
     docker:
@@ -58,6 +66,10 @@ workflows:
   deploy:
     jobs:
       - lint:
+          filters:
+            tags:
+              only: /.*/
+      - flow:
           filters:
             tags:
               only: /.*/

@@ -1,3 +1,13 @@
+# Unreleased
+
+## Add
+
+- FlowJs support
+
+## Fix
+
+- `parseISO` should returns `Date` when parsing `number`
+
 # 5.0.3 -- 19/06/2020
 
 ## Chore

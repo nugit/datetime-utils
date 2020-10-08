@@ -1,10 +1,11 @@
-import { differenceInDays, differenceInMonths, differenceInQuarters, differenceInWeeks, differenceInYears, endOfISOWeek, endOfMonth, endOfQuarter, endOfYear, format, startOfISOWeek, startOfMonth, startOfQuarter, startOfYear, subDays, subMonths, subQuarters, subWeeks, subYears } from './helpers';
+// @flow
 
-// :: (Date | String | Int) -> String
-export const formatDate = date => format(date, 'yyyy-MM-dd');
+import { differenceInDays, differenceInMonths, differenceInQuarters, differenceInWeeks, differenceInYears, endOfISOWeek, endOfMonth, endOfQuarter, endOfYear, format, parseISO, startOfISOWeek, startOfMonth, startOfQuarter, startOfYear, subDays, subMonths, subQuarters, subWeeks, subYears } from './helpers';
+import type { DateLike, Unit } from './types.js.flow';
 
-// :: String -> ((Date | String | Int) -> Int -> Date)
-export const getSubtractionFn = (unit) => {
+export const formatDate = (date: DateLike): string => format(date, 'yyyy-MM-dd');
+
+export const getSubtractionFn = (unit: Unit): ((DateLike, number) => Date) => {
   if (unit === 'year') return subYears;
   if (unit === 'quarter') return subQuarters;
   if (unit === 'month') return subMonths;
@@ -12,8 +13,7 @@ export const getSubtractionFn = (unit) => {
   return subDays;
 };
 
-// :: String -> ((Date | String | Int) -> (Date | String | Int) -> Int)
-export const getDiffFn = (unit) => {
+export const getDiffFn = (unit: Unit): ((DateLike, DateLike) => number) => {
   if (unit === 'year') return differenceInYears;
   if (unit === 'quarter') return differenceInQuarters;
   if (unit === 'month') return differenceInMonths;
@@ -21,28 +21,25 @@ export const getDiffFn = (unit) => {
   return differenceInDays;
 };
 
-// :: String -> ((Date | String | Int) -> Date)
-export const getStartOfFn = (unit) => {
+export const getStartOfFn = (unit: Unit): (DateLike => Date) => {
   if (unit === 'year') return startOfYear;
   if (unit === 'quarter') return startOfQuarter;
   if (unit === 'month') return startOfMonth;
   if (unit === 'week') return startOfISOWeek;
   // return identity function when unit is day
-  return _ => _;
+  return parseISO;
 };
 
-// :: String -> ((Date | String | Int) -> Date)
-export const getEndOfFn = (unit) => {
+export const getEndOfFn = (unit: Unit): (DateLike => Date) => {
   if (unit === 'year') return endOfYear;
   if (unit === 'quarter') return endOfQuarter;
   if (unit === 'month') return endOfMonth;
   if (unit === 'week') return endOfISOWeek;
   // return identity function when unit is day
-  return _ => _;
+  return parseISO;
 };
 
-// :: String -> Float
-export const parseTimezoneStrToHours = (tz) => {
+export const parseTimezoneStrToHours = (tz: string): number => {
   const [chunk1, chunk2] = tz.split(':');
   const isPositive = chunk1[0] === '+';
   const hours = parseInt(chunk1.slice(1), 10);
@@ -52,24 +49,21 @@ export const parseTimezoneStrToHours = (tz) => {
 };
 
 // The offset can be either in hours or in seconds. Or it can be a string.
-// :: (Int | String) -> Int
-export const normalizeOffsetToMs = (offset) => {
+export const normalizeOffsetToMs = (offset: number | string): number => {
   if (typeof offset !== 'number') return parseTimezoneStrToHours(offset) * 3600 * 1000;
   if (Math.abs(offset) > 15) return offset * 1000; // If the offset looks like seconds
   return offset * 3600 * 1000;
 };
 
-// :: (Int | String) -> Object -> Int
-export const getMsDiffFromUTC = offset => (
+export const getMsDiffFromUTC = (offset: number | string): number => (
   // The getTimezoneOffset retuns minutes
   normalizeOffsetToMs(offset) + (new Date().getTimezoneOffset() * 60 * 1000)
 );
 
 // The offset can be either in hours or in seconds. Or it can be a string.
 // Returns a new Date string with the offset applied to it.
-// :: (Int | String) -> (Int | String | Date) -> Date
-export const applyOffset = (offset, date) => {
-  if (!offset) return date;
+export const applyOffset = (offset: number | string, date: DateLike): Date => {
+  if (!offset) return parseISO(date);
   const dateObj = date instanceof Date ? date : new Date(date);
   const diffFromUTC = getMsDiffFromUTC(offset);
   return new Date(dateObj.getTime() + diffFromUTC);

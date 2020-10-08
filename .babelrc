@@ -5,7 +5,8 @@
       {
         "targets": "> 1%, not dead"
       }
-    ]
+    ],
+    "@babel/preset-flow"
   ]
 }
 

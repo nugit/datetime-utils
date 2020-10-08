@@ -1,0 +1,54 @@
+[ignore]
+; ignore is using regex syntax
+<PROJECT_ROOT>/\.circleci/.*
+<PROJECT_ROOT>/\.github/.*
+<PROJECT_ROOT>/\.idea/.*
+<PROJECT_ROOT>/coverage/.*
+<PROJECT_ROOT>/lib/.*
+<PROJECT_ROOT>/\..*/.*
+<PROJECT_ROOT>/node_modules/.*
+!<PROJECT_ROOT>/node_modules/date-fns/.*
+
+[include]
+; include is using path (no regex)
+
+[libs]
+; libs is using path (no regex)
+flow-typed
+
+[lints]
+all=error
+deprecated-utility=error
+implicit-inexact-object=error
+ambiguous-object-type=error
+sketchy-null=warn
+deprecated-type=warn
+unclear-type=warn
+untyped-import=warn
+unsafe-getters-setters=warn
+
+[declarations]
+; declarations is using regex syntax
+
+[untyped]
+; untyped is using regex syntax
+
+[options]
+; traces=3
+module.file_ext=.js
+module.file_ext=.mjs
+module.file_ext=.json
+exact_by_default=true
+experimental.const_params=true
+munge_underscores=true
+esproposal.optional_chaining=enable
+; include_warnings=true
+well_formed_exports=true
+types_first=true
+
+[strict]
+nonstrict-import
+unclear-type
+unsafe-getters-setters
+untyped-import
+untyped-type-import

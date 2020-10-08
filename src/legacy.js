@@ -1,7 +1,9 @@
-import { getAutoCompareRangeAndLabel, getCompareRange, getCustomPeriod, getPeriodParams, getRange } from './main';
+// @flow
 
-// (Object | String) -> String
-const migrateLegacyPeriod = (period) => {
+import { getAutoCompareRangeAndLabel, getCompareRange, getCustomPeriod, getPeriodParams, getRange } from './main';
+import type { CompareMode, DateLike, LegacyCompareMode, LegacyPeriod, Period, PeriodParams, Range } from './types.js.flow';
+
+const migrateLegacyPeriod = (period: LegacyPeriod): Period => {
   if (typeof period !== 'string') {
     // a range is provided, this is legacy way to handle custom periods
     return getCustomPeriod(period.start, period.end);
@@ -30,8 +32,7 @@ const migrateLegacyPeriod = (period) => {
   }
 };
 
-// (Object | String) -> String
-const migrateLegacyCompareMode = (compareMode = 'auto') => {
+const migrateLegacyCompareMode = (compareMode?: LegacyCompareMode = 'auto'): CompareMode => {
   switch (compareMode) {
     case 'auto':
     case '12_months_ago':
@@ -42,19 +43,13 @@ const migrateLegacyCompareMode = (compareMode = 'auto') => {
   }
 };
 
-// Proxy given function to migrate legacy period parameter
-// Function -> Function
-const convertLegacyParams = fn => (period, ...args) => fn(migrateLegacyPeriod(period), ...args);
-
-// String -> (Object | String)
-const toLegacyPeriod = (period) => {
+const toLegacyPeriod = (period: Period): LegacyPeriod => {
   const { type } = getPeriodParams(period);
 
   return type === 'custom' ? getRange(period) : period;
 };
 
-// String -> (Object | String)
-const toLegacyCompareMode = (compareMode) => {
+const toLegacyCompareMode = (compareMode: CompareMode): LegacyCompareMode => {
   switch (compareMode) {
     case 'auto':
     case '12_months_ago':
@@ -64,20 +59,31 @@ const toLegacyCompareMode = (compareMode) => {
   }
 };
 
-// :: (String | Object) -> Option(Date | Int | String) -> Option(Int) = 0 -> Object
-const retrievePeriod = convertLegacyParams(getRange);
+const retrievePeriod = (
+  period: LegacyPeriod, base?: DateLike = new Date(), offset?: string | number = 0,
+): Range => (
+  getRange(migrateLegacyPeriod(period), base, offset)
+);
 
-// :: (String | Object) -> Object
-const retrievePeriodParams = convertLegacyParams(getPeriodParams);
+const retrievePeriodParams = (period: LegacyPeriod): PeriodParams => (
+  getPeriodParams(migrateLegacyPeriod(period))
+);
 
-// :: (String | Object) -> Option(String | Object) = 'auto' -> Object
-const retrieveComparePeriod = (period, compareMode) => getCompareRange(
+const retrieveComparePeriod = (
+  period: LegacyPeriod, compareMode?: LegacyCompareMode = 'auto',
+): Range => getCompareRange(
   migrateLegacyPeriod(period),
   migrateLegacyCompareMode(compareMode),
 );
 
-// :: (String | Object) -> Option(Date | Int | String) = new Date() -> Object
-const calculateAutoCompare = (period, base) => {
+type CalculateAutoCompareReturn = {|
+  label: string,
+  period: Range,
+|};
+
+const calculateAutoCompare = (
+  period: LegacyPeriod, base?: DateLike = new Date(),
+): CalculateAutoCompareReturn => {
   const { label, range } = getAutoCompareRangeAndLabel(
     migrateLegacyPeriod(period),
     base,
