@@ -1,3 +1,10 @@
+# [5.1.0-alpha.2](https://github.com/nugit/datetime-utils/compare/v5.1.0-alpha.1...v5.1.0-alpha.2) (2020-10-08)
+
+
+### Bug Fixes
+
+* changelog ([ff9f58d](https://github.com/nugit/datetime-utils/commit/ff9f58d0e9f6506a7335f68c16273f16015805b1))
+
 # Unreleased
 
 ## Add
