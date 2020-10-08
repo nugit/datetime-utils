@@ -80,6 +80,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,flow}": ["lint", "test"]
+    "*.{js,flow}": ["lint", "test", "flow"]
   }
 }
