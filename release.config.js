@@ -26,7 +26,15 @@ module.exports = {
       },
     ],
     '@semantic-release/npm',
-    '@semantic-release/github',
+    [
+      '@semantic-release/github', {
+        assets: [
+          { path: 'lib/nugit-datetime-utils.cjs.js', label: 'Common JS build' },
+          { path: 'lib/nugit-datetime-utils.esm.js', label: 'ESM build' },
+          { path: 'lib/nugit-datetime-utils.umd.js', label: 'UMD build' },
+        ],
+      },
+    ],
     [
       'semantic-release-slack-bot',
       {

@@ -71,7 +71,8 @@
     "deploy": "semantic-release"
   },
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "husky": {
     "hooks": {
@@ -80,6 +81,10 @@
     }
   },
   "lint-staged": {
-    "*.{js,flow}": ["lint", "test", "flow"]
+    "*.{js,flow}": [
+      "lint",
+      "test",
+      "flow"
+    ]
   }
 }
