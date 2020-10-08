@@ -8,6 +8,10 @@
 
 - `parseISO` should returns `Date` when parsing `number`
 
+## Chore
+
+- Use semantic release
+
 # 5.0.3 -- 19/06/2020
 
 ## Chore
