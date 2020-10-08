@@ -1,3 +1,10 @@
+# [5.1.0-alpha.3](https://github.com/nugit/datetime-utils/compare/v5.1.0-alpha.2...v5.1.0-alpha.3) (2020-10-08)
+
+
+### Bug Fixes
+
+* add missing src in npm package ([17a09bb](https://github.com/nugit/datetime-utils/commit/17a09bb930ede84d42e9443a6e3e878de4e111a3))
+
 # [5.1.0-alpha.2](https://github.com/nugit/datetime-utils/compare/v5.1.0-alpha.1...v5.1.0-alpha.2) (2020-10-08)
 
 
