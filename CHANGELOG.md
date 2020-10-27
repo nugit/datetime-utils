@@ -1,3 +1,18 @@
+# [5.1.0](https://github.com/nugit/datetime-utils/compare/v5.0.3...v5.1.0) (2020-10-27)
+
+
+### Bug Fixes
+
+* add missing src in npm package ([17a09bb](https://github.com/nugit/datetime-utils/commit/17a09bb930ede84d42e9443a6e3e878de4e111a3))
+* address PR comments ([3879101](https://github.com/nugit/datetime-utils/commit/3879101e882f398705c0126e2eed3eb5c2aad6b5))
+* changelog ([ff9f58d](https://github.com/nugit/datetime-utils/commit/ff9f58d0e9f6506a7335f68c16273f16015805b1))
+
+
+### Features
+
+* add flow support ([f061934](https://github.com/nugit/datetime-utils/commit/f061934b67630a798d2b209effab18f3dee9f2f9))
+* upgrade dependencies ([5903575](https://github.com/nugit/datetime-utils/commit/5903575f2e611eafbfde7df1f627760b31629c2e))
+
 # [5.1.0-beta.1](https://github.com/nugit/datetime-utils/compare/v5.0.2...v5.1.0-beta.1) (2020-10-20)
 
 
