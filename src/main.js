@@ -1,14 +1,17 @@
+// @flow
+
 import { getDate, getDayOfYear, getDaysInMonth, getDaysInYear, isMonday, isSameDay, isSunday, subDays, subYears } from './helpers';
 import { applyOffset, formatDate, getDiffFn, getEndOfFn, getStartOfFn, getSubtractionFn } from './utils';
+import type { CompareMode, DateLike, Period, PeriodParams, Range, RangeAndLabel, Unit } from './types.js.flow';
 
-// :: (Date | Int | String) -> (Date | Int | String)  -> Object
-const formatRange = (start, end) => ({
+const formatRange = (start: DateLike, end: DateLike): Range => ({
   start: formatDate(start),
   end: formatDate(end),
 });
 
-// :: Int -> String -> Option(Date | Int | String) = new Date() -> Object
-const getLastRelativePeriodRange = (num, unit, base = new Date()) => {
+const getLastRelativePeriodRange = (
+  num: number, unit: Unit, base?: DateLike = new Date(),
+): Range => {
   const startOf = getStartOfFn(unit);
   const endOf = getEndOfFn(unit);
   const sub = getSubtractionFn(unit);
@@ -16,8 +19,9 @@ const getLastRelativePeriodRange = (num, unit, base = new Date()) => {
   return formatRange(startOf(sub(base, num)), endOf(sub(base, 1)));
 };
 
-// :: String -> Option(Date | Int | String) = new Date() -> Object
-const getThisRelativePeriodRange = (unit, base = new Date(), num = 1) => {
+const getThisRelativePeriodRange = (
+  unit: Unit, base?: DateLike = new Date(), num?: number = 1,
+): Range => {
   const dayBefore = subDays(base, 1);
 
   const startOf = getStartOfFn(unit);
@@ -26,15 +30,26 @@ const getThisRelativePeriodRange = (unit, base = new Date(), num = 1) => {
   return formatRange(startOf(sub(dayBefore, num - 1)), formatDate(dayBefore));
 };
 
-// :: (Date | Int | String) -> Option(Date | Int | String) = new Date() -> Object
-const getTillYesterdayRange = (start, base = new Date()) => {
+const getTillYesterdayRange = (start: DateLike, base?: DateLike = new Date()): Range => {
   const dayBefore = subDays(base, 1);
 
   return formatRange(start, dayBefore);
 };
 
-// :: String -> Object
-const getPeriodParams = (period) => {
+const getUnit = (value: string): Unit => {
+  switch (value) {
+    case 'day':
+    case 'week':
+    case 'month':
+    case 'quarter':
+    case 'year':
+      return value;
+    default:
+      throw new Error('Unexpected unit');
+  }
+};
+
+const getPeriodParams = (period: Period): PeriodParams => {
   const LAST_RANGE_REGEX_1 = /^last_(day|week|month|quarter|year)(_including_current)?$/;
   const LAST_RANGE_REGEX_2 = /^last_(\d+)_(day|week|month|quarter|year)s?(_including_current)?$/;
   const THIS_RANGE_REGEX = /^this_(day|week|month|quarter|year)$/;
@@ -46,7 +61,7 @@ const getPeriodParams = (period) => {
     return {
       type: 'last',
       num: 1,
-      unit: match[1],
+      unit: getUnit(match[1]),
       including_current: match[2] === '_including_current',
       includingParam: 'this',
     };
@@ -57,14 +72,14 @@ const getPeriodParams = (period) => {
     return {
       type: 'last',
       num: Number(match[1]),
-      unit: match[2],
+      unit: getUnit(match[2]),
       including_current: match[3] === '_including_current',
       includingParam: match[2] === 'day' ? 'today' : `this ${match[2]}`,
     };
   }
 
   match = period.match(THIS_RANGE_REGEX);
-  if (match) return { type: 'this', unit: match[1] };
+  if (match) return { type: 'this', unit: getUnit(match[1]) };
 
   match = period.match(TILL_YESTERDAY_REGEX);
   if (match) return { type: 'till_yesterday', start: match[1] };
@@ -82,8 +97,9 @@ const getPeriodParams = (period) => {
   }
 };
 
-// :: (String) -> Option(Date | Int | String) -> Option(Int) = 0 -> Object
-const getRange = (period, base = new Date(), utcOffset = 0) => {
+const getRange = (
+  period: Period, base?: DateLike = new Date(), utcOffset?: string | number = 0,
+): Range => {
   const baseDate = applyOffset(utcOffset, base);
 
   const params = getPeriodParams(period);
@@ -117,8 +133,7 @@ const getRange = (period, base = new Date(), utcOffset = 0) => {
   }
 };
 
-// :: (Date | Int | String) -> (Date | Int | String) -> String
-const getBestCompareUnit = (start, end) => {
+const getBestCompareUnit = (start: DateLike, end: DateLike): Unit => {
   if (getDayOfYear(start) === 1 && getDayOfYear(end) === getDaysInYear(end)) {
     return 'year';
   }
@@ -140,8 +155,9 @@ const getBestCompareUnit = (start, end) => {
   return 'day';
 };
 
-// :: (String) -> Option(Date | Int | String) = new Date() -> Object
-const getAutoCompareRangeAndLabel = (period, baseDate = new Date()) => {
+const getAutoCompareRangeAndLabel = (
+  period: Period, baseDate?: DateLike = new Date(),
+): RangeAndLabel => {
   const { start, end } = getRange(period, baseDate);
   const params = getPeriodParams(period);
 
@@ -190,8 +206,7 @@ const getAutoCompareRangeAndLabel = (period, baseDate = new Date()) => {
   }
 };
 
-// :: String -> Option(String) = 'auto' -> Object
-const getCompareRange = (period, compareMode = 'auto') => {
+const getCompareRange = (period: Period, compareMode?: CompareMode = 'auto'): Range => {
   switch (compareMode) {
     case 'auto':
       return getAutoCompareRangeAndLabel(period).range;
@@ -205,14 +220,11 @@ const getCompareRange = (period, compareMode = 'auto') => {
   }
 };
 
-// :: (Date | Int | String) -> String
-const getTillYesterdayPeriod = date => `${formatDate(date)}_to_yesterday`;
+const getTillYesterdayPeriod = (date: DateLike): string => `${formatDate(date)}_to_yesterday`;
 
-// :: (Date | Int | String) -> (Date | Int | String) -> String
-const getCustomPeriod = (start, end) => `${formatDate(start)}_to_${formatDate(end)}`;
+const getCustomPeriod = (start: DateLike, end: DateLike): string => `${formatDate(start)}_to_${formatDate(end)}`;
 
-// :: Int -> String -> Boolean -> String
-const getLastPeriod = (num, unit, includingCurrent) => {
+const getLastPeriod = (num: number, unit: Unit, includingCurrent: boolean): Period => {
   const suffix = `${unit}${includingCurrent ? '_including_current' : ''}`;
 
   if (num === 1) {
@@ -222,8 +234,7 @@ const getLastPeriod = (num, unit, includingCurrent) => {
   return `last_${num}_${suffix}`;
 };
 
-// :: String -> String
-const getThisPeriod = unit => `this_${unit}`;
+const getThisPeriod = (unit: Unit): string => `this_${unit}`;
 
 export {
   getRange,
