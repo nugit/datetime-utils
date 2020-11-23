@@ -1,3 +1,12 @@
+# [5.1.0-beta.2](https://github.com/nugit/datetime-utils/compare/v5.1.0-beta.1...v5.1.0-beta.2) (2020-11-23)
+
+
+### Bug Fixes
+
+* bump babel-jest from 26.3.0 to 26.6.3 ([6ea5bb4](https://github.com/nugit/datetime-utils/commit/6ea5bb4900ab8c5a9511ddf2780d1339aea119a5))
+* bump rollup from 2.28.2 to 2.33.3 ([343cd16](https://github.com/nugit/datetime-utils/commit/343cd1682146ce3fd2c345c5a79b18a04d77cce1))
+* bump sinon from 9.1.0 to 9.2.1 ([209c6ca](https://github.com/nugit/datetime-utils/commit/209c6cac491ad20352be44706f57fab3197bbaf4))
+
 # [5.1.0-beta.1](https://github.com/nugit/datetime-utils/compare/v5.0.2...v5.1.0-beta.1) (2020-10-20)
 
 
