@@ -1,3 +1,10 @@
+# [5.1.0-beta.3](https://github.com/nugit/datetime-utils/compare/v5.1.0-beta.2...v5.1.0-beta.3) (2020-11-23)
+
+
+### Bug Fixes
+
+* bump jest from 26.4.2 to 26.6.3 ([05a2de2](https://github.com/nugit/datetime-utils/commit/05a2de263a230b0d4b4a3e035d0de5d1aa99b399))
+
 # [5.1.0-beta.2](https://github.com/nugit/datetime-utils/compare/v5.1.0-beta.1...v5.1.0-beta.2) (2020-11-23)
 
 
