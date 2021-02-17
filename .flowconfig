@@ -1,9 +1,7 @@
 [ignore]
 ; ignore is using regex syntax
-<PROJECT_ROOT>/\.circleci/.*
 <PROJECT_ROOT>/\.github/.*
 <PROJECT_ROOT>/\.idea/.*
-<PROJECT_ROOT>/coverage/.*
 <PROJECT_ROOT>/lib/.*
 <PROJECT_ROOT>/\..*/.*
 <PROJECT_ROOT>/node_modules/.*
@@ -43,8 +41,6 @@ experimental.const_params=true
 munge_underscores=true
 esproposal.optional_chaining=enable
 ; include_warnings=true
-well_formed_exports=true
-types_first=true
 ; Fixes out of shared memory error for Mac Rosetta 2, see https://github.com/facebook/flow/issues/8538
 sharedmemory.heap_size=3221225472
 

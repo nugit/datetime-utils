@@ -1,8 +1,8 @@
 // @flow
 
 import { getDate, getDayOfYear, getDaysInMonth, getDaysInYear, isMonday, isSameDay, isSunday, subDays, subYears } from './helpers';
-import { applyOffset, formatDate, getDiffFn, getEndOfFn, getStartOfFn, getSubtractionFn } from './utils';
 import type { CompareMode, DateLike, Period, PeriodParams, Range, RangeAndLabel, Unit } from './types.js.flow';
+import { applyOffset, formatDate, getDiffFn, getEndOfFn, getStartOfFn, getSubtractionFn } from './utils';
 
 const formatRange = (start: DateLike, end: DateLike): Range => ({
   start: formatDate(start),
