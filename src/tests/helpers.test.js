@@ -15,7 +15,7 @@ describe('helpers', () => {
 
   describe('parseISO', () => {
     describe('with options', () => {
-      it('should return correct date', () => {
+      test('should return correct date', () => {
         const date = '+020190101';
         expect(helpers.parseISO(date, { additionalDigits: 1 })).toEqual(
           new Date(2019, 0, 1),
@@ -25,21 +25,21 @@ describe('helpers', () => {
 
     describe('without options', () => {
       describe('date is a date type', () => {
-        it('should return date as it is', () => {
+        test('should return date as it is', () => {
           const date = new Date(2018, 0, 1);
           expect(helpers.parseISO(date)).toEqual(date);
         });
       });
 
       describe('date is a string type', () => {
-        it('should return date as date type', () => {
+        test('should return date as date type', () => {
           const date = '2018-01-01';
           expect(helpers.parseISO(date)).toEqual(new Date(date));
         });
       });
 
       describe('date is a integer type', () => {
-        it('should return date as date type', () => {
+        test('should return date as date type', () => {
           const date = 1514764800000; // 2018-01-01
           expect(helpers.parseISO(date)).toEqual(new Date(date));
         });
@@ -181,7 +181,7 @@ describe('helpers', () => {
 
   describe('format', () => {
     describe('with options', () => {
-      it('should return the correct formatted date', () => {
+      test('should return the correct formatted date', () => {
         expect(
           helpers.format('2018-02-10', 'DD', { useAdditionalDayOfYearTokens: true }),
         ).toEqual('41');
@@ -212,7 +212,7 @@ describe('helpers', () => {
     });
 
     describe('with options', () => {
-      it('should return the distance in words', () => {
+      test('should return the distance in words', () => {
         expect(
           helpers.formatDistanceToNow('2018-02-15', { addSuffix: true }),
         ).toEqual('in about 1 month');
@@ -220,7 +220,7 @@ describe('helpers', () => {
     });
 
     describe('without options', () => {
-      it('should return the distance in words', () => {
+      test('should return the distance in words', () => {
         expect(helpers.formatDistanceToNow('2018-02-15')).toEqual('about 1 month');
       });
     });
