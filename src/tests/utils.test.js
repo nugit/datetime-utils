@@ -1,7 +1,7 @@
 // @flow
 
 import timezoneMock from 'timezone-mock';
-import * as utils from '../src/utils';
+import * as utils from '../utils';
 
 describe('utils', () => {
   describe('formatDate', () => {

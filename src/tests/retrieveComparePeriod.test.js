@@ -1,7 +1,7 @@
 // @flow
 
 import sinon from 'sinon';
-import { retrieveComparePeriod } from '../src/index';
+import { retrieveComparePeriod } from '../index';
 
 describe('#retrieveComparePeriod', () => {
   describe('when current date is Mon, 20 Mar 2017', () => {

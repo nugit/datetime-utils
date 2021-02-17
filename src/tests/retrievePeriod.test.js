@@ -1,7 +1,7 @@
 // @flow
 
 import sinon from 'sinon';
-import { retrievePeriod } from '../src/index';
+import { retrievePeriod } from '../index';
 
 describe('#retrievePeriod', () => {
   describe('without baseDate', () => {

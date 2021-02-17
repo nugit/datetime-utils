@@ -2,7 +2,7 @@
 
 import sinon from 'sinon';
 import timezoneMock from 'timezone-mock';
-import * as helpers from '../src/helpers';
+import * as helpers from '../helpers';
 
 describe('helpers', () => {
   beforeAll(() => {
