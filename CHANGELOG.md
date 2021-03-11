@@ -1,3 +1,16 @@
+## [5.1.1-beta.1](https://github.com/nugit/datetime-utils/compare/v5.1.0...v5.1.1-beta.1) (2021-03-11)
+
+
+### Bug Fixes
+
+* bump @babel/cli from 7.11.6 to 7.13.10 ([62f0527](https://github.com/nugit/datetime-utils/commit/62f0527c6ec414256921a1fcc3f82682772d4a0f))
+* bump @babel/register from 7.11.5 to 7.13.8 ([31ecfee](https://github.com/nugit/datetime-utils/commit/31ecfeef82d4d70fa43e5004f859713c0a32b3a0))
+* bump @semantic-release/github from 7.1.1 to 7.2.0 ([039d915](https://github.com/nugit/datetime-utils/commit/039d915991dda79c8fb90daa2f61d86d42291259))
+* bump babel-jest from 26.3.0 to 26.6.3 ([6ea5bb4](https://github.com/nugit/datetime-utils/commit/6ea5bb4900ab8c5a9511ddf2780d1339aea119a5))
+* bump jest from 26.4.2 to 26.6.3 ([05a2de2](https://github.com/nugit/datetime-utils/commit/05a2de263a230b0d4b4a3e035d0de5d1aa99b399))
+* bump rollup from 2.28.2 to 2.33.3 ([343cd16](https://github.com/nugit/datetime-utils/commit/343cd1682146ce3fd2c345c5a79b18a04d77cce1))
+* bump sinon from 9.1.0 to 9.2.1 ([209c6ca](https://github.com/nugit/datetime-utils/commit/209c6cac491ad20352be44706f57fab3197bbaf4))
+
 # [5.1.0-beta.3](https://github.com/nugit/datetime-utils/compare/v5.1.0-beta.2...v5.1.0-beta.3) (2020-11-23)
 
 
@@ -13,6 +26,21 @@
 * bump babel-jest from 26.3.0 to 26.6.3 ([6ea5bb4](https://github.com/nugit/datetime-utils/commit/6ea5bb4900ab8c5a9511ddf2780d1339aea119a5))
 * bump rollup from 2.28.2 to 2.33.3 ([343cd16](https://github.com/nugit/datetime-utils/commit/343cd1682146ce3fd2c345c5a79b18a04d77cce1))
 * bump sinon from 9.1.0 to 9.2.1 ([209c6ca](https://github.com/nugit/datetime-utils/commit/209c6cac491ad20352be44706f57fab3197bbaf4))
+
+# [5.1.0](https://github.com/nugit/datetime-utils/compare/v5.0.3...v5.1.0) (2020-10-27)
+
+
+### Bug Fixes
+
+* add missing src in npm package ([17a09bb](https://github.com/nugit/datetime-utils/commit/17a09bb930ede84d42e9443a6e3e878de4e111a3))
+* address PR comments ([3879101](https://github.com/nugit/datetime-utils/commit/3879101e882f398705c0126e2eed3eb5c2aad6b5))
+* changelog ([ff9f58d](https://github.com/nugit/datetime-utils/commit/ff9f58d0e9f6506a7335f68c16273f16015805b1))
+
+
+### Features
+
+* add flow support ([f061934](https://github.com/nugit/datetime-utils/commit/f061934b67630a798d2b209effab18f3dee9f2f9))
+* upgrade dependencies ([5903575](https://github.com/nugit/datetime-utils/commit/5903575f2e611eafbfde7df1f627760b31629c2e))
 
 # [5.1.0-beta.1](https://github.com/nugit/datetime-utils/compare/v5.0.2...v5.1.0-beta.1) (2020-10-20)
 
