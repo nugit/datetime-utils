@@ -57,7 +57,7 @@ type ParseIsoOptions = {|
   additionalDigits?: 0 | 1 | 2,
 |};
 
-export const parseISO = (date: DateLike, options?: ParseIsoOptions): Date => {
+const parseISO = (date: DateLike, options?: ParseIsoOptions): Date => {
   if (typeof date === 'string') {
     return _parseISO(date, options);
   }
@@ -65,35 +65,35 @@ export const parseISO = (date: DateLike, options?: ParseIsoOptions): Date => {
   return typeof date === 'number' ? new Date(date) : date;
 };
 
-export const addDays = (date: DateLike, days: number): Date => _addDays(parseISO(date), days);
+const addDays = (date: DateLike, days: number): Date => _addDays(parseISO(date), days);
 
-export const addMonths = (date: DateLike, months: number): Date => (
+const addMonths = (date: DateLike, months: number): Date => (
   _addMonths(parseISO(date), months)
 );
 
-export const addWeeks = (date: DateLike, weeks: number): Date => _addWeeks(parseISO(date), weeks);
+const addWeeks = (date: DateLike, weeks: number): Date => _addWeeks(parseISO(date), weeks);
 
-export const differenceInCalendarDays = (firstDate: DateLike, secondDate: DateLike): number => (
+const differenceInCalendarDays = (firstDate: DateLike, secondDate: DateLike): number => (
   _differenceInCalendarDays(parseISO(firstDate), parseISO(secondDate))
 );
 
-export const differenceInDays = (firstDate: DateLike, secondDate: DateLike): number => (
+const differenceInDays = (firstDate: DateLike, secondDate: DateLike): number => (
   _differenceInDays(parseISO(firstDate), parseISO(secondDate))
 );
 
-export const differenceInMonths = (firstDate: DateLike, secondDate: DateLike): number => (
+const differenceInMonths = (firstDate: DateLike, secondDate: DateLike): number => (
   _differenceInMonths(parseISO(firstDate), parseISO(secondDate))
 );
 
-export const differenceInQuarters = (firstDate: DateLike, secondDate: DateLike): number => (
+const differenceInQuarters = (firstDate: DateLike, secondDate: DateLike): number => (
   _differenceInQuarters(parseISO(firstDate), parseISO(secondDate))
 );
 
-export const differenceInWeeks = (firstDate: DateLike, secondDate: DateLike): number => (
+const differenceInWeeks = (firstDate: DateLike, secondDate: DateLike): number => (
   _differenceInWeeks(parseISO(firstDate), parseISO(secondDate))
 );
 
-export const differenceInYears = (firstDate: DateLike, secondDate: DateLike): number => (
+const differenceInYears = (firstDate: DateLike, secondDate: DateLike): number => (
   _differenceInYears(parseISO(firstDate), parseISO(secondDate))
 );
 
@@ -101,7 +101,7 @@ type EachDayOfIntervalOptions = {|
   step?: number,
 |};
 
-export const eachDayOfInterval = (
+const eachDayOfInterval = (
   firstDate: DateLike, lastDate: DateLike, options?: EachDayOfIntervalOptions,
 ): Date[] => (
   _eachDayOfInterval(
@@ -110,22 +110,22 @@ export const eachDayOfInterval = (
   )
 );
 
-export const endOfISOWeek = (date: DateLike): Date => _endOfISOWeek(parseISO(date));
+const endOfISOWeek = (date: DateLike): Date => _endOfISOWeek(parseISO(date));
 
-export const endOfMonth = (date: DateLike): Date => _endOfMonth(parseISO(date));
+const endOfMonth = (date: DateLike): Date => _endOfMonth(parseISO(date));
 
-export const endOfQuarter = (date: DateLike): Date => _endOfQuarter(parseISO(date));
+const endOfQuarter = (date: DateLike): Date => _endOfQuarter(parseISO(date));
 
 type EndOfWeekOptions = {|
   locale?: Locale,
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6,
 |};
 
-export const endOfWeek = (
+const endOfWeek = (
   date: DateLike, options?: EndOfWeekOptions,
 ): Date => _endOfWeek(parseISO(date), options);
 
-export const endOfYear = (date: DateLike): Date => _endOfYear(parseISO(date));
+const endOfYear = (date: DateLike): Date => _endOfYear(parseISO(date));
 
 type FormatOptions = {|
   firstWeekContainsDate?: number,
@@ -135,7 +135,7 @@ type FormatOptions = {|
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6,
 |};
 
-export const format = (date: DateLike, formatIn: string, options?: FormatOptions): string => (
+const format = (date: DateLike, formatIn: string, options?: FormatOptions): string => (
   _format(parseISO(date), formatIn, options)
 );
 
@@ -145,51 +145,51 @@ type FormatDistanceToNowOptions = {|
   locale?: Locale,
 |};
 
-export const formatDistanceToNow = (
+const formatDistanceToNow = (
   date: DateLike, options?: FormatDistanceToNowOptions,
 ): string => (
   _formatDistanceToNow(parseISO(date), options)
 );
 
-export const getDate = (date: DateLike): number => _getDate(parseISO(date));
+const getDate = (date: DateLike): number => _getDate(parseISO(date));
 
-export const getDayOfYear = (date: DateLike): number => _getDayOfYear(parseISO(date));
+const getDayOfYear = (date: DateLike): number => _getDayOfYear(parseISO(date));
 
-export const getDaysInMonth = (date: DateLike): number => _getDaysInMonth(parseISO(date));
+const getDaysInMonth = (date: DateLike): number => _getDaysInMonth(parseISO(date));
 
-export const getDaysInYear = (date: DateLike): number => _getDaysInYear(parseISO(date));
+const getDaysInYear = (date: DateLike): number => _getDaysInYear(parseISO(date));
 
-export const getISODay = (date: DateLike): number => _getISODay(parseISO(date));
+const getISODay = (date: DateLike): number => _getISODay(parseISO(date));
 
-export const getMonth = (date: DateLike): number => _getMonth(parseISO(date));
+const getMonth = (date: DateLike): number => _getMonth(parseISO(date));
 
-export const getYear = (date: DateLike): number => _getYear(parseISO(date));
+const getYear = (date: DateLike): number => _getYear(parseISO(date));
 
-export const isAfter = (firstDate: DateLike, secondDate: DateLike): boolean => (
+const isAfter = (firstDate: DateLike, secondDate: DateLike): boolean => (
   _isAfter(parseISO(firstDate), parseISO(secondDate))
 );
 
-export const isBefore = (firstDate: DateLike, secondDate: DateLike): boolean => (
+const isBefore = (firstDate: DateLike, secondDate: DateLike): boolean => (
   _isBefore(parseISO(firstDate), parseISO(secondDate))
 );
 
-export const isMonday = (date: DateLike): boolean => _isMonday(parseISO(date));
+const isMonday = (date: DateLike): boolean => _isMonday(parseISO(date));
 
-export const isSameDay = (firstDate: DateLike, secondDate: DateLike): boolean => (
+const isSameDay = (firstDate: DateLike, secondDate: DateLike): boolean => (
   _isSameDay(parseISO(firstDate), parseISO(secondDate))
 );
 
-export const isSameMonth = (firstDate: DateLike, secondDate: DateLike): boolean => (
+const isSameMonth = (firstDate: DateLike, secondDate: DateLike): boolean => (
   _isSameMonth(parseISO(firstDate), parseISO(secondDate))
 );
 
-export const isSunday = (date: DateLike): boolean => _isSunday(parseISO(date));
+const isSunday = (date: DateLike): boolean => _isSunday(parseISO(date));
 
-export const isToday = (date: DateLike): boolean => _isToday(parseISO(date));
+const isToday = (date: DateLike): boolean => _isToday(parseISO(date));
 
-export const isValid = (date: DateLike): boolean => _isValid(parseISO(date));
+const isValid = (date: DateLike): boolean => _isValid(parseISO(date));
 
-export const isWithinInterval = (
+const isWithinInterval = (
   date: DateLike, startDate: DateLike, endDate: DateLike,
 ): boolean => (
   _isWithinInterval(
@@ -198,52 +198,105 @@ export const isWithinInterval = (
   )
 );
 
-export const max = (dates: DateLike[]): Date => _max(dates.map(d => parseISO(d)));
+const max = (dates: DateLike[]): Date => _max(dates.map(d => parseISO(d)));
 
-export const min = (dates: DateLike[]): Date => _min(dates.map(d => parseISO(d)));
+const min = (dates: DateLike[]): Date => _min(dates.map(d => parseISO(d)));
 
-export const setDate = (date: DateLike, day: number): Date => _setDate(parseISO(date), day);
+const setDate = (date: DateLike, day: number): Date => _setDate(parseISO(date), day);
 
 type SetDayOptions = {|
   locale?: Locale,
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6,
 |};
 
-export const setDay = (date: DateLike, day: number, options?: SetDayOptions): Date => (
+const setDay = (date: DateLike, day: number, options?: SetDayOptions): Date => (
   _setDay(parseISO(date), day, options)
 );
 
-export const setISODay = (date: DateLike, day: number): Date => _setISODay(parseISO(date), day);
+const setISODay = (date: DateLike, day: number): Date => _setISODay(parseISO(date), day);
 
-export const setMonth = (date: DateLike, month: number): Date => _setMonth(parseISO(date), month);
+const setMonth = (date: DateLike, month: number): Date => _setMonth(parseISO(date), month);
 
-export const startOfISOWeek = (date: DateLike): Date => _startOfISOWeek(parseISO(date));
+const startOfISOWeek = (date: DateLike): Date => _startOfISOWeek(parseISO(date));
 
-export const startOfMonth = (date: DateLike): Date => _startOfMonth(parseISO(date));
+const startOfMonth = (date: DateLike): Date => _startOfMonth(parseISO(date));
 
-export const startOfQuarter = (date: DateLike): Date => _startOfQuarter(parseISO(date));
+const startOfQuarter = (date: DateLike): Date => _startOfQuarter(parseISO(date));
 
 type StartOfWeekOptions = {|
   locale?: Locale,
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6,
 |};
 
-export const startOfWeek = (
+const startOfWeek = (
   date: DateLike, options?: StartOfWeekOptions,
 ): Date => _startOfWeek(parseISO(date), options);
 
-export const startOfYear = (date: DateLike): Date => _startOfYear(parseISO(date));
+const startOfYear = (date: DateLike): Date => _startOfYear(parseISO(date));
 
-export const subDays = (date: DateLike, days: number): Date => _subDays(parseISO(date), days);
+const subDays = (date: DateLike, days: number): Date => _subDays(parseISO(date), days);
 
-export const subMonths = (
+const subMonths = (
   date: DateLike, months: number,
 ): Date => _subMonths(parseISO(date), months);
 
-export const subQuarters = (
+const subQuarters = (
   date: DateLike, quarters: number,
 ): Date => _subQuarters(parseISO(date), quarters);
 
-export const subWeeks = (date: DateLike, weeks: number): Date => _subWeeks(parseISO(date), weeks);
+const subWeeks = (date: DateLike, weeks: number): Date => _subWeeks(parseISO(date), weeks);
 
-export const subYears = (date: DateLike, years: number): Date => _subYears(parseISO(date), years);
+const subYears = (date: DateLike, years: number): Date => _subYears(parseISO(date), years);
+
+export {
+  addDays,
+  addMonths,
+  addWeeks,
+  differenceInCalendarDays,
+  differenceInDays,
+  differenceInMonths,
+  differenceInQuarters,
+  differenceInWeeks,
+  differenceInYears,
+  eachDayOfInterval,
+  endOfISOWeek,
+  endOfMonth,
+  endOfQuarter,
+  endOfWeek,
+  endOfYear,
+  format,
+  formatDistanceToNow,
+  getDate,
+  getDayOfYear,
+  getDaysInMonth,
+  getDaysInYear,
+  getISODay,
+  getMonth,
+  getYear,
+  isAfter,
+  isBefore,
+  isMonday,
+  isSameDay,
+  isSameMonth,
+  isSunday,
+  isToday,
+  isValid,
+  isWithinInterval,
+  max,
+  min,
+  parseISO,
+  setDate,
+  setDay,
+  setISODay,
+  setMonth,
+  startOfISOWeek,
+  startOfMonth,
+  startOfQuarter,
+  startOfWeek,
+  startOfYear,
+  subDays,
+  subMonths,
+  subQuarters,
+  subWeeks,
+  subYears,
+};

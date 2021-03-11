@@ -1,7 +1,7 @@
-import bundlesize from 'rollup-plugin-bundle-size';
-import resolve from 'rollup-plugin-node-resolve';
-import commonJS from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
+import bundlesize from 'rollup-plugin-bundle-size';
+import commonJS from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
 import { uglify } from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
