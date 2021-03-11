@@ -1,3 +1,10 @@
+## [5.1.1-beta.2](https://github.com/nugit/datetime-utils/compare/v5.1.1-beta.1...v5.1.1-beta.2) (2021-03-11)
+
+
+### Bug Fixes
+
+* bump @babel/preset-flow from 7.10.4 to 7.12.13 ([87b8909](https://github.com/nugit/datetime-utils/commit/87b8909a5cb4bbc2af766b3eac9c386864a02802))
+
 ## [5.1.1-beta.1](https://github.com/nugit/datetime-utils/compare/v5.1.0...v5.1.1-beta.1) (2021-03-11)
 
 
