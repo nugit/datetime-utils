@@ -1,3 +1,10 @@
+## [5.1.1-beta.3](https://github.com/nugit/datetime-utils/compare/v5.1.1-beta.2...v5.1.1-beta.3) (2021-04-29)
+
+
+### Bug Fixes
+
+* bump rollup from 2.41.0 to 2.45.2 ([62c14a2](https://github.com/nugit/datetime-utils/commit/62c14a2bbe9bcfbb1c30339f0f667196ec6fc4c7))
+
 ## [5.1.1-beta.2](https://github.com/nugit/datetime-utils/compare/v5.1.1-beta.1...v5.1.1-beta.2) (2021-03-11)
 
 
