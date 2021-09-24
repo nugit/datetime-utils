@@ -19,11 +19,7 @@ all=error
 deprecated-utility=error
 implicit-inexact-object=error
 ambiguous-object-type=error
-sketchy-null=warn
-deprecated-type=warn
-unclear-type=warn
-untyped-import=warn
-unsafe-getters-setters=warn
+nonstrict-import=off
 
 [declarations]
 ; declarations is using regex syntax
@@ -39,7 +35,6 @@ module.file_ext=.json
 exact_by_default=true
 experimental.const_params=true
 munge_underscores=true
-esproposal.optional_chaining=enable
 ; include_warnings=true
 ; Fixes out of shared memory error for Mac Rosetta 2, see https://github.com/facebook/flow/issues/8538
 sharedmemory.heap_size=3221225472
