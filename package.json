@@ -19,11 +19,11 @@
     "date-fns": "^2.24.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.11.5",
-    "@babel/preset-flow": "^7.10.4",
-    "@babel/register": "^7.11.5",
+    "@babel/preset-flow": "^7.14.5",
+    "@babel/register": "^7.15.3",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@rollup/plugin-babel": "^5.3.0",
@@ -35,7 +35,6 @@
     "@semantic-release/github": "^7.2.0",
     "@semantic-release/npm": "^7.0.10",
     "@semantic-release/release-notes-generator": "^9.0.2",
-    "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.2.1",
     "eslint": "^7.32.0",
