@@ -16,8 +16,13 @@ export default [
     },
     plugins: [
       nodeResolve(),
-      commonJS({ include: 'node_modules/**' }),
-      babel({ exclude: 'node_modules/**' }),
+      commonJS({
+        include: 'node_modules/**',
+      }),
+      babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**',
+      }),
       terser(),
       bundlesize(),
     ],
@@ -44,7 +49,10 @@ export default [
       },
     ],
     plugins: [
-      babel({ exclude: 'node_modules/**' }),
+      babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**',
+      }),
       bundlesize(),
     ],
   },
