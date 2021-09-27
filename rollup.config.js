@@ -2,7 +2,7 @@ import babel from '@rollup/plugin-babel';
 import commonJS from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import bundlesize from 'rollup-plugin-bundle-size';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
 export default [
@@ -18,7 +18,7 @@ export default [
       nodeResolve(),
       commonJS({ include: 'node_modules/**' }),
       babel({ exclude: 'node_modules/**' }),
-      uglify({ sourcemap: false }),
+      terser(),
       bundlesize(),
     ],
   },
