@@ -1,10 +1,6 @@
 **Changes:**
 
 
-**JIRA Tickets:**
-
--
-
 **PRs:**
 
 -
