@@ -57,6 +57,9 @@
     "sinon": "^11.1.2",
     "timezone-mock": "^1.2.2"
   },
+  "peerDependencies": {
+    "date-fns": "^2.24.0"
+  },
   "scripts": {
     "build": "rollup -c ./config/rollup.config.js",
     "prepublish": "yarn build",
