@@ -47,7 +47,7 @@
     "eslint-plugin-react": "^7.26.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "flow-bin": "^0.160.2",
-    "husky": "^4.3.0",
+    "husky": "^7.0.2",
     "jest": "^27.2.2",
     "rollup": "^2.57.0",
     "rollup-plugin-bundle-size": "^1.0.3",
@@ -66,15 +66,11 @@
     "lint": "eslint --cache . --ext .js,.flow",
     "flow": "flow",
     "deploy": "semantic-release",
-    "deploy:local": "CI=true LOCAL_RELEASE=true semantic-release"
+    "deploy:local": "CI=true LOCAL_RELEASE=true semantic-release",
+    "prepare": "husky install $PWD/.husky"
   },
   "files": [
     "lib",
     "src"
-  ],
-  "husky": {
-    "hooks": {
-      "commit-msg": "[[ -n $HUSKY_BYPASS ]] || commitlint --config ./config/commitlint.config.js -E HUSKY_GIT_PARAMS"
-    }
-  }
+  ]
 }
