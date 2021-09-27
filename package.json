@@ -58,7 +58,7 @@
     "timezone-mock": "^1.2.2"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.js",
+    "build": "rollup -c ./config/rollup.config.js",
     "prepublish": "yarn build",
     "test": "jest",
     "test-watch": "jest --watch",

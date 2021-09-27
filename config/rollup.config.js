@@ -3,7 +3,7 @@ import commonJS from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import bundlesize from 'rollup-plugin-bundle-size';
 import { terser } from 'rollup-plugin-terser';
-import pkg from './package.json';
+import pkg from '../package.json';
 
 export default [
   // Browser-friendly UMD build
