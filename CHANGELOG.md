@@ -1,3 +1,10 @@
+## [6.0.1-beta.4](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.3...v6.0.1-beta.4) (2021-09-29)
+
+
+### Bug Fixes
+
+* bump @commitlint/cli from 13.1.0 to 13.2.0 ([073f915](https://github.com/nugit/datetime-utils/commit/073f915cfe2ddec1438a4fc2d79d4d2f7c80c958))
+
 ## [6.0.1-beta.3](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.2...v6.0.1-beta.3) (2021-09-29)
 
 
