@@ -1,3 +1,10 @@
+## [6.0.1-beta.1](https://github.com/nugit/datetime-utils/compare/v6.0.0...v6.0.1-beta.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* bump babel-jest from 27.2.2 to 27.2.3 ([1018e3f](https://github.com/nugit/datetime-utils/commit/1018e3f5f61dff413eee57d8e424fb7573bf08d1))
+
 # [6.0.0](https://github.com/nugit/datetime-utils/compare/v5.1.0...v6.0.0) (2021-09-29)
 
 
