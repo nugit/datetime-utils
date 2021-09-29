@@ -18,9 +18,9 @@ logs
 results
 temp
 
-
 # Editors
 *.sublime-workspace
+
 # Vim swap and backup files
 *.swo
 *.swp
@@ -30,6 +30,7 @@ temp
 npm-debug.log
 node_modules
 yarn-error.log
+.npmrc
 
 # ESLint
 .eslintcache

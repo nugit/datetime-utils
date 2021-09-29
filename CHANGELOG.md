@@ -1,3 +1,90 @@
+# [6.0.0-beta.2](https://github.com/nugit/datetime-utils/compare/v6.0.0-beta.1...v6.0.0-beta.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* fix version not updated in package.json ([2462789](https://github.com/nugit/datetime-utils/commit/2462789b1795cc668753ec1283ee146b3c705e69))
+
+# [6.0.0-beta.1](https://github.com/nugit/datetime-utils/compare/v5.1.0...v6.0.0-beta.1) (2021-09-28)
+
+
+### Bug Fixes
+
+* bump @babel/cli from 7.11.6 to 7.13.10 ([62f0527](https://github.com/nugit/datetime-utils/commit/62f0527c6ec414256921a1fcc3f82682772d4a0f))
+* bump @babel/preset-flow from 7.10.4 to 7.12.13 ([87b8909](https://github.com/nugit/datetime-utils/commit/87b8909a5cb4bbc2af766b3eac9c386864a02802))
+* bump @babel/register from 7.11.5 to 7.13.8 ([31ecfee](https://github.com/nugit/datetime-utils/commit/31ecfeef82d4d70fa43e5004f859713c0a32b3a0))
+* bump @semantic-release/github from 7.1.1 to 7.2.0 ([039d915](https://github.com/nugit/datetime-utils/commit/039d915991dda79c8fb90daa2f61d86d42291259))
+* bump babel-jest from 26.3.0 to 26.6.3 ([6ea5bb4](https://github.com/nugit/datetime-utils/commit/6ea5bb4900ab8c5a9511ddf2780d1339aea119a5))
+* bump jest from 26.4.2 to 26.6.3 ([05a2de2](https://github.com/nugit/datetime-utils/commit/05a2de263a230b0d4b4a3e035d0de5d1aa99b399))
+* bump rollup from 2.28.2 to 2.33.3 ([343cd16](https://github.com/nugit/datetime-utils/commit/343cd1682146ce3fd2c345c5a79b18a04d77cce1))
+* bump rollup from 2.41.0 to 2.45.2 ([62c14a2](https://github.com/nugit/datetime-utils/commit/62c14a2bbe9bcfbb1c30339f0f667196ec6fc4c7))
+* bump sinon from 9.1.0 to 9.2.1 ([209c6ca](https://github.com/nugit/datetime-utils/commit/209c6cac491ad20352be44706f57fab3197bbaf4))
+* fix vulnerabilities ([ff91c44](https://github.com/nugit/datetime-utils/commit/ff91c443486eac316e409df3696ee1cf6fbfee42))
+* update babel related packages ([1e7165a](https://github.com/nugit/datetime-utils/commit/1e7165a4b7f7de7b276e6acb3c02d31ab84a1bf6))
+* update date-fns ([d052f38](https://github.com/nugit/datetime-utils/commit/d052f38429a534c1d8a48f5ac1c435c03c3242c5))
+
+
+### Features
+
+* add peer dependencies ([4d7e595](https://github.com/nugit/datetime-utils/commit/4d7e595ad5d3961790975c14e5bb6ea7129330bd))
+
+
+* fix!: update target browsers list ([20f1c6a](https://github.com/nugit/datetime-utils/commit/20f1c6afcc387d90f474220321c0c9c08cf36700))
+* fix!: update @babel/preset-env ([2d0e176](https://github.com/nugit/datetime-utils/commit/2d0e176c21d11822065d7fbe20177d7768b44ab2))
+* fix!: replace rollup uglify with terser ([05204b5](https://github.com/nugit/datetime-utils/commit/05204b508ac4cbb3a871e6c5279d584bfcb97143))
+* fix!: update rollup related packages ([9815dd5](https://github.com/nugit/datetime-utils/commit/9815dd52bd9ce9cc6fc7e8e6ba47004022243170))
+
+
+### BREAKING CHANGES
+
+* Update target browsers list
+* Update @babel/preset-env
+* Replace rollup uglify with terser
+* Replace some rollup packages with latest version
+
+## [5.1.1-beta.3](https://github.com/nugit/datetime-utils/compare/v5.1.1-beta.2...v5.1.1-beta.3) (2021-04-29)
+
+
+### Bug Fixes
+
+* bump rollup from 2.41.0 to 2.45.2 ([62c14a2](https://github.com/nugit/datetime-utils/commit/62c14a2bbe9bcfbb1c30339f0f667196ec6fc4c7))
+
+## [5.1.1-beta.2](https://github.com/nugit/datetime-utils/compare/v5.1.1-beta.1...v5.1.1-beta.2) (2021-03-11)
+
+
+### Bug Fixes
+
+* bump @babel/preset-flow from 7.10.4 to 7.12.13 ([87b8909](https://github.com/nugit/datetime-utils/commit/87b8909a5cb4bbc2af766b3eac9c386864a02802))
+
+## [5.1.1-beta.1](https://github.com/nugit/datetime-utils/compare/v5.1.0...v5.1.1-beta.1) (2021-03-11)
+
+
+### Bug Fixes
+
+* bump @babel/cli from 7.11.6 to 7.13.10 ([62f0527](https://github.com/nugit/datetime-utils/commit/62f0527c6ec414256921a1fcc3f82682772d4a0f))
+* bump @babel/register from 7.11.5 to 7.13.8 ([31ecfee](https://github.com/nugit/datetime-utils/commit/31ecfeef82d4d70fa43e5004f859713c0a32b3a0))
+* bump @semantic-release/github from 7.1.1 to 7.2.0 ([039d915](https://github.com/nugit/datetime-utils/commit/039d915991dda79c8fb90daa2f61d86d42291259))
+* bump babel-jest from 26.3.0 to 26.6.3 ([6ea5bb4](https://github.com/nugit/datetime-utils/commit/6ea5bb4900ab8c5a9511ddf2780d1339aea119a5))
+* bump jest from 26.4.2 to 26.6.3 ([05a2de2](https://github.com/nugit/datetime-utils/commit/05a2de263a230b0d4b4a3e035d0de5d1aa99b399))
+* bump rollup from 2.28.2 to 2.33.3 ([343cd16](https://github.com/nugit/datetime-utils/commit/343cd1682146ce3fd2c345c5a79b18a04d77cce1))
+* bump sinon from 9.1.0 to 9.2.1 ([209c6ca](https://github.com/nugit/datetime-utils/commit/209c6cac491ad20352be44706f57fab3197bbaf4))
+
+# [5.1.0-beta.3](https://github.com/nugit/datetime-utils/compare/v5.1.0-beta.2...v5.1.0-beta.3) (2020-11-23)
+
+
+### Bug Fixes
+
+* bump jest from 26.4.2 to 26.6.3 ([05a2de2](https://github.com/nugit/datetime-utils/commit/05a2de263a230b0d4b4a3e035d0de5d1aa99b399))
+
+# [5.1.0-beta.2](https://github.com/nugit/datetime-utils/compare/v5.1.0-beta.1...v5.1.0-beta.2) (2020-11-23)
+
+
+### Bug Fixes
+
+* bump babel-jest from 26.3.0 to 26.6.3 ([6ea5bb4](https://github.com/nugit/datetime-utils/commit/6ea5bb4900ab8c5a9511ddf2780d1339aea119a5))
+* bump rollup from 2.28.2 to 2.33.3 ([343cd16](https://github.com/nugit/datetime-utils/commit/343cd1682146ce3fd2c345c5a79b18a04d77cce1))
+* bump sinon from 9.1.0 to 9.2.1 ([209c6ca](https://github.com/nugit/datetime-utils/commit/209c6cac491ad20352be44706f57fab3197bbaf4))
+
 # [5.1.0](https://github.com/nugit/datetime-utils/compare/v5.0.3...v5.1.0) (2020-10-27)
 
 

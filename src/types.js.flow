@@ -1,15 +1,15 @@
 // @flow
 
-export type Period = string;
+type Period = string;
 
-export type Range = {|
+type Range = {|
   end: string,
   start: string,
 |};
 
-export type Unit = 'day' | 'week' | 'month' | 'quarter' | 'year';
+type Unit = 'day' | 'week' | 'month' | 'quarter' | 'year';
 
-export type PeriodLastParams = {|
+type PeriodLastParams = {|
   including_current: boolean,
   includingParam: string,
   num: number,
@@ -17,42 +17,60 @@ export type PeriodLastParams = {|
   unit: Unit,
 |};
 
-export type PeriodThisParams = {|
+type PeriodThisParams = {|
   type: 'this',
   unit: Unit,
 |};
 
-export type PeriodTillYesterdayParams = {|
+type PeriodTillYesterdayParams = {|
   start: string,
   type: 'till_yesterday',
 |};
 
-export type PeriodCustomParams = {|
+type PeriodCustomParams = {|
   end: string,
   start: string,
   type: 'custom',
 |};
 
-export type PeriodYesterdayParams = {|
+type PeriodYesterdayParams = {|
   type: 'yesterday',
 |};
 
-export type PeriodAllTimeParams = {|
+type PeriodAllTimeParams = {|
   type: 'all_time',
 |};
 
-export type PeriodParams = PeriodLastParams | PeriodThisParams | PeriodTillYesterdayParams
+type PeriodParams = PeriodLastParams | PeriodThisParams | PeriodTillYesterdayParams
   | PeriodCustomParams | PeriodYesterdayParams | PeriodAllTimeParams;
 
-export type RangeAndLabel = {|
+type RangeAndLabel = {|
   label: string,
   range: Range,
 |};
 
-export type CompareMode = 'auto' | '12_months_ago' | Period;
+type CompareMode = 'auto' | '12_months_ago' | Period;
 
-export type LegacyCompareMode = CompareMode | Range;
+type LegacyCompareMode = CompareMode | Range;
 
-export type DateLike = Date | string | number;
+type DateLike = Date | string | number;
 
-export type LegacyPeriod = Period | Range;
+type LegacyPeriod = Period | Range;
+
+export type {
+  CompareMode,
+  DateLike,
+  LegacyCompareMode,
+  LegacyPeriod,
+  Period,
+  PeriodAllTimeParams,
+  PeriodCustomParams,
+  PeriodLastParams,
+  PeriodParams,
+  PeriodThisParams,
+  PeriodTillYesterdayParams,
+  PeriodYesterdayParams,
+  Range,
+  RangeAndLabel,
+  Unit,
+};
