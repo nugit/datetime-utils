@@ -1,3 +1,10 @@
+## [6.0.1-beta.3](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.2...v6.0.1-beta.3) (2021-09-29)
+
+
+### Bug Fixes
+
+* bump @commitlint/config-conventional from 13.1.0 to 13.2.0 ([5d576f9](https://github.com/nugit/datetime-utils/commit/5d576f99bfeab1372da747e34b289436d21e5f0e))
+
 ## [6.0.1-beta.2](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.1...v6.0.1-beta.2) (2021-09-29)
 
 
