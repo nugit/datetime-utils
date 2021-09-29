@@ -1,3 +1,10 @@
+# [6.0.0-beta.2](https://github.com/nugit/datetime-utils/compare/v6.0.0-beta.1...v6.0.0-beta.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* fix version not updated in package.json ([2462789](https://github.com/nugit/datetime-utils/commit/2462789b1795cc668753ec1283ee146b3c705e69))
+
 # [6.0.0-beta.1](https://github.com/nugit/datetime-utils/compare/v5.1.0...v6.0.0-beta.1) (2021-09-28)
 
 
