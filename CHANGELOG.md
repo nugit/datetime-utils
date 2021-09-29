@@ -1,3 +1,10 @@
+## [6.0.1-beta.2](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.1...v6.0.1-beta.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* bump jest from 27.2.2 to 27.2.3 ([ff59fe2](https://github.com/nugit/datetime-utils/commit/ff59fe295ba1dd75a1e46ee1e2e1a82f41e0672b))
+
 ## [6.0.1-beta.1](https://github.com/nugit/datetime-utils/compare/v6.0.0...v6.0.1-beta.1) (2021-09-29)
 
 
