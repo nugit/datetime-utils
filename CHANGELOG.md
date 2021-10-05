@@ -1,3 +1,10 @@
+## [6.0.1-beta.5](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.4...v6.0.1-beta.5) (2021-10-05)
+
+
+### Bug Fixes
+
+* bump date-fns from 2.24.0 to 2.25.0 ([cb13119](https://github.com/nugit/datetime-utils/commit/cb13119b72dd12a360023d35a42b2c9d0ef7f2fd))
+
 ## [6.0.1-beta.4](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.3...v6.0.1-beta.4) (2021-09-29)
 
 
