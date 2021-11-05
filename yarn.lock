@@ -5835,7 +5835,7 @@ micromark@^2.11.3, micromark@~2.11.0, micromark@~2.11.3:
     debug "^4.0.0"
     parse-entities "^2.0.0"
 
-micromatch@4.0.2, micromatch@^4.0.0:
+micromatch@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-4.0.2.tgz#4fcb0999bf9fbc2fcbdd212f6d629b9a56c39259"
   integrity sha512-y7FpHSbMUMoyPbYUSzO6PaZ6FyRnQOpHuKwbo1G+Knck95XVU4QAiKdGEnj5wwoS7PlOgthX/09u5iFJ+aYf5Q==
@@ -5843,7 +5843,7 @@ micromatch@4.0.2, micromatch@^4.0.0:
     braces "^3.0.1"
     picomatch "^2.0.5"
 
-micromatch@^4.0.2, micromatch@^4.0.4:
+micromatch@^4.0.0, micromatch@^4.0.2, micromatch@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-4.0.4.tgz#896d519dfe9db25fce94ceb7a500919bf881ebf9"
   integrity sha512-pRmzw/XUcwXGpD9aI9q/0XOwLNygjETJ8y0ao0wdqprrzDa4YnxLcz7fQRZr8voh8V10kGhABbNcHVk5wHgWwg==
@@ -6043,12 +6043,7 @@ node-emoji@^1.10.0:
   dependencies:
     lodash "^4.17.21"
 
-node-fetch@^2.3.0:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
-  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
-
-node-fetch@^2.6.1:
+node-fetch@^2.3.0, node-fetch@^2.6.1:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.5.tgz#42735537d7f080a7e5f78b6c549b7146be1742fd"
   integrity sha512-mmlIVHJEu5rnIxgEgez6b9GgWXbkZj5YZ7fx+2r94a2E+Uirsp6HsPTPlomfdHtpt/B0cdKviwkoaM6pyvUOpQ==
@@ -7228,9 +7223,9 @@ saxes@^5.0.1:
     xmlchars "^2.2.0"
 
 semantic-release-slack-bot@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/semantic-release-slack-bot/-/semantic-release-slack-bot-2.1.1.tgz#22fd5f10640c468c83af8f2deae7b89bb9d571f7"
-  integrity sha512-keNqVsZ+Ntm1F8O5yqoX3DmIsH1gK+CDmPhcjLAHTOtmJSul2kRFzEnAac1O8LltF9BQ2wW5OJ3BXcFWXt49aw==
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/semantic-release-slack-bot/-/semantic-release-slack-bot-2.1.2.tgz#d60ee110e70b203df1a2812851f11ba98b70037b"
+  integrity sha512-4rx5ve35+K56HXh6vWhCziFGUZ2zghBm4N6rtQiXCxdscWP8Emd0SGgJNJf+FprtLl89g006akBOoMy24BNoog==
   dependencies:
     "@semantic-release/error" "^2.2.0"
     micromatch "4.0.2"
