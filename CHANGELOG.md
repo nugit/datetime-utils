@@ -1,3 +1,38 @@
+## [6.0.1-beta.5](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.4...v6.0.1-beta.5) (2021-10-05)
+
+
+### Bug Fixes
+
+* bump date-fns from 2.24.0 to 2.25.0 ([cb13119](https://github.com/nugit/datetime-utils/commit/cb13119b72dd12a360023d35a42b2c9d0ef7f2fd))
+
+## [6.0.1-beta.4](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.3...v6.0.1-beta.4) (2021-09-29)
+
+
+### Bug Fixes
+
+* bump @commitlint/cli from 13.1.0 to 13.2.0 ([073f915](https://github.com/nugit/datetime-utils/commit/073f915cfe2ddec1438a4fc2d79d4d2f7c80c958))
+
+## [6.0.1-beta.3](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.2...v6.0.1-beta.3) (2021-09-29)
+
+
+### Bug Fixes
+
+* bump @commitlint/config-conventional from 13.1.0 to 13.2.0 ([5d576f9](https://github.com/nugit/datetime-utils/commit/5d576f99bfeab1372da747e34b289436d21e5f0e))
+
+## [6.0.1-beta.2](https://github.com/nugit/datetime-utils/compare/v6.0.1-beta.1...v6.0.1-beta.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* bump jest from 27.2.2 to 27.2.3 ([ff59fe2](https://github.com/nugit/datetime-utils/commit/ff59fe295ba1dd75a1e46ee1e2e1a82f41e0672b))
+
+## [6.0.1-beta.1](https://github.com/nugit/datetime-utils/compare/v6.0.0...v6.0.1-beta.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* bump babel-jest from 27.2.2 to 27.2.3 ([1018e3f](https://github.com/nugit/datetime-utils/commit/1018e3f5f61dff413eee57d8e424fb7573bf08d1))
+
 # [6.0.0](https://github.com/nugit/datetime-utils/compare/v5.1.0...v6.0.0) (2021-09-29)
 
 
