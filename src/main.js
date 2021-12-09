@@ -98,7 +98,7 @@ const getPeriodParams = (period: Period): PeriodParams => {
 };
 
 const getRange = (
-  period: Period, base?: DateLike = new Date(), utcOffset?: string | number = 0,
+  period: Period, base?: DateLike = new Date(), utcOffset?: number | string = 0,
 ): Range => {
   const baseDate = applyOffset(utcOffset, base);
 

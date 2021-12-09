@@ -60,7 +60,7 @@ const toLegacyCompareMode = (compareMode: CompareMode): LegacyCompareMode => {
 };
 
 const retrievePeriod = (
-  period: LegacyPeriod, base?: DateLike = new Date(), offset?: string | number = 0,
+  period: LegacyPeriod, base?: DateLike = new Date(), offset?: number | string = 0,
 ): Range => (
   getRange(migrateLegacyPeriod(period), base, offset)
 );

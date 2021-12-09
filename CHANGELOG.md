@@ -1,3 +1,10 @@
+## [6.0.2-beta.1](https://github.com/nugit/datetime-utils/compare/v6.0.1...v6.0.2-beta.1) (2021-12-09)
+
+
+### Bug Fixes
+
+* update dependencies ([7e09a0f](https://github.com/nugit/datetime-utils/commit/7e09a0f0d8027aca1ce35bd093adb619bbd8d57e))
+
 ## [6.0.1](https://github.com/nugit/datetime-utils/compare/v6.0.0...v6.0.1) (2021-11-08)
 
 
