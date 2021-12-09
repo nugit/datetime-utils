@@ -7,7 +7,7 @@ type Range = {|
   start: string,
 |};
 
-type Unit = 'day' | 'week' | 'month' | 'quarter' | 'year';
+type Unit = 'day' | 'month' | 'quarter' | 'week' | 'year';
 
 type PeriodLastParams = {|
   including_current: boolean,
@@ -41,19 +41,20 @@ type PeriodAllTimeParams = {|
   type: 'all_time',
 |};
 
-type PeriodParams = PeriodLastParams | PeriodThisParams | PeriodTillYesterdayParams
-  | PeriodCustomParams | PeriodYesterdayParams | PeriodAllTimeParams;
+type PeriodParams =
+  | PeriodAllTimeParams | PeriodCustomParams | PeriodLastParams
+  | PeriodThisParams | PeriodTillYesterdayParams | PeriodYesterdayParams;
 
 type RangeAndLabel = {|
   label: string,
   range: Range,
 |};
 
-type CompareMode = 'auto' | '12_months_ago' | Period;
+type CompareMode = Period | '12_months_ago' | 'auto';
 
 type LegacyCompareMode = CompareMode | Range;
 
-type DateLike = Date | string | number;
+type DateLike = number | string | Date;
 
 type LegacyPeriod = Period | Range;
 
