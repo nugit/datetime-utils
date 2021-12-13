@@ -7077,10 +7077,10 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-semantic-release-slack-bot@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/semantic-release-slack-bot/-/semantic-release-slack-bot-2.1.1.tgz#22fd5f10640c468c83af8f2deae7b89bb9d571f7"
-  integrity sha512-keNqVsZ+Ntm1F8O5yqoX3DmIsH1gK+CDmPhcjLAHTOtmJSul2kRFzEnAac1O8LltF9BQ2wW5OJ3BXcFWXt49aw==
+semantic-release-slack-bot@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/semantic-release-slack-bot/-/semantic-release-slack-bot-3.0.0.tgz#a59db25d8eb4f480b2a20d0e6badb70e2a7829c9"
+  integrity sha512-nkzfoXqrLcqxYP1l1y78i1hON9lZEyrt/vVWeR0Qi57TnH/S7pfZ2ds//GqiDO2HQRYUroyAM6U/PZPM0XLYjw==
   dependencies:
     "@semantic-release/error" "^2.2.0"
     micromatch "4.0.2"
