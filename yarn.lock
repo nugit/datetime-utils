@@ -7128,9 +7128,9 @@ saxes@^5.0.1:
     xmlchars "^2.2.0"
 
 semantic-release-slack-bot@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/semantic-release-slack-bot/-/semantic-release-slack-bot-3.4.1.tgz#80cd59ca2674add45df063eab9d8cc175a2057f2"
-  integrity sha512-AbGSLN1O8CrYg9Z3hhZKVQTi3ZSvR5VHCgzQXCfWg+bJsNbWsfnAw+3zPtUcS+gWuU4vvS/+fHBtwIJlON6gxg==
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/semantic-release-slack-bot/-/semantic-release-slack-bot-3.5.2.tgz#941be844e570abe43dd4521d17dae1e6e7d1ec88"
+  integrity sha512-xCig9RxUW9EJ6w5Hvoo4U0u9OAClBxkJCWBPwQSROlzMx1SzhjU8wfQkYBOIJACRqOGQS2qfETZTRdK/7CpGeA==
   dependencies:
     "@semantic-release/error" "^2.2.0"
     micromatch "4.0.2"
