@@ -44,7 +44,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "flow-bin": "^0.170.0",
+    "flow-bin": "^0.171.0",
     "husky": "^7.0.4",
     "jest": "^27.4.7",
     "rollup": "^2.64.0",
