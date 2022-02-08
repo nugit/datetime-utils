@@ -1,3 +1,23 @@
+# [7.0.0](https://github.com/nugit/datetime-utils/compare/v6.0.2...v7.0.0) (2022-02-08)
+
+
+### Bug Fixes
+
+* fix security vulnerabilities ([b687e09](https://github.com/nugit/datetime-utils/commit/b687e099006db626f66144411bace16f61d7f6fc))
+* run `npx yarn-minify` ([f0225b4](https://github.com/nugit/datetime-utils/commit/f0225b4d1240a1831fc4e471d78abbafbdb53a17))
+* update node version to 14 ([a9b4066](https://github.com/nugit/datetime-utils/commit/a9b4066faf90b1844ed1bedae3e53efbcf41821a))
+* upgrade minor dependencies ([677ab48](https://github.com/nugit/datetime-utils/commit/677ab48fe472faa3b8726fa37e31720ec2dea526))
+
+
+* feat!: upgrade to node 14 ([828acb6](https://github.com/nugit/datetime-utils/commit/828acb6ee6b12ca13495be4966fb50b43cdd588d))
+* feat!: move date-fns to `devDependencies` ([8b6ea6a](https://github.com/nugit/datetime-utils/commit/8b6ea6a18cd85ca07df36d380a1e85bc8916a967))
+
+
+### BREAKING CHANGES
+
+* Upgrade Node 14
+* Move date-fns to `devDependencies`
+
 # [7.0.0-beta.1](https://github.com/nugit/datetime-utils/compare/v6.0.2...v7.0.0-beta.1) (2022-01-25)
 
 
