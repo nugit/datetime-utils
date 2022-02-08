@@ -16,6 +16,9 @@ updates:
     commit-message:
       prefix: "fix:"
       prefix-development: "chore:"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
 # github actions
   - package-ecosystem: "github-actions"
