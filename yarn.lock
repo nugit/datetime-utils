@@ -872,7 +872,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.16.7"
     "@babel/helper-plugin-utils" "^7.16.7"
 
-"@babel/preset-env@^7.16.11", "@babel/preset-env@^7.16.4":
+"@babel/preset-env@^7.16.11":
   version "7.16.11"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.16.11.tgz#5dd88fd885fae36f88fd7c8342475c9f0abe2982"
   integrity sha512-qcmWG8R7ZW6WBRPZK//y+E3Cli151B20W1Rv7ln27vuPaXU/8TKms6jFdiJtF7UDTxcrb7mZd88tAeK9LjdT8g==
@@ -952,7 +952,7 @@
     core-js-compat "^3.20.2"
     semver "^6.3.0"
 
-"@babel/preset-flow@^7.16.0", "@babel/preset-flow@^7.16.7":
+"@babel/preset-flow@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/preset-flow/-/preset-flow-7.16.7.tgz#7fd831323ab25eeba6e4b77a589f680e30581cbd"
   integrity sha512-6ceP7IyZdUYQ3wUVqyRSQXztd1YmFHWI4Xv11MIqAlE4WqxBSd/FZ61V9k+TS5Gd4mkHOtQtPp9ymRpxH4y1Ug==
@@ -972,7 +972,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/preset-react@^7.16.0":
+"@babel/preset-react@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.16.7.tgz#4c18150491edc69c183ff818f9f2aecbe5d93852"
   integrity sha512-fWpyI8UM/HE6DfPBzD8LnhQ/OcH8AgTaqcqP2nGOXEUV+VKBR5JRN9hCk9ai+zQQ57vtm9oWeXguBCPNUjytgA==
@@ -2912,7 +2912,7 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
-confusing-browser-globals@^1.0.10:
+confusing-browser-globals@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.11.tgz#ae40e9b57cdd3915408a2805ebd3a5585608dc81"
   integrity sha512-JsPKdmh8ZkmnHxDk55FZ1TqVLvEQTvoByJZRN9jzI0UjxK/QgAmsphz7PGtqgPieQZ/CQcHWXCR7ATDNhGe+YA==
@@ -3418,14 +3418,14 @@ escodegen@^2.0.0:
     source-map "~0.6.1"
 
 eslint-config-nugit@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-nugit/-/eslint-config-nugit-2.0.2.tgz#d766cf97401d20ca74cb5442ffd0545eb8f32836"
-  integrity sha512-4HUhlLXca+DtLh4qS1QO4gyrFAjROVOKxn28qoC4s5ORaXW7LIjo8e17W6AEdR49zVSXlvhJIaMSlo7vPc41Aw==
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-nugit/-/eslint-config-nugit-2.0.3.tgz#ad214ba1b0fa89f9cd8868d6bc06fae2814aee30"
+  integrity sha512-KrCb6eNMhuZcespQ0r2m69AvwJrAh5hu9wiz1JQgi4pQvmw3oNvb5jSKgufxr33hyGE+78W85cwb6sotFY3txw==
   dependencies:
-    "@babel/preset-env" "^7.16.4"
-    "@babel/preset-flow" "^7.16.0"
-    "@babel/preset-react" "^7.16.0"
-    confusing-browser-globals "^1.0.10"
+    "@babel/preset-env" "^7.16.11"
+    "@babel/preset-flow" "^7.16.7"
+    "@babel/preset-react" "^7.16.7"
+    confusing-browser-globals "^1.0.11"
 
 eslint-import-resolver-node@^0.3.6:
   version "0.3.6"
